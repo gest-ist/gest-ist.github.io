@@ -7,6 +7,8 @@
   <title>GEST — Grupo de Estratégia, Simulação e Táctica</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="gest_style.css">
+  <link rel="icon" href="favicon.png" type="image/png">
 </head>
 
 <body>
@@ -15,6 +17,7 @@
   <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
+	    <img class="mr-2" src="rubrica_small.png">
         <strong>Grupo de Estratégia, Simulação e Táctica</strong>
       </a>
     </div>
@@ -58,11 +61,9 @@
   <section class="hero is-link is-medium">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title lang lang-pt">Bem-vindo ao GEST</h1>
-        <h1 class="title lang lang-en is-hidden">Welcome to GEST</h1>
-
-        <h2 class="subtitle lang lang-pt">(PT) Lorem ipsum</h2>
-        <h2 class="subtitle lang lang-en is-hidden">(EN) Lorem ipsum</h2>
+        <h1 class="title">GEST</h1>
+        <h2 class="subtitle lang lang-pt">Secção Autónoma da Associação dos Estudantes do Instituto Superior Técnico</h2>
+        <h2 class="subtitle lang lang-en is-hidden">Autonomous Section of Instituto Superior Técnico's Students Association</h2>
       </div>
     </div>
   </section>
@@ -75,24 +76,17 @@
 	  <h2 class="title is-3 lang lang-en is-hidden">About Us</h2>
 	  <div class="columns">
 	  <p class="column lang lang-pt">
-		(PT) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rutrum sollicitudin nisi, vitae
-		dictum lectus pellentesque sit amet. In blandit elementum bibendum. Curabitur vestibulum ex vitae arcu
-		dapibus posuere. Nunc quam turpis, eleifend nec molestie nec, facilisis ut felis. Donec auctor, diam
-		blandit porttitor ornare, mi dolor dictum nulla, quis finibus dui nunc semper nunc. Nullam aliquam magna
-		ac eros fermentum, eget sodales eros posuere. Integer vitae faucibus lacus, imperdiet aliquam libero.
-		Integer mi eros, ultrices sit amet auctor vel, iaculis eget tortor. Curabitur semper risus tortor. Morbi
-		ac blandit tortor. In finibus fringilla mi quis porta.
+		Somos um grupo de estudantes do IST com o objectivo de disponibilizar e divulgar uma grande variedade de jogos, 
+		incluindo jogos de tabuleiro, jogos narrativos, jogos de cartas colecionáveis, videojogos e outras actividades semelhantes. 
+		Organizamos eventos, incluindo Game Nights, campanhas de D&D, torneios e muito mais. Para além disso, 
+		promovemos uma comunidade inclusiva, na qual todos são bem-vindos para partilhar o gosto pelos diversos jogos.
 	  </p>
 	  <p class="column lang lang-en is-hidden">
-		(EN) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rutrum sollicitudin nisi, vitae
-		dictum lectus pellentesque sit amet. In blandit elementum bibendum. Curabitur vestibulum ex vitae arcu
-		dapibus posuere. Nunc quam turpis, eleifend nec molestie nec, facilisis ut felis. Donec auctor, diam
-		blandit porttitor ornare, mi dolor dictum nulla, quis finibus dui nunc semper nunc. Nullam aliquam magna
-		ac eros fermentum, eget sodales eros posuere. Integer vitae faucibus lacus, imperdiet aliquam libero.
-		Integer mi eros, ultrices sit amet auctor vel, iaculis eget tortor. Curabitur semper risus tortor. Morbi
-		ac blandit tortor. In finibus fringilla mi quis porta.
+		We are a student group at IST whose goal is to make available and promote a wide variety of games, including board games, 
+		role playing games, collectible card games, video games, and similar activities. We organize events, including Game Nights, 
+		D&D campaigns, tournaments, and more. In addition, we foster an inclusive community, where everyone is welcome to share their love of games.
 	  </p>
-	  <div class="column has-text-centered mt-5">
+	  <div class="column has-text-centered">
 	  <div class="columns">
 	    <a class = "column" href="https://discord.gg/PU3aQhHnqu" target="_blank">
 		  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Join us on Discord" style="width: 100px; height: 100px;">
@@ -103,6 +97,9 @@
 			Join us on Discord to chat, participate in activities, and engage with the community!
 		  </p>
 	    </a>
+		  <div class="column">
+			<img src="IMG_8247.jpg" alt="Game Day 2025" style="max-height: 300px;">
+		  </div>
 	  </div>
 	  </div>
 	</div>
@@ -139,6 +136,21 @@
               rutrum sollicitudin nisi, vitae dictum lectus pellentesque sit amet.</p>
             <p class="lang lang-en is-hidden">(EN) Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Nunc rutrum sollicitudin nisi, vitae dictum lectus pellentesque sit amet.</p>
+			<div class="mt-4">
+			
+			  <!-- WHEN THERE ARE NO EVENTS USE THIS -->
+			  <a 
+				class="button is-link is-disabled tooltip" 
+				style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" 
+			  >
+			  
+			  <!-- WHEN THERE IS AN EVENT USE THIS
+			  <a href="" class="button is-link"> -->
+			  
+				<span class="lang lang-pt">Inscrições</span>
+				<span class="lang lang-en is-hidden">Sign up</span>
+			  </a>
+			</div>
           </div>
         </div>
       </div>
@@ -204,6 +216,23 @@
       });
     });
   </script>
+  
+	<script>
+	  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function (e) {
+		  const targetId = this.getAttribute('href');
+		  const target = document.querySelector(targetId);
+
+		  if (target) {
+			e.preventDefault();
+			const yOffset = -60; // adjust this as needed
+			const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+			window.scrollTo({ top: y, behavior: 'smooth' });
+		  }
+		});
+	  });
+	</script>
 
 
 </body>
