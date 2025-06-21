@@ -1,0 +1,47 @@
+.image-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.image-carousel img {
+  flex: 0 0 auto;
+  max-height: 300px;       /* ✅ set a max height */
+  height: auto;
+  width: auto;             /* ✅ let width scale with height */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 1;
+  transition: background 0.3s;
+}
+
+.scroll-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.scroll-button.left {
+  left: 0;
+}
+
+.scroll-button.right {
+  right: 0;
+}
