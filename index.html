@@ -56,7 +56,8 @@
 
     </div>
   </nav>
-
+  
+  <main id="main-content">
   <!-- Hero Section -->
   <section class="hero is-link is-medium">
     <div class="hero-body">
@@ -195,6 +196,7 @@
 		</div>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -246,6 +248,21 @@
 			behavior: "smooth"
 		  });
 		}
+	</script>
+	
+	<script>
+	  function adjustForNavbar() {
+		const navbar = document.querySelector('.navbar');
+		const main = document.getElementById('main-content');
+		if (navbar && main) {
+		  const navbarHeight = navbar.offsetHeight;
+		  main.style.marginTop = navbarHeight + 'px';
+		}
+	  }
+
+	  // Adjust on load and on resize (for mobile resizing or language changes)
+	  window.addEventListener('DOMContentLoaded', adjustForNavbar);
+	  window.addEventListener('resize', adjustForNavbar);
 	</script>
 
 

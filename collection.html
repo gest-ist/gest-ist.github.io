@@ -14,6 +14,7 @@
   <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item is-link" href="index.html">
+	    <img class="mr-2" src="rubrica_small.png">
         <strong>Grupo de Estratégia, Simulação e Táctica</strong>
       </a>
     </div>
@@ -42,9 +43,8 @@
 
 	</div>
   </nav>
-  <br>
-  <br>
-  <br>
+  
+  <main id="main-content">
   <section class="section">
     <div class="container">
       <div class="level">
@@ -53,12 +53,11 @@
           <h1 class="title lang lang-en is-hidden">Board Games</h1>
         </div>
       </div>
-	  
 		<p class="lang lang-pt">Esta é a nossa coleção de jogos de tabuleiro. Nem todos estarão disponíveis nas Game Nights e eventos semelhantes. 
 			No entanto, podem ser requesitados para estes eventos através do canal de jogos de tabuleiro no nosso sevidor de Discord.</p>
 		<p class="lang lang-en is-hidden">This is our board game collection. Not all the games will be available at Game Nights and similar events.
 			However, they can be requested for these events through the board games channel on our Discord server.</p>
-
+		<br>
       <!-- Game Table -->
       <table class="table is-fullwidth is-striped is-hoverable">
         <thead>
@@ -76,6 +75,7 @@
       </table>
     </div>
   </section>
+  </main>
   
  <!-- Game Storage Script -->
  
@@ -341,6 +341,23 @@
 	  });
     });
   </script>
+  
+  <!-- This fixes the navbar -->
+  
+	<script>
+	  function adjustForNavbar() {
+		const navbar = document.querySelector('.navbar');
+		const main = document.getElementById('main-content');
+		if (navbar && main) {
+		  const navbarHeight = navbar.offsetHeight;
+		  main.style.marginTop = navbarHeight + 'px';
+		}
+	  }
+
+	  // Adjust on load and on resize (for mobile resizing or language changes)
+	  window.addEventListener('DOMContentLoaded', adjustForNavbar);
+	  window.addEventListener('resize', adjustForNavbar);
+	</script>
   
   
   
