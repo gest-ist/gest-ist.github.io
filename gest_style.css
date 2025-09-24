@@ -45,3 +45,14 @@
 .scroll-button.right {
   right: 0;
 }
+
+/*.navbar.is-primary {
+  background-color: #F2BC35; 
+}*/
+
+
+.container img {
+  width: 100%;       /* allow it to scale down */
+  max-width: 400px;  /* but never grow beyond 400px */
+  height: auto;      /* keep aspect ratio */
+}
