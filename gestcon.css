@@ -1,0 +1,13 @@
+.location-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.location-text {
+    flex: 1;
+}
+
+.location-map {
+    flex: 1;
+}

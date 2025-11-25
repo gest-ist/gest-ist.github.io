@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="gest_style.css">
+    <link rel="stylesheet" href="gestcon.css">
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
 
@@ -65,27 +66,64 @@
         <section class="hero is-link is-medium">
             <div class="hero-body">
                 <div class="container" style="text-align:center;">
-                    <img class="mr-2" src="gestcon-2.png" width="400">
+                    <img class="mr-2" src="gestcon-1.png" width="400">
                     <br>
                     <br>
                     <h2 class="subtitle lang lang-pt">GESTCon - Convenção de Jogos de Tabuleiro em Lisboa</h2>
-                    <h2 class="subtitle lang lang-en is-hidden">GESTCon- Board Game Convention in Lisbon</h2>
+                    <h2 class="subtitle lang lang-en is-hidden">GESTCon - Board Game Convention in Lisbon</h2>
                 </div>
             </div>
         </section>
 
         <section class="section" id="about">
-            Something Someting bues jogos
-            Something something
+            <div class="container">
+                <h2 class="title is-3">GESTCon</h2>
+                <p class="lang lang-pt">A GESTCon vai ser uma concenção de jogos de tabuleiro org</p>
+                <p class="lang lang-en is-hidden">GESTCon is going to be a board game convention, hapening on January 9th, 10th and 11th. 
+                    It's the first event of this kind organized by GEST or in Lisbon for many years. 
+                    We have more than 200 board games for you to try with your friends or family, over the three days of the convention. On Friday there will also be D&D One-Shot sessions, for which you will need to sign up.
+            
+                    <br> We hope to you have in atendance! 
+                </p>
+            </div>
         </section>
 
         <section class="section" id="schedule">
-            Schedule
+            <div class="container">
+                <h2 class="title is-3 lang lang-pt"> Horário </h2>
+                <ul class="lang lang-pt">
+                    <li> Sexta Feira 09/01: 10:00 - 22:00</li>
+                    <li> Sábado 10/01: 10:00 - 23:00</li>
+                    <li> Domingo 11/01: 10:00 - 17:00</li>
+                </ul>
+
+                <h2 class="title is-3 lang lang-en is-hidden"> Schedule </h2>
+                <ul class="lang lang-en is-hidden">
+                    <li> Friday 09/01: 10:00 - 22:00</li>
+                    <li> Saturday 10/01: 10:00 - 23:00</li>
+                    <li> Sunday 11/01: 10:00 - 17:00</li>
+                </ul>
+            </div>
+
         </section>
 
         <section class="section" id="location">
-            Location
-            Something Something maps link?
+            <div class="location-container">
+                <div class="location-text">
+                    <div class="container">
+                        <h2 class="title is-3 lang-pt">Localização</h2>
+                        <p class="lang lang-pt"> Something Something IST </p>
+                    </div>
+                </div>
+
+                <div class="location-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.066488236138!2d-9.139655434816053!3d38.73626878664998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a2302b2157%3A0x11c13201e2cf8229!2sPavilh%C3%A3o%20Central%2C%20Av.%20Rovisco%20Pais%201%2C%201049-001%20Lisboa!5e0!3m2!1sen!2spt!4v1764086342525!5m2!1sen!2spt"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
         </section>
 
     </main>
@@ -96,4 +134,21 @@
             <p>&copy; 2025 GEST</p>
         </div>
     </footer>
+
+    <script>
+        const selector = document.getElementById("language-selector");
+        const allLangSections = document.querySelectorAll(".lang");
+
+        selector.addEventListener("change", function () {
+            const lang = this.value;
+            allLangSections.forEach((el) => {
+                if (el.classList.contains("lang-" + lang)) {
+                    el.classList.remove("is-hidden");
+                } else {
+                    el.classList.add("is-hidden");
+                }
+            });
+        });
+    </script>
+
 </body>
