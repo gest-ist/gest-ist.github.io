@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Navbar hide on scroll
   let lastScrollTop = 0;
   const navbar = document.querySelector('.navbar');
-  const scrollThreshold = 100; // pixels
+  const scrollThreshold = 70; // CHANGE THRESHOLD HERE
 
   window.addEventListener('scroll', () => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;

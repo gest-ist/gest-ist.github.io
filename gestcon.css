@@ -63,3 +63,28 @@
     min-width: 120px;
   }
 }
+
+.brand-name {
+  display: inline-block;
+  max-width: 350px; /*Adjust here*/
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+/* 
+.brand-name::after {
+  content: "";
+  position: absolute;
+  top: 0 ;
+  right: 0;
+  width : 40px;
+  height: 100%;
+  pointer-events: none;
+} */
+
+@media (max-width: 400px) {
+  .brand-name {
+    max-width: 280px;
+    font-size: 0.875rem;
+  }
+}
