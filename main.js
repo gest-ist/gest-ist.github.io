@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Scrolling down
         navbar.style.transform = 'translateY(-100%)';
         navbar.style.transition = 'transform 0.3s ease-in-out'; // CHANGE ANIMATION DURATION HERE
-        }
+      }
     } else {
       // Near top - show navbar
       navbar.style.transform = 'translateY(0)';

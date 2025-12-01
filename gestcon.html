@@ -2,143 +2,152 @@
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GESTCon - Convenção de Jogos de Tabuleiro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="gest_style.css">
-    <link rel="stylesheet" href="gestcon.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GESTCon - Convenção de Jogos de Tabuleiro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="gest_style.css">
+  <link rel="stylesheet" href="gestcon.css">
+  <link rel="icon" href="favicon.png" type="image/png">
 </head>
 
 <body>
-        <a class="skip-link" href="#main-content" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+  <a class="skip-link" href="#main-content"
+    style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
-        <!-- Navbar -->
-        <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img class="mr-2" src="rubrica_small.png" alt="GEST logo">
-                    <strong>Grupo de Estratégia, Simulação e Táctica</strong>
-                </a>
+  <!-- Navbar -->
+  <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="index.html">
+        <img class="mr-2" src="rubrica_small.png" alt="GEST logo">
+        <strong>Grupo de Estratégia, Simulação e Táctica</strong>
+      </a>
 
-                <!-- Hamburger button -->
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar" data-target="mainNavbar">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
+      <!-- Hamburger button -->
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar"
+        data-target="mainNavbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
 
-            <div id="mainNavbar" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item lang lang-pt" href="#about">Evento</a>
-                    <a class="navbar-item lang lang-pt" href="#schedule">Horário</a>
-                    <a class="navbar-item lang lang-pt" href="#location">Localização</a>
+    <div id="mainNavbar" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item lang lang-pt" href="#about">Evento</a>
+        <a class="navbar-item lang lang-pt" href="#schedule">Horário</a>
+        <a class="navbar-item lang lang-pt" href="#location">Localização</a>
 
-                    <a class="navbar-item lang lang-en is-hidden" href="#about">About</a>
-                    <a class="navbar-item lang lang-en is-hidden" href="#schedule">Schedule</a>
-                    <a class="navbar-item lang lang-en is-hidden" href="#location">Location</a>
-                </div>
-            </div>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <!-- Social Icons -->
-                    <div class="icons">
-                        <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram fa-lg"></i>
-                        </a>
-                        <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-discord fa-lg"></i>
-                        </a>
-                        <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </a>
-                    </div>
+        <a class="navbar-item lang lang-en is-hidden" href="#about">About</a>
+        <a class="navbar-item lang lang-en is-hidden" href="#schedule">Schedule</a>
+        <a class="navbar-item lang lang-en is-hidden" href="#location">Location</a>
+      </div>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item icons-language-container">
+        <!-- Social Icons -->
+        <div class="icons">
+          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-discord fa-lg"></i>
+          </a>
+          <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
+            <i class="fas fa-envelope fa-lg"></i>
+          </a>
+        </div>
+        <div class="select mr-4">
+          <select id="language-selector">
+            <option value="pt">Português</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
 
-                    <div class="select mr-4">
-                        <select id="language-selector">
-                            <option value="pt">Português</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-        </nav>
+    </div>
+  </nav>
 
 
-        <main id="main-content">
-            <!-- Hero Section -->
-            <section class="hero is-link is-medium">
-                <div class="hero-body">
-                    <div class="container" style="text-align:center;">
-                        <img class="mr-2" src="gestcon-3.png" width="400" loading="lazy" decoding="async" alt="GESTCon banner">
-                        <br>
-                        <br>
-                        <h2 class="subtitle lang lang-pt">GESTCon - Convenção de Jogos de Tabuleiro em Lisboa</h2>
-                        <h2 class="subtitle lang lang-en is-hidden">GESTCon - Board Game Convention in Lisbon</h2>
-                    </div>
-                </div>
-            </section>
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero is-link is-medium">
+      <div class="hero-body">
+        <div class="container" style="text-align:center;">
+          <img class="mr-2" src="gestcon-3.png" width="400" loading="lazy" decoding="async" alt="GESTCon banner">
+          <br>
+          <br>
+          <h2 class="subtitle lang lang-pt">GESTCon - Convenção de Jogos de Tabuleiro em Lisboa</h2>
+          <h2 class="subtitle lang lang-en is-hidden">GESTCon - Board Game Convention in Lisbon</h2>
+        </div>
+      </div>
+    </section>
 
-            <section class="section" id="about">
-                <div class="container">
-                    <h2 class="title is-3">GESTCon</h2>
-                    <p class="lang lang-pt">A GESTCon vai ser uma convenção de jogos de tabuleiro organizada pelo GEST — 9 a 11 de Janeiro, Lisboa. Teremos centenas de jogos disponíveis para experimentar, sessões de One-Shot de D&D na sexta-feira e espaço para torneios informais. Junta-te para jogar, aprender e conhecer outros jogadores.</p>
-                    <p class="lang lang-en is-hidden">GESTCon is going to be a board game convention, happening on January 9th, 10th and 11th. We have more than 200 board games for you to try with your friends or family, over the three days of the convention. On Friday there will also be D&D One-Shot sessions.</p>
-                </div>
-            </section>
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="title is-3">GESTCon</h2>
+        <p class="lang lang-pt">A GESTCon vai ser uma convenção de jogos de tabuleiro organizada pelo GEST — 9 a 11 de
+          Janeiro, Lisboa. Teremos centenas de jogos disponíveis para experimentar, sessões de One-Shot de D&D na
+          sexta-feira e espaço para torneios informais. Junta-te para jogar, aprender e conhecer outros jogadores.</p>
+        <p class="lang lang-en is-hidden">GESTCon is going to be a board game convention, happening on January 9th, 10th
+          and 11th. We have more than 200 board games for you to try with your friends or family, over the three days of
+          the convention. On Friday there will also be D&D One-Shot sessions.</p>
+      </div>
+    </section>
 
-            <section class="section" id="schedule">
-                <div class="container">
-                    <h2 class="title is-3 lang lang-pt"> Horário </h2>
-                    <ul class="lang lang-pt">
-                        <li> Sexta Feira 09/01: 10:00 - 22:00</li>
-                        <li> Sábado 10/01: 10:00 - 23:00</li>
-                        <li> Domingo 11/01: 10:00 - 17:00</li>
-                    </ul>
+    <section class="section" id="schedule">
+      <div class="container">
+        <h2 class="title is-3 lang lang-pt"> Horário </h2>
+        <ul class="lang lang-pt">
+          <li> Sexta Feira 09/01: 10:00 - 22:00</li>
+          <li> Sábado 10/01: 10:00 - 23:00</li>
+          <li> Domingo 11/01: 10:00 - 17:00</li>
+        </ul>
 
-                    <h2 class="title is-3 lang lang-en is-hidden"> Schedule </h2>
-                    <ul class="lang lang-en is-hidden">
-                        <li> Friday 09/01: 10:00 - 22:00</li>
-                        <li> Saturday 10/01: 10:00 - 23:00</li>
-                        <li> Sunday 11/01: 10:00 - 17:00</li>
-                    </ul>
-                </div>
+        <h2 class="title is-3 lang lang-en is-hidden"> Schedule </h2>
+        <ul class="lang lang-en is-hidden">
+          <li> Friday 09/01: 10:00 - 22:00</li>
+          <li> Saturday 10/01: 10:00 - 23:00</li>
+          <li> Sunday 11/01: 10:00 - 17:00</li>
+        </ul>
+      </div>
 
-            </section>
+    </section>
 
-            <section class="section" id="location">
-                <div class="location-container">
-                    <div class="location-text">
-                        <div class="container">
-                            <h2 class="title is-3 lang-pt">Localização</h2>
-                            <p class="lang lang-pt">Pavilhão Central, Av. Rovisco Pais 1, Lisboa — junto ao Instituto Superior Técnico.</p>
-                        </div>
-                    </div>
+    <section class="section" id="location">
+      <div class="location-container">
+        <div class="location-text">
+          <div class="container">
+            <h2 class="title is-3 lang-pt">Localização</h2>
+            <p class="lang lang-pt">Pavilhão Central, Av. Rovisco Pais 1, Lisboa — junto ao Instituto Superior Técnico.
+            </p>
+          </div>
+        </div>
 
-                    <div class="location-map">
-                        <div class="responsive-iframe">
-                            <iframe title="Pavilhão Central — map" loading="lazy"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.066488236138!2d-9.139655434816053!3d38.73626878664998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a2302b2157%3A0x11c13201e2cf8229!2sPavilh%C3%A3o%20Central%2C%20Av.%20Rovisco%20Pais%201%2C%201049-001%20Lisboa!5e0!3m2!1sen!2spt!4v1764086342525!5m2!1sen!2spt"
-                                style="border:0;" frameborder="0" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                </div>
+        <div class="location-map">
+          <div class="responsive-iframe">
+            <iframe title="Pavilhão Central — map" loading="lazy"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.066488236138!2d-9.139655434816053!3d38.73626878664998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1933a2302b2157%3A0x11c13201e2cf8229!2sPavilh%C3%A3o%20Central%2C%20Av.%20Rovisco%20Pais%201%2C%201049-001%20Lisboa!5e0!3m2!1sen!2spt!4v1764086342525!5m2!1sen!2spt"
+              style="border:0;" frameborder="0" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
 
-            </section>
+    </section>
 
-        </main>
+  </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>&copy; 2025 GEST</p>
-            </div>
-        </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>&copy; 2025 GEST</p>
+    </div>
+  </footer>
 
-        <script src="main.js" defer></script>
-    </body>
+  <script src="main.js" defer></script>
+</body>
 
-    </html>
+</html>
