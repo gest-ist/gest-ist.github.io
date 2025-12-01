@@ -66,11 +66,13 @@
 
 .brand-name {
   display: inline-block;
-  max-width: 350px; /*Adjust here*/
+  max-width: 350px;
+  /*Adjust here*/
   white-space: nowrap;
   overflow: hidden;
   position: relative;
 }
+
 /* 
 .brand-name::after {
   content: "";
@@ -82,9 +84,36 @@
   pointer-events: none;
 } */
 
+.hero .title {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.hero .subtitle {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.hero .subtitle.lang {
+  color: rgba(245, 238, 222);
+  margin-bottom: 0.5rem;
+}
+
+/* For mobile phone sizes.. */
 @media (max-width: 400px) {
+
   .brand-name {
     max-width: 280px;
     font-size: 0.875rem;
+  }
+
+  .hero .title {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  .hero .subtitle {
+    font-size: 1.75rem;
+    font-weight: 500;
   }
 }
