@@ -58,4 +58,28 @@ document.addEventListener('DOMContentLoaded', function () {
     var scrollAmount = 320;
     carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
   };
+
+  // Navbar hide on scroll
+  let lastScrollTop = 0;
+  const navbar = document.querySelector('.navbar');
+  const scrollThreshold = 100; // pixels
+
+  window.addEventListener('scroll', () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > scrollThreshold) {
+      if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.transition = 'transform 0.3s ease-in-out'; // CHANGE ANIMATION DURATION HERE
+        }
+    } else {
+      // Near top - show navbar
+      navbar.style.transform = 'translateY(0)';
+      navbar.style.transition = 'transform 0.45s'; // CHANGE ANIMATION DURATION HERE
+    }
+
+    lastScrollTop = scrollTop;
+  });
+
 });
