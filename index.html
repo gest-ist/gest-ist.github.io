@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
   <!-- Navbar -->
   <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
@@ -20,8 +21,14 @@
         <img class="mr-2" src="rubrica_small.png">
         <strong>Grupo de Estratégia, Simulação e Táctica</strong>
       </a>
+      <!-- Hamburger button for mobile -->
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar" data-target="mainNavbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
-    <div class="navbar-menu">
+    <div id="mainNavbar" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item lang lang-pt" href="#about">Sobre nós</a>
         <a class="navbar-item lang lang-pt" href="#events">Eventos</a>
@@ -37,10 +44,10 @@
       <div class="navbar-item">
         <!-- Social Icons -->
         <div class="icons">
-          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank">
+          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-instagram fa-lg"></i>
           </a>
-          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank">
+          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i>
           </a>
           <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
@@ -64,7 +71,7 @@
     <section class="hero is-link is-medium">
       <div class="hero-body">
         <div class="container" style="text-align:center;">
-          <img class="mr-2" src="rubrica_big.png" width="400">
+          <img class="mr-2" src="rubrica_big.png" width="400" loading="lazy" decoding="async" alt="GEST logo">
           <br>
           <br>
           <h2 class="subtitle lang lang-pt">Secção Autónoma da Associação dos Estudantes do Instituto Superior Técnico
@@ -103,9 +110,9 @@
           </p>
           <div class="column has-text-centered">
             <div class="columns">
-              <a class="column" href="https://discord.gg/PU3aQhHnqu" target="_blank">
+              <a class="column" href="https://discord.gg/PU3aQhHnqu" target="_blank" rel="noopener noreferrer">
                 <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Join us on Discord"
-                  style="width: 100px; height: 100px;">
+                  style="width: 100px; height: 100px;" loading="lazy" decoding="async">
                 <p class="lang lang-pt">
                   Junta-te a nós no Discord para conversar, participar em actividades e interagir com a comunidade!
                 </p>
@@ -114,7 +121,7 @@
                 </p>
               </a>
               <div class="column">
-                <img src="IMG_8247.jpg" alt="Game Day 2025" style="max-height: 300px;">
+                <img src="IMG_8247.jpg" alt="Game Day 2025" style="max-height: 300px;" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -193,10 +200,12 @@
         <h2 class="title is-3 lang lang-en is-hidden">Calendar</h2>
 
         <div class="box has-text-centered">
-          <iframe
-            src="https://calendar.google.com/calendar/embed?src=f33f8cc9f59ccadffa773cf4fcfa3ce73f9a09b92b467cdb36e5aa52f5e60c99%40group.calendar.google.com&ctz=Europe%2FLisbon"
-            style="border: 0" width="800" height="600" frameborder="0" scrolling="no">
-          </iframe>
+          <div class="responsive-iframe">
+            <iframe title="GEST calendar" loading="lazy"
+              src="https://calendar.google.com/calendar/embed?src=f33f8cc9f59ccadffa773cf4fcfa3ce73f9a09b92b467cdb36e5aa52f5e60c99%40group.calendar.google.com&ctz=Europe%2FLisbon"
+              frameborder="0" scrolling="no">
+            </iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -209,11 +218,11 @@
           <button class="scroll-button left" onclick="scrollCarousel(-1)">&#10094;</button>
 
           <div class="image-carousel" id="carousel">
-            <img src="IMG_0846.jpg" alt="Game Night, 2022">
-            <img src="IMG_20230414_232837.jpg" alt="D&D One-Shots, 2023">
-            <img src="IMG_20221123_182023.jpg" alt="D&D One-Shots, 2022">
-            <img src="IMG_5248.jpg" alt="Game Day, 2025">
-            <img src="1750451630331.jpg" alt="Semana de Acolhimento, 2024">
+            <img src="IMG_0846.jpg" alt="Game Night, 2022" loading="lazy" decoding="async">
+            <img src="IMG_20230414_232837.jpg" alt="D&D One-Shots, 2023" loading="lazy" decoding="async">
+            <img src="IMG_20221123_182023.jpg" alt="D&D One-Shots, 2022" loading="lazy" decoding="async">
+            <img src="IMG_5248.jpg" alt="Game Day, 2025" loading="lazy" decoding="async">
+            <img src="1750451630331.jpg" alt="Semana de Acolhimento, 2024" loading="lazy" decoding="async">
           </div>
 
           <button class="scroll-button right" onclick="scrollCarousel(1)">&#10095;</button>
@@ -228,66 +237,7 @@
     </div>
   </footer>
 
-  <script>
-    const selector = document.getElementById("language-selector");
-    const allLangSections = document.querySelectorAll(".lang");
-
-    selector.addEventListener("change", function () {
-      const lang = this.value;
-      allLangSections.forEach((el) => {
-        if (el.classList.contains("lang-" + lang)) {
-          el.classList.remove("is-hidden");
-        } else {
-          el.classList.add("is-hidden");
-        }
-      });
-    });
-  </script>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        const target = document.querySelector(targetId);
-
-        if (target) {
-          e.preventDefault();
-          const yOffset = -60; // adjust this as needed
-          const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
-
-  <script>
-    function scrollCarousel(direction) {
-      const carousel = document.getElementById("carousel");
-      const scrollAmount = 320; // adjust for image width + gap
-
-      carousel.scrollBy({
-        left: direction * scrollAmount,
-        behavior: "smooth"
-      });
-    }
-  </script>
-
-  <script>
-    function adjustForNavbar() {
-      const navbar = document.querySelector('.navbar');
-      const main = document.getElementById('main-content');
-      if (navbar && main) {
-        const navbarHeight = navbar.offsetHeight;
-        main.style.marginTop = navbarHeight + 'px';
-      }
-    }
-
-    // Adjust on load and on resize (for mobile resizing or language changes)
-    window.addEventListener('DOMContentLoaded', adjustForNavbar);
-    window.addEventListener('resize', adjustForNavbar);
-  </script>
-
+  <script src="main.js" defer></script>
 
 </body>
 

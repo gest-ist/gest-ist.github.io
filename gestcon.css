@@ -11,3 +11,14 @@
 .location-map {
     flex: 1;
 }
+
+/* Allow location container to wrap on narrow screens */
+@media (max-width: 800px) {
+    .location-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .location-map {
+        width: 100%;
+    }
+}
