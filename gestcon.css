@@ -1,6 +1,7 @@
 .location-container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column; /* stack children vertically */
+  align-items: stretch;    /* make children take full width */
   gap: 20px;
 }
 
@@ -116,4 +117,15 @@
     font-size: 1.5rem;
     font-weight: 500;
   }
+}
+
+/* Ensure responsive iframe does not overflow its container and is centered */
+.location-map .responsive-iframe {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.location-map .responsive-iframe iframe {
+  max-width: 100%;
+  width: 100%;
+  display: block;
 }
