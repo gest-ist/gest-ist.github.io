@@ -89,3 +89,64 @@
     transition: transform 0.3s ease-in-out;
     will-change: transform;
 }
+
+/* Mobile fix for navbar brand name */
+@media (max-width: 600px) {
+
+  .brand-name {
+    max-width: 280px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Allow location container to wrap on narrow screens */
+@media (max-width: 800px) {
+  .location-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .location-map {
+    width: 100%;
+  }
+}
+
+.navbar {
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.icons-language-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.icons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.select {
+  margin-left: auto;
+}
+
+@media (max-width: 1023px) {
+  .navbar-end {
+    width: 100%;
+  }
+
+  .icons-language-container {
+    width: 100%;
+  }
+
+  .icons {
+    width: auto;
+  }
+
+  .select {
+    margin-left: auto;
+    min-width: 120px;
+  }
+}
