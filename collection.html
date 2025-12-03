@@ -1,317 +1,365 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogos de Tabuleiro / Board Games</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="icon" href="favicon.png" type="image/png">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Jogos de Tabuleiro / Board Games</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+	<link rel="icon" href="favicon.png" type="image/png">
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item is-link" href="index.html">
-	    <img class="mr-2" src="rubrica_small.png">
-        <strong>Grupo de Estratégia, Simulação e Táctica</strong>
-      </a>
-    </div>
-	<div class="navbar-end">
-	    <div class="navbar-item">
-			<!-- Social Icons -->
-			<div class="icons">
-			  <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank">
-				<i class="fab fa-instagram fa-lg"></i>
-			  </a>
-			  <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank">
-				<i class="fab fa-discord"></i>
-			  </a>
-			  <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
-				<i class="fas fa-envelope fa-lg"></i>
-			  </a>
-			</div>
-			
-			<div class="select mr-4">
-			  <select id="language-selector">
-				<option value="pt">Português</option>
-				<option value="en">English</option>
-			  </select>
-			</div>
-		  </div>
+	<!-- Navbar -->
+	<nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="navbar-item is-link" href="index.html">
+				<img class="mr-2" src="rubrica_small.png">
+				<strong>Grupo de Estratégia, Simulação e Táctica</strong>
+			</a>
+		</div>
+		<div class="navbar-end">
+			<div class="navbar-item">
+				<!-- Social Icons -->
+				<div class="icons">
+					<a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2"
+						target="_blank">
+						<i class="fab fa-instagram fa-lg"></i>
+					</a>
+					<a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank">
+						<i class="fab fa-discord"></i>
+					</a>
+					<a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
+						<i class="fas fa-envelope fa-lg"></i>
+					</a>
+				</div>
 
-	</div>
-  </nav>
-  
-  <main id="main-content">
-  <section class="section">
-    <div class="container">
-      <div class="level">
-        <div class="level-left">
-          <h1 class="title lang lang-pt">Jogos de Tabuleiro</h1>
-          <h1 class="title lang lang-en is-hidden">Board Games</h1>
-        </div>
-      </div>
-		<p class="lang lang-pt">Esta é a nossa coleção de jogos de tabuleiro. Nem todos estarão disponíveis nas Game Nights e eventos semelhantes. 
-			No entanto, podem ser requesitados para estes eventos através do canal de jogos de tabuleiro no nosso sevidor de Discord.</p>
-		<p class="lang lang-en is-hidden">This is our board game collection. Not all the games will be available at Game Nights and similar events.
-			However, they can be requested for these events through the board games channel on our Discord server.</p>
-		<br>
-      <!-- Game Table -->
-      <table class="table is-fullwidth is-striped is-hoverable">
-        <thead>
-          <tr>
-            <th class="lang lang-pt">Nome</th>
-            <th class="lang lang-en is-hidden">Name</th>
-            <th class="lang lang-pt">Jogadores</th>
-            <th class="lang lang-en is-hidden">Players</th>
-            <th class="lang lang-pt">Disponibilidade</th>
-            <th class="lang lang-en is-hidden">Availability</th>
-            <th>BGG</th>
-          </tr>
-        </thead>
-        <tbody id="games-table-body"></tbody>
-      </table>
-    </div>
-  </section>
-  </main>
-  
- <!-- Game Storage Script -->
- 
+				<div class="select mr-4">
+					<select id="language-selector">
+						<option value="pt">Português</option>
+						<option value="en">English</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<main id="main-content">
+		<section class="section">
+			<div class="container">
+				<div class="level">
+					<div class="level-left">
+						<h1 class="title lang lang-pt">Jogos de Tabuleiro</h1>
+						<h1 class="title lang lang-en is-hidden">Board Games</h1>
+					</div>
+				</div>
+				<p class="lang lang-pt">Esta é a nossa coleção de jogos de tabuleiro. Nem todos estarão disponíveis nas
+					Game Nights e eventos semelhantes.
+					No entanto, podem ser requesitados para estes eventos através do canal de jogos de tabuleiro no
+					nosso sevidor de Discord.</p>
+				<p class="lang lang-en is-hidden">This is our board game collection. Not all the games will be available
+					at Game Nights and similar events.
+					However, they can be requested for these events through the board games channel on our Discord
+					server.</p>
+				<br>
+				<!-- Game Table -->
+				<table class="table is-fullwidth is-striped is-hoverable">
+					<thead>
+						<tr>
+							<th class="lang lang-pt">Nome</th>
+							<th class="lang lang-en is-hidden">Name</th>
+							<th class="lang lang-pt">Jogadores</th>
+							<th class="lang lang-en is-hidden">Players</th>
+							<th class="lang lang-pt">Disponibilidade</th>
+							<th class="lang lang-en is-hidden">Availability</th>
+							<th>BGG</th>
+						</tr>
+					</thead>
+					<tbody id="games-table-body"></tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+
+	<!-- Game Storage Script -->
+
 	<script>
-	  const games = [
-		  {
-		    name: "Azul",
-		    players: "2–4",
-		    availability: "on-request",
-		    link: "https://boardgamegeek.com/boardgame/230802/azul"
-		  },
-		  {
-		    name: "Axis & Allies",
-		    players: "2–5",
-		    availability: "on-request",
-		    link: "https://boardgamegeek.com/boardgame/98/axis-and-allies"
-		  },
-		  {
-		    name: "Blood Bowl",
-		    players: "2",
-		    availability: "on-request",
-		    link: "https://boardgamegeek.com/boardgame/212445/blood-bowl-2016-edition"
-		  },
-		  {
-		    name: "Brass: Birmingham",
-		    players: "2–4",
-		    availability: "on-request",
-		    link: "https://boardgamegeek.com/boardgame/224517/brass-birmingham"
-		  },
-		  {
-		    name: "Café",
-		    players: "1–4",
-		    availability: "always",
-		    link: "https://boardgamegeek.com/boardgame/284936/cafe"
-		  },
-		  {
-		    name: "Carcassonne",
-		    players: "1–4",
-		    availability: "always",
-		    link: "https://boardgamegeek.com/boardgame/822/carcassonne"
-		  },
-		  {
-			name: "Cascadia",
-			players: "1–4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/295947/cascadia"
-		  },
-		  {
-			name: "Cat in the Box",
-			players: "2–5",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/345972/cat-in-the-box-deluxe-edition"
-		  },
-		  {
-			name: "Catan",
-			players: "3–4",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/13/catan"
-		  },
-		  {
-			name: "Coup",
-			players: "2–6",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/131357/coup"
-		  },
-		  {
-			name: "Dominion",
-			players: "2–4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/36218/dominion"
-		  },
-		  {
-			name: "Dune: Imperium - Uprising",
-			players: "1–6",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/397598/dune-imperium-uprising"
-		  },
-		  {
-			name: "Hanamikoji",
-			players: "2",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/158600/hanamikoji"
-		  },
-		  {
-			name: "Heat: Pedal to the Metal (+ Heavy Rain Expansion)",
-			players: "1–7",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal"
-		  },
-		  {
-			name: "Hitler's War",
-			players: "1-3",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/2168/hitlers-war"
-		  },
-		  {
-			name: "Jaipur",
-			players: "2",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/54043/jaipur"
-		  },
-		  {
-			name: "Kingdomino",
-			players: "2-4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/204583/kingdomino"
-		  },
-		  {
-			name: "Letter Jam",
-			players: "2-6",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/275467/letter-jam"
-		  },
-		  {
-			name: "Long Shot: The Dice Game",
-			players: "1-8",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/295374/long-shot-the-dice-game"
-		  },
-		  {
-			name: "Mafia de Cuba",
-			players: "6-12",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/176558/mafia-de-cuba"
-		  },
-		  {
-			name: "NMBR 9",
-			players: "1-4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/217449/nmbr-9"
-		  },
-		  {
-			name: "That's Pretty Clever!",
-			players: "1-4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/244522/thats-pretty-clever"
-		  },
-		  {
-			name: "Photosynthesis",
-			players: "2-4",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/218603/photosynthesis"
-		  },
-		  {
-			name: "Pipeline",
-			players: "2-4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/256730/pipeline"
-		  },
-		  {
-			name: "Ragami",
-			players: "2-4",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/114863/ragami"
-		  },
-		  {
-			name: "Scout",
-			players: "2-5",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/291453/scout"
-		  },
-		  {
-			name: "Secret Hitler",
-			players: "5-10",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/188834/secret-hitler"
-		  },
-		  {
-			name: "Small World",
-			players: "2-5",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/40692/small-world"
-		  },
-		  {
-			name: "Sushi Go!",
-			players: "2-5",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/133473/sushi-go"
-		  },
-		  {
-			name: "That's Not a Hat",
-			players: "3-8",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/375651/thats-not-a-hat"
-		  },
-		  {
-			name: "The Crew: Mission Deep Sea",
-			players: "3-5",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/324856/the-crew-mission-deep-sea"
-		  },
-		  {
-			name: "Ticket to Ride",
-			players: "2-5",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/9209/ticket-to-ride"
-		  },
-		  {
-			name: "Tsuro",
-			players: "2-8",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/16992/tsuro"
-		  },
-		  {
-			name: "Unlock: Escape Adventures",
-			players: "2-6",
-			availability: "on-request",
-			link: "https://boardgamegeek.com/boardgame/213460/unlock-escape-adventures"
-		  },
-		  {
-			name: "Wavelength",
-			players: "2-12",
-			availability: "always",
-			link: "https://boardgamegeek.com/boardgame/262543/wavelength"
-		  }
-		
-		// Add more games here...
-	  ];
+		const games = [
+			{
+				name: "Arcs",
+				players: "2-4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/359871/arcs"
+			},
+			{
+				name: "Azul",
+				players: "2–4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/230802/azul"
+			},
+			{
+				name: "Axis & Allies",
+				players: "2–5",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/98/axis-and-allies"
+			},
+			{
+				name: "BOOoop.",
+				players: "2",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/383579/boooop"
+			},
+			{
+				name: "Blood Bowl",
+				players: "2",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/212445/blood-bowl-2016-edition"
+			},
+			{
+				name: "Brass: Birmingham",
+				players: "2–4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/224517/brass-birmingham"
+			},
+			{
+				name: "Café",
+				players: "1–4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/284936/cafe"
+			},
+			{
+				name: "Carcassonne",
+				players: "1–4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/822/carcassonne"
+			},
+			{
+				name: "Cascadia",
+				players: "1–4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/295947/cascadia"
+			},
+			{
+				name: "Cat in the Box",
+				players: "2–5",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/345972/cat-in-the-box-deluxe-edition"
+			},
+			{
+				name: "Cat Lady",
+				players: "2-4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/228504/cat-lady"
+			},
+			{
+				name: "Catan",
+				players: "3–4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/13/catan"
+			},
+			{
+				name: "Coup",
+				players: "2–6",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/131357/coup"
+			},
+			{
+				name: "Cubitos",
+				players: "2-4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/298069/cubitos"
+			},
+			{
+				name: "Decrypto",
+				players: "3-8",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/225694/decrypto"
+			},
+			{
+				name: "Dominion",
+				players: "2–4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/36218/dominion"
+			},
+			{
+				name: "Dune: Imperium - Uprising (+ Bloodlines Expansion)",
+				players: "1–6",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/397598/dune-imperium-uprising"
+			},
+			{
+				name: "Feed the Kraken",
+				players: "5-11",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/271601/feed-the-kraken"
+			},
+			{
+				name: "Hanamikoji",
+				players: "2",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/158600/hanamikoji"
+			},
+			{
+				name: "Heat: Pedal to the Metal (+ Heavy Rain Expansion)",
+				players: "1–7",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal"
+			},
+			{
+				name: "Hitler's War",
+				players: "1-3",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/2168/hitlers-war"
+			},
+			{
+				name: "Jaipur",
+				players: "2",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/54043/jaipur"
+			},
+			{
+				name: "Kingdomino",
+				players: "2-4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/204583/kingdomino"
+			},
+			{
+				name: "Letter Jam",
+				players: "2-6",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/275467/letter-jam"
+			},
+			{
+				name: "Long Shot: The Dice Game",
+				players: "1-8",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/295374/long-shot-the-dice-game"
+			},
+			{
+				name: "Mafia de Cuba",
+				players: "6-12",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/176558/mafia-de-cuba"
+			},
+			{
+				name: "NMBR 9",
+				players: "1-4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/217449/nmbr-9"
+			},
+			{
+				name: "That's Pretty Clever!",
+				players: "1-4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/244522/thats-pretty-clever"
+			},
+			{
+				name: "Photosynthesis",
+				players: "2-4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/218603/photosynthesis"
+			},
+			{
+				name: "Pipeline",
+				players: "2-4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/256730/pipeline"
+			},
+			{
+				name: "Ragami",
+				players: "2-4",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/114863/ragami"
+			},
+			{
+				name: "Scout",
+				players: "2-5",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/291453/scout"
+			},
+			{
+				name: "Secret Hitler",
+				players: "5-10",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/188834/secret-hitler"
+			},
+			{
+				name: "Small World",
+				players: "2-5",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/40692/small-world"
+			},
+			{
+				name: "Sushi Go!",
+				players: "2-5",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/133473/sushi-go"
+			},
+			{
+				name: "That's Not a Hat",
+				players: "3-8",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/375651/thats-not-a-hat"
+			},
+			{
+				name: "The Crew: Mission Deep Sea",
+				players: "3-5",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/324856/the-crew-mission-deep-sea"
+			},
+			{
+				name: "Ticket to Ride",
+				players: "2-5",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/9209/ticket-to-ride"
+			},
+			{
+				name: "Tsuro",
+				players: "2-8",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/16992/tsuro"
+			},
+			{
+				name: "Turing Machine",
+				players: "1-4",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/356123/turing-machine"
+			},
+			{
+				name: "Unlock: Escape Adventures",
+				players: "2-6",
+				availability: "on-request",
+				link: "https://boardgamegeek.com/boardgame/213460/unlock-escape-adventures"
+			},
+			{
+				name: "Wavelength",
+				players: "2-12",
+				availability: "always",
+				link: "https://boardgamegeek.com/boardgame/262543/wavelength"
+			}
 
-	  const availabilityTexts = {
-		"on-request": {
-		  pt: "A pedido",
-		  en: "On request"
-		},
-		"always": {
-		  pt: "Sempre",
-		  en: "Always"
-		}
-	  };
+			// Add more games here...
+		];
 
-	  const tbody = document.getElementById("games-table-body");
+		const availabilityTexts = {
+			"on-request": {
+				pt: "A pedido",
+				en: "On request"
+			},
+			"always": {
+				pt: "Sempre",
+				en: "Always"
+			}
+		};
 
-	  games.forEach(game => {
-		const row = document.createElement("tr");
+		const tbody = document.getElementById("games-table-body");
 
-		row.innerHTML = `
+		games.forEach(game => {
+			const row = document.createElement("tr");
+
+			row.innerHTML = `
 		  <td>${game.name}</td>
 		  <td>${game.players}</td>
 		  <td>
@@ -321,45 +369,46 @@
 		  <td><a href="${game.link}" target="_blank">Link</a></td>
 		`;
 
-		tbody.appendChild(row);
-	  });
+			tbody.appendChild(row);
+		});
 	</script>
 
-  <!-- Language Switch Script -->
-  <script>
-    const selector = document.getElementById("language-selector");
-    const allLangSections = document.querySelectorAll(".lang");
-
-    selector.addEventListener("change", function () {
-	  const lang = this.value;
-	  allLangSections.forEach((el) => {
-	    if (el.classList.contains("lang-" + lang)) {
-		  el.classList.remove("is-hidden");
-	    } else {
-		  el.classList.add("is-hidden");
-	    }
-	  });
-    });
-  </script>
-  
-  <!-- This fixes the navbar -->
-  
+	<!-- Language Switch Script -->
 	<script>
-	  function adjustForNavbar() {
-		const navbar = document.querySelector('.navbar');
-		const main = document.getElementById('main-content');
-		if (navbar && main) {
-		  const navbarHeight = navbar.offsetHeight;
-		  main.style.marginTop = navbarHeight + 'px';
-		}
-	  }
+		const selector = document.getElementById("language-selector");
+		const allLangSections = document.querySelectorAll(".lang");
 
-	  // Adjust on load and on resize (for mobile resizing or language changes)
-	  window.addEventListener('DOMContentLoaded', adjustForNavbar);
-	  window.addEventListener('resize', adjustForNavbar);
+		selector.addEventListener("change", function () {
+			const lang = this.value;
+			allLangSections.forEach((el) => {
+				if (el.classList.contains("lang-" + lang)) {
+					el.classList.remove("is-hidden");
+				} else {
+					el.classList.add("is-hidden");
+				}
+			});
+		});
 	</script>
-  
-  
-  
+
+	<!-- This fixes the navbar -->
+
+	<script>
+		function adjustForNavbar() {
+			const navbar = document.querySelector('.navbar');
+			const main = document.getElementById('main-content');
+			if (navbar && main) {
+				const navbarHeight = navbar.offsetHeight;
+				main.style.marginTop = navbarHeight + 'px';
+			}
+		}
+
+		// Adjust on load and on resize (for mobile resizing or language changes)
+		window.addEventListener('DOMContentLoaded', adjustForNavbar);
+		window.addEventListener('resize', adjustForNavbar);
+	</script>
+
+
+
 </body>
+
 </html>
