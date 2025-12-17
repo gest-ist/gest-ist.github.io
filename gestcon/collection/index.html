@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GESTCon - Convenção de Jogos de Tabuleiro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="../../gest_style.css">
+  <link rel="stylesheet" href="../gestcon.css">
+  <link rel="stylesheet" href="collection.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+
+<body>
+<script>0</script>
+  <a class="skip-link" href="#main-content"
+    style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+
+  <!-- Navbar -->
+  <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../">
+        <img class="mr-2" src="../../images/rubrica_small.png" alt="GEST logo">
+        <strong class="brand-name">Grupo de Estratégia, Simulação e Táctica</strong>
+      </a>
+
+      <!-- Hamburger button -->
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar"
+        data-target="mainNavbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item icons-language-container">
+        <!-- Social Icons -->
+        <div class="icons">
+          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-instagram fa-lg"></i>
+          </a>
+          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-discord fa-lg"></i>
+          </a>
+          <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
+            <i class="fas fa-envelope fa-lg"></i>
+          </a>
+        </div>
+        <div class="select mr-4">
+          <select id="language-selector">
+            <option value="pt">Português</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <main id="main-content">
+    <section class="section" id="games">
+
+        <div class="columns is-centered">
+            <div class="column is-narrow">
+
+                <!-- Search bar -->
+                <div class="field">
+                    <p class="control has-icons-right">
+                        <input class="input"/>
+                        <span class="icon is-small is-right">
+                        <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="grid is-col-min-6 has-text-centered" id="game-grid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>&copy; 2025 GEST</p>
+    </div>
+  </footer>
+
+  <script src="../../main.js" defer></script>
+  <script src="collection-renderer.js" defer></script>
+</body>
+
+</html>
+<!-- 
+<div class="cell">
+                        <div class="box">
+                            <figure>
+                                <img src="https://cf.geekdo-images.com/0XODRpReiZBFUffEcqT5-Q__imagepage/img/enC7UTvCAnb6j1Uazvh0OBQjvxw=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9156909.png">
+                            </figure>
+                            <span class="tag is-danger is-medium unavailable">Não Disponível</span>
+                            <span class="tag is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
+                            <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
+                        </div>
+                        <p class="has-text-grey is-size-7 game-year">1995</p>
+                        <p class="game-title">Catan</p>
+                    </div> -->
+
+                    <!-- <div class="cell">
+                        <div class="box">
+                            <img src="https://cf.geekdo-images.com/0XODRpReiZBFUffEcqT5-Q__imagepage/img/enC7UTvCAnb6j1Uazvh0OBQjvxw=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9156909.png">
+                            <span class="tag is-warning is-medium requested">Requisitado</span>
+                            <span class="tag is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
+                            <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
+                        </div>
+                        <p>Catan</p>
+                    </div> -->
+
+                     <!-- <div class="cell">
+                        <div class="box">
+                            <figure class="image is-skeleton">
+                                <img src="https://placehold.co/64x64">
+                            </figure>
+                            <span class="tag is-hidden is-danger is-medium unavailable">Não Disponível</span>
+                            <span class="tag is-hidden is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
+                            <span class="tag is-hidden is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
+                        </div>
+                        <p class="has-text-grey is-size-7 game-year">1995</p>
+                        <p class="game-title">Catan</p>
+                    </div> -->

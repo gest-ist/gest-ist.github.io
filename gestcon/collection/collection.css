@@ -1,0 +1,56 @@
+#games {
+    .grid {
+        max-width: 750px;
+    }
+
+    .game-year {
+        margin: 2pt 0pt;
+    }
+
+    .game-title {
+        margin-top: -5pt;
+    }
+
+    .box {
+        padding: 0pt;
+        overflow: hidden;
+        aspect-ratio: 1;
+        position: relative;
+        margin: 0pt;
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        span {
+            position: absolute;
+            z-index: 3;
+            opacity: 80%;
+        }
+
+        i {
+            margin-right: 4px;
+        }
+
+        .unavailable, .requested {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .players {
+            bottom: 3%;
+            left: 3%;
+        }
+
+        .time {
+            bottom: 3%;
+            right: 3%;
+        }
+    } 
+
+    
+}
