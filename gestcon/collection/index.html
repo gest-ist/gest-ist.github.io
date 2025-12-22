@@ -65,19 +65,19 @@
     <section class="section" id="games">
 
         <div class="columns is-centered">
-            <div class="column is-narrow">
+            <div class="column is-full-mobile is-three-quarters-tablet is-two-thirds-desktop" id="game-grid-container">
 
                 <!-- Search bar -->
                 <div class="field">
                     <p class="control has-icons-right">
-                        <input class="input"/>
+                        <input class="input" type="search" id="search-bar"/>
                         <span class="icon is-small is-right">
                         <i class="fas fa-magnifying-glass"></i>
                         </span>
                     </p>
                 </div>
 
-                <div class="grid is-col-min-6 has-text-centered" id="game-grid">
+                <div class="columns is-mobile is-multiline has-text-centered" id="game-grid">
                 </div>
             </div>
         </div>
@@ -93,43 +93,8 @@
   </footer>
 
   <script src="../../main.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
   <script src="collection-renderer.js" defer></script>
 </body>
 
 </html>
-<!-- 
-<div class="cell">
-                        <div class="box">
-                            <figure>
-                                <img src="https://cf.geekdo-images.com/0XODRpReiZBFUffEcqT5-Q__imagepage/img/enC7UTvCAnb6j1Uazvh0OBQjvxw=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9156909.png">
-                            </figure>
-                            <span class="tag is-danger is-medium unavailable">Não Disponível</span>
-                            <span class="tag is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
-                            <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
-                        </div>
-                        <p class="has-text-grey is-size-7 game-year">1995</p>
-                        <p class="game-title">Catan</p>
-                    </div> -->
-
-                    <!-- <div class="cell">
-                        <div class="box">
-                            <img src="https://cf.geekdo-images.com/0XODRpReiZBFUffEcqT5-Q__imagepage/img/enC7UTvCAnb6j1Uazvh0OBQjvxw=/fit-in/900x600/filters:no_upscale():strip_icc()/pic9156909.png">
-                            <span class="tag is-warning is-medium requested">Requisitado</span>
-                            <span class="tag is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
-                            <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
-                        </div>
-                        <p>Catan</p>
-                    </div> -->
-
-                     <!-- <div class="cell">
-                        <div class="box">
-                            <figure class="image is-skeleton">
-                                <img src="https://placehold.co/64x64">
-                            </figure>
-                            <span class="tag is-hidden is-danger is-medium unavailable">Não Disponível</span>
-                            <span class="tag is-hidden is-rounded players"><i class="fas fa-users"></i>3 - 4</span>
-                            <span class="tag is-hidden is-rounded time"><i class="fas fa-hourglass"></i>45 - 60</span>
-                        </div>
-                        <p class="has-text-grey is-size-7 game-year">1995</p>
-                        <p class="game-title">Catan</p>
-                    </div> -->

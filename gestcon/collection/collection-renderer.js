@@ -5,15 +5,24 @@ const SLUG = 'PgslpkZShMbeWNDviq2vgcRWfj5l-ZVuN0K4sSOnSu0' // slug = the identif
 
 const ENTRIES_PER_PAGE = 100;
 
-function cell_template(title, publishing_year, players_min, players_max, time_min, time_max, image, status){
+var games = [];
+const fuse_options = {
+    keys: ['title'],
+    threshold: 0.0
+  }
+var fuse; 
+
+var currentSearch = "";
+
+function game_container_template(title, publishing_year, players_min, players_max, time_min, time_max, image, status){
   var availability_tag = {
     'Unavailable': '<span class="tag is-danger is-medium unavailable">Não Disponível</span>',
     'Requested':  '<span class="tag is-warning is-medium requested">Requisitado</span>',
     'Available': ''
   };
   return `
-    <div class="box">
-      <figure class="image}">
+    <div class="box image-container">
+      <figure class="image is-square">
           <img src="${image === "" ? "https://placehold.co/64x64" : image}">
       </figure>
       ${
@@ -27,9 +36,10 @@ function cell_template(title, publishing_year, players_min, players_max, time_mi
   `
 }
 
-const skeleton =  `
-  <div class="cell skeleton">
-    <div class="box">
+function skeleton(){
+  const str =  `
+  <div class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
+    <div class="box image-container">
           <figure class="image is-skeleton">
               <img src="https://placehold.co/64x64">
           </figure>
@@ -39,6 +49,33 @@ const skeleton =  `
     </div>
   </div>
   `
+  const div = document.createElement('div');
+  div.innerHTML = str.trim();
+  return div.firstElementChild;
+}
+
+function applySearchFilter() {
+  const grid = document.querySelector('#game-grid');
+
+  // No search → show everything
+  if (!currentSearch) {
+    grid.querySelectorAll('.column').forEach(el =>
+      el.classList.remove('is-hidden')
+    );
+    return;
+  }
+
+  // Hide all first
+  grid.querySelectorAll('.column').forEach(el =>
+    el.classList.add('is-hidden')
+  );
+
+  // Show matches only
+  fuse.search(currentSearch).forEach(({ item }) => {
+    item.element.classList.remove('is-hidden');
+  });
+}
+
 async function field_name2id() {
   const response = await fetch(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`, {method: "GET"});
   var data = await response.json();
@@ -61,7 +98,9 @@ async function load() {
   var page = 1;
   var pages_left = true;
   while(pages_left){
-    grid.innerHTML += skeleton.repeat(ENTRIES_PER_PAGE);
+    for (let i = 0; i < ENTRIES_PER_PAGE; i++) {
+      grid.appendChild(skeleton());
+    }
     db = await load_db_page(page);
     if(db.next === null) pages_left = false;
 
@@ -70,10 +109,13 @@ async function load() {
         return game[`field_${field2id[name]}`]
       }
       if(field('Status').value != 'Unavailable') { // don't show games which are unavailable
-        let cell = grid.querySelector(".skeleton");
-        cell.classList.remove('skeleton');
-        cell.innerHTML = cell_template(field('Title'), field('Publishing-year'), field('Players-min'), field('Players-max'), field('Time-min'), field('Time-max'), field('Image'), field('Status').value);
+        let game_container = grid.querySelector(".skeleton");
+        game_container.classList.remove('skeleton');
+        game_container.innerHTML = game_container_template(field('Title'), field('Publishing-year'), field('Players-min'), field('Players-max'), field('Time-min'), field('Time-max'), field('Image'), field('Status').value);
+        games.push({title: field('Title'), element: game_container});
       }
+      fuse = new Fuse(games, fuse_options); 
+      applySearchFilter();
     });
     page++;
   }
@@ -81,3 +123,8 @@ async function load() {
 }
 
 load();
+
+document.querySelector('#search-bar').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
+  applySearchFilter();
+});
