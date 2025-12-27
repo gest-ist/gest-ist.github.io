@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GESTCon - Convenção de Jogos de Tabuleiro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../../../gest_style.css">
+    <link rel="stylesheet" href="../../gestcon.css">
+    <!-- <link rel="stylesheet" href="collection.css"> -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+
+<body class="has-navbar-fixed-top">
+    <script>0</script>
+    <a class="skip-link" href="#main-content"
+        style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+
+    <div class="modal" id="login-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Login</p>
+            </header>
+            <section class="modal-card-body">
+                <p>Instruções para fazer login</p>
+            </section>
+            <footer class="modal-card-foot is-flex is-flex-direction-column">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="password" placeholder="token" id="token-input">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary" id="login-button">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal" id="error-modal">
+        <div class="modal-background close-modal"></div>
+        <div class="notification is-danger">
+            <button class="delete close-modal"></button>
+            <p id="error-modal-text"></p>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <nav class="navbar is-fixed-top level">
+            <div class="level-item">
+                <div class="tabs is-large">
+                    <ul>
+                        <li class="is-active"><a>
+                                <span class="icon is-small"><i class="fas fa-dice" aria-hidden="true"></i></span>
+                                <span>Jogos</span>
+                            </a></li>
+                        <li><a>
+                                <span class="icon is-small"><i class="fas fa-users" aria-hidden="true"></i></span>
+                                <span>Utilizadores</span>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="level-right">
+                <button class="button is-light level-item is-medium" id="logout-button">
+                    <span class="icon is-small">
+                        <i class="fas fa-right-from-bracket"></i>
+                    </span>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+
+        <section class="section" id="games">    
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>&copy; 2025 GEST</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+    <script src="admin.js" defer></script>
+</body>
+
+</html>
