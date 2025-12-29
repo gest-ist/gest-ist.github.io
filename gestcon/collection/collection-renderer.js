@@ -108,11 +108,11 @@ async function load() {
       function field(name){
         return game[`field_${field2id[name]}`]
       }
-      if(field('Status').value != 'Unavailable') { // don't show games which are unavailable
+      if(field('status').value != 'Unavailable') { // don't show games which are unavailable
         let game_container = grid.querySelector(".skeleton");
         game_container.classList.remove('skeleton');
-        game_container.innerHTML = game_container_template(field('Title'), field('Publishing-year'), field('Players-min'), field('Players-max'), field('Time-min'), field('Time-max'), field('Image'), field('Status').value);
-        games.push({title: field('Title'), element: game_container});
+        game_container.innerHTML = game_container_template(field('title'), field('publishingYear'), field('playersMin'), field('playersMax'), field('timeMin'), field('timeMax'), field('image'), field('status').value);
+        games.push({title: field('title'), element: game_container});
       }
       fuse = new Fuse(games, fuse_options); 
       applySearchFilter();
