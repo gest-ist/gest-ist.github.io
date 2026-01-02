@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<script>0</script>
+  <script>0</script>
   <a class="skip-link" href="#main-content"
     style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
@@ -34,6 +34,13 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
+    <div id="mainNavbar" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item lang lang-pt" href=".."> GESTCon - Convenção de Jogos de Tabuleiro</a>
+
+        <a class="navbar-item lang lang-en is-hidden" href=".."> GESTCon - Board Game Convention</a>
+      </div>
+    </div>
     <div class="navbar-end">
       <div class="navbar-item icons-language-container">
         <!-- Social Icons -->
@@ -44,12 +51,13 @@
           </a>
           <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank"
             rel="noopener noreferrer">
-            <i class="fab fa-discord fa-lg"></i>
+            <i class="fab fa-discord"></i>
           </a>
           <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
             <i class="fas fa-envelope fa-lg"></i>
           </a>
         </div>
+
         <div class="select mr-4">
           <select id="language-selector">
             <option value="pt">Português</option>
@@ -57,6 +65,7 @@
           </select>
         </div>
       </div>
+
     </div>
   </nav>
 
@@ -64,23 +73,23 @@
   <main id="main-content">
     <section class="section" id="games">
 
-        <div class="columns is-centered">
-            <div class="column is-full-mobile is-three-quarters-tablet is-two-thirds-desktop" id="game-grid-container">
+      <div class="columns is-centered">
+        <div class="column is-full-mobile is-three-quarters-tablet is-two-thirds-desktop" id="game-grid-container">
 
-                <!-- Search bar -->
-                <div class="field">
-                    <p class="control has-icons-right">
-                        <input class="input" type="search" id="search-bar"/>
-                        <span class="icon is-small is-right">
-                        <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </p>
-                </div>
+          <!-- Search bar -->
+          <div class="field">
+            <p class="control has-icons-right">
+              <input class="input" type="search" id="search-bar" />
+              <span class="icon is-small is-right">
+                <i class="fas fa-magnifying-glass"></i>
+              </span>
+            </p>
+          </div>
 
-                <div class="columns is-mobile is-multiline has-text-centered" id="game-grid">
-                </div>
-            </div>
+          <div class="columns is-mobile is-multiline has-text-centered" id="game-grid">
+          </div>
         </div>
+      </div>
     </section>
 
   </main>
