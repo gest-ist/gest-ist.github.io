@@ -53,3 +53,7 @@
         }
     }     
 }
+
+.game:not(.class-b):hover {
+    cursor: pointer;
+}

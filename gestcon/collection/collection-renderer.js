@@ -5,17 +5,32 @@ const SLUG = 'PgslpkZShMbeWNDviq2vgcRWfj5l-ZVuN0K4sSOnSu0' // slug = the identif
 
 const ENTRIES_PER_PAGE = 100;
 
-var games = [];
+let games = [];
 const fuse_options = { //TODO adjust these options
     keys: ['title'],
     threshold: 0.0
   }
-var fuse; 
+let fuse; 
 
-var currentSearch = "";
+let currentSearch = "";
+
+let field2id;
+async function field_name2id() {
+  const response = await fetch(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`, {method: "GET"});
+  let data = await response.json();
+  let res = {};
+  data.fields.forEach((field) => {
+    res[field.name] = field.id;
+  });
+  return res;
+}
+
+function gameField(game, name){
+  return game[`field_${field2id[name]}`]
+}
 
 function game_container_template(title, publishing_year, players_min, players_max, time_min, time_max, image, status){
-  var availability_tag = {
+  let availability_tag = {
     'Unavailable': '<span class="tag is-danger is-medium unavailable">Não Disponível</span>',
     'Requested':  '<span class="tag is-warning is-medium requested">Requisitado</span>',
     'Available': ''
@@ -38,7 +53,7 @@ function game_container_template(title, publishing_year, players_min, players_ma
 
 function skeleton(){
   const str =  `
-  <div class="column is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
+  <div class="column game is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
     <div class="box image-container">
           <figure class="image is-skeleton">
               <img src="https://placehold.co/64x64">
@@ -76,15 +91,7 @@ function applySearchFilter() {
   });
 }
 
-async function field_name2id() {
-  const response = await fetch(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`, {method: "GET"});
-  var data = await response.json();
-  var res = {};
-  data.fields.forEach((field) => {
-    res[field.name] = field.id;
-  });
-  return res;
-}
+
 
 async function load_db_page(page) {
   const response = await fetch(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/?page=${page}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {method: "GET"});
@@ -92,11 +99,11 @@ async function load_db_page(page) {
 }
 
 async function load() {
-  var field2id = await field_name2id();  
-  var grid = document.querySelector('#game-grid');
+  field2id = await field_name2id();  
+  let grid = document.querySelector('#game-grid');
   
-  var page = 1;
-  var pages_left = true;
+  let page = 1;
+  let pages_left = true;
   while(pages_left){
     for (let i = 0; i < ENTRIES_PER_PAGE; i++) {
       grid.appendChild(skeleton());
@@ -105,13 +112,12 @@ async function load() {
     if(db.next === null) pages_left = false;
 
     db.results.forEach(game => {
-      function field(name){
-        return game[`field_${field2id[name]}`]
-      }
-      if(field('status').value != 'Unavailable') { // don't show games which are unavailable
+      field = (name) => gameField(game, name);
+      if(field('status').value != 'Unavailable') { // don't show unavailable games
         let game_container = grid.querySelector(".skeleton");
         game_container.classList.remove('skeleton');
         game_container.innerHTML = game_container_template(field('title'), field('publishingYear'), field('playersMin'), field('playersMax'), field('timeMin'), field('timeMax'), field('image'), field('status').value);
+        game_container.addEventListener('click', () => handleClickGame(game));
         games.push({title: field('title'), element: game_container});
       }
       fuse = new Fuse(games, fuse_options); 
@@ -121,6 +127,12 @@ async function load() {
   }
   document.querySelectorAll('.skeleton').forEach(el => el.remove());
 }
+
+function handleClickGame(game) {
+  window.open(`https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`, '_blank');
+}
+
+// MAIN 
 
 load();
 
