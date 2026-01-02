@@ -94,7 +94,7 @@ function applySearchFilter() {
 
 
 async function load_db_page(page) {
-  const response = await fetch(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/?page=${page}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {method: "GET"});
+  const response = await fetch(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/?page=${page}&order_by=-field_${field2id['avgScore']}&size=${ENTRIES_PER_PAGE}`, {method: "GET"});
   return await response.json();
 }
 
