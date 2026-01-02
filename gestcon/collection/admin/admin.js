@@ -2,6 +2,8 @@ const games = '760059';
 const users = '760060';
 const logs = '783823';
 
+const ENTRIES_PER_PAGE = 100;
+
 let token;
 
 function openModal($el) {
@@ -39,14 +41,14 @@ document.querySelector('#login-button').addEventListener('click', async () => {
     // but the error message after the json lets ou figure out which
 
     try {
-        for(const table of [games, users]){
+        for (const table of [games, users]) {
             let res = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Token ${tempToken}`
-                }}
-            );
-            if(res.status != 200) {
+                }
+            });
+            if (res.status != 200) {
                 let data = await res.json();
                 console.log(data);
                 throw new Error(data.error + '–' + data.detail);
@@ -57,7 +59,9 @@ document.querySelector('#login-button').addEventListener('click', async () => {
         localStorage.setItem('token', tempToken);
         token = tempToken;
         closeModal(document.querySelector("#login-modal"));
-    } catch(error) {
+        loadGames();
+        // TODO loadUsers();
+    } catch (error) {
         showError('Token inválido ou sem permissões<br>' + error);
     }
     document.querySelector('#login-button').classList.remove('is-loading');
@@ -68,8 +72,205 @@ document.querySelector('#logout-button').addEventListener('click', async () => {
     window.location.reload();
 });
 
+const tbodyGame = document.querySelector('#game-table tbody');
+
+function addRowGame({ id, title, bggId, status, currentReserver, noOfReservations }) {
+
+    const availabilityTag = {
+        'Unavailable': '<span class="tag is-danger is-medium">Não Disponível</span>',
+        'Requested': '<span class="tag is-warning is-medium">Requisitado</span>',
+        'Available': '<span class="tag is-success is-medium">Disponível</span>',
+    };
+    const row = tbodyGame.insertRow();
+
+    row.insertCell().innerHTML = `<a target="_blank" href="https://boardgamegeek.com/boardgame/${bggId}/">${bggId}</a>`;
+    row.insertCell().textContent = title;
+    row.insertCell().innerHTML = availabilityTag[status.value];
+    row.insertCell().textContent = currentReserver.length == 1 ? currentReserver[0].value : ""; //TODO when you click it should open the user profile
+    row.insertCell().textContent = noOfReservations;
+
+    let actionCell = row.insertCell();
+    if (status.value != 'Unavailable') {
+        const btn = document.createElement('button');
+        btn.className = 'button is-outlined ' + (status.value == 'Available' ? 'is-warning' : 'is-success');
+        btn.textContent = status.value == 'Available' ? 'Requisição' : 'Devolução';
+
+        if (status.value == 'Available') {
+            btn.addEventListener('click', () => {
+                requestGame(id);
+            });
+        } else {
+            btn.addEventListener('click', () => {
+                returnGame(id);
+            });
+        }
+        actionCell.appendChild(btn);
+    }
+
+    actionCell = row.insertCell();
+    btn = document.createElement('button');
+    btn.className = 'button';
+    btn.textContent = 'Log';
+    actionCell.appendChild(btn);
+    btn.addEventListener('click', () => {
+        openLog(id);
+    });
+}
+
+function addRowUser({ id }) {
+
+}
+
+function requestGame(rowId) {
+    const game = gameList.find(item => item.id == rowId);
+    document.querySelector('#request-modal img').src = game.image;
+    document.querySelector('#request-modal .game-title').textContent = game.title;
+    if (game.shelf == null) {
+        document.querySelector('#request-modal .game-shelf').classList.add('is-hidden');
+    } else {
+        document.querySelector('#request-modal .game-shelf').textContent = 'Prateleira ' + game.shelf;
+    }
+    document.querySelector('#request-modal .button').dataset.gameId = game.id;
+    openModal(document.querySelector("#request-modal"));
+}
+
+function returnGame(rowId) {
+    console.log('Return ', rowId);
+    // do whatever you need here
+}
+
+function openLog(rowId) {
+    console.log('Log ', rowId);
+    // do whatever you need here
+}
+
+async function load_db_page(page, table) {
+    const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Token ${token}`
+        }
+    });
+    return await response.json();
+}
+
+async function load(table, addRowCallback, list) {
+    let page = 1;
+    let pages_left = true;
+    while (pages_left) {
+        db = await load_db_page(page, table);
+        if (db.next === null) pages_left = false;
+
+        db.results.forEach(item => {
+            addRowCallback(item);
+        });
+        list.push(...db.results);
+        //fuse = new Fuse(games, fuse_options); TODO
+        //applySearchFilter();
+        page++;
+    }
+}
+
+const gameList = [];
+const userList = [];
+
+async function loadGames() {
+    load(games, addRowGame, gameList);
+}
+
+async function loadUsers() {
+    const select = new TomSelect("#select-user", {
+        create: false, //TODO would be neat if it were true and clicking it opened the create user modal
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'searchField',
+        sortField: {
+            field: "name",
+            direction: "asc"
+        },
+        dropdownParent: 'body',
+    });
+
+    select.disable();
+
+    //load(addRowUser, userList);
+    await load(users, () => { }, userList);
+    document.querySelector('.select').classList.remove('is-loading');
+
+    userList.forEach(user => user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber);
+    select.addOptions(userList);
+    select.enable();
+
+    const btn = document.querySelector('#request-button')
+    select.on('item_add', (userId) => {
+        const user = userList.find(user => user.id == userId)
+        if (user.currentReservation.length != 0) { // if hasn't returned previuosly requested game.
+            showError(`O utilizador ${user.name} ainda não devolveu o jogo ${user.currentReservation[0].value}.`)
+            select.clear();
+        } else {
+            btn.disabled = false;
+            btn.addEventListener('click', async () => {
+                try {
+                    btn.classList.add('is-loading');
+                    await handleRegisterGameReservation(userId, btn.dataset.gameId);
+                    window.location.reload();
+                } catch (error) {
+                    showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
+                }
+            });
+        }
+    });
+    select.on('item_remove', () => {
+        btn.disabled = true;
+    });
+}
+
+async function checkError(res) { //throws a JS error if the request was unsuccessful
+    if (res.status != 200) {
+        let data = await res.json();
+        throw new Error(data.error + '–' + data.detail);
+    }
+}
+
+async function handleRegisterGameReservation(userId, gameId) {
+    // add to logs table
+    let res = await fetch(`https://api.baserow.io/api/database/rows/table/${logs}/?user_field_names=true`, {
+        method: "POST",
+        headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "game": [Number(gameId)],
+            "user": [Number(userId)],
+            "type": 'request',
+            "registeredBy": "urmom", //TODO
+        }),
+    });
+    await checkError(res);
+    // update games table
+    console.log([Number(userId)]);
+    console.log(gameList.find(game => game.id == gameId).reservers.map(i => Number(i)) + [Number(userId)]);
+    res = await fetch(`https://api.baserow.io/api/database/rows/table/${games}/${gameId}/?user_field_names=true`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "currentReserver": [Number(userId)],
+            "reservers": gameList.find(game => game.id == gameId).reservers.map(i => Number(i)).concat([Number(userId)]),
+            "status": "Requested",
+        }),
+    });
+    await checkError(res);
+}
+
 // MAIN
 token = localStorage.getItem('token');
-if(token == null) {
+if (token == null) {
     openModal(document.querySelector("#login-modal"))
+} else {
+    loadGames();
+    loadUsers();
 }
