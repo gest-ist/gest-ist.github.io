@@ -55,10 +55,9 @@ function skeleton(){
   const str =  `
   <div class="column game is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
     <div class="box image-container">
-          <figure class="image is-skeleton">
-              <img src="https://placehold.co/64x64">
-          </figure>
-      </div>
+        <figure class="image is-skeleton">
+            <img src="https://placehold.co/64x64">
+        </figure>
       <p class="has-text-grey is-size-7 game-year is-invisible">9999</p>
       <p class="game-title is-invisible">Title</p>
     </div>
