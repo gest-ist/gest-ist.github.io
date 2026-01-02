@@ -5,6 +5,7 @@ const logs = '783823';
 const ENTRIES_PER_PAGE = 100;
 
 let token;
+let userName;
 
 function openModal($el) {
     $el.classList.add('is-active');
@@ -27,6 +28,22 @@ document.querySelectorAll('.close-modal').forEach(($el) => {
     });
 });
 
+async function tokenVerification(tempToken) {
+    for (const table of [games, users, logs]) {
+        let res = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Token ${tempToken}`
+            }
+        });
+        if (res.status != 200) {
+            let data = await res.json();
+            console.log(data);
+            throw new Error('Token inválido ou sem permissões<br>' + data.error + '–' + data.detail);
+        }
+    }
+}
+
 document.querySelector('#login-button').addEventListener('click', async () => {
     document.querySelector('#login-button').classList.add('is-loading');
     let tempToken = document.querySelector('#token-input').value;
@@ -41,34 +58,25 @@ document.querySelector('#login-button').addEventListener('click', async () => {
     // but the error message after the json lets ou figure out which
 
     try {
-        for (const table of [games, users]) {
-            let res = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Token ${tempToken}`
-                }
-            });
-            if (res.status != 200) {
-                let data = await res.json();
-                console.log(data);
-                throw new Error(data.error + '–' + data.detail);
-            }
-        }
+        await tokenVerification(tempToken);
+        userName = document.querySelector('#user-name').value;
+        if(userName.length == 0) throw new Error("Insere o teu nome.");
         // verification successfull
         // keep token in local storage and close modal
         localStorage.setItem('token', tempToken);
         token = tempToken;
+        localStorage.setItem('userName', userName);
         closeModal(document.querySelector("#login-modal"));
-        loadGames();
-        // TODO loadUsers();
+        window.location.reload();
     } catch (error) {
-        showError('Token inválido ou sem permissões<br>' + error);
+        showError(error);
     }
     document.querySelector('#login-button').classList.remove('is-loading');
 });
 
 document.querySelector('#logout-button').addEventListener('click', async () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     window.location.reload();
 });
 
@@ -244,7 +252,7 @@ async function handleRegisterGameReservation(userId, gameId) {
             "game": [Number(gameId)],
             "user": [Number(userId)],
             "type": 'request',
-            "registeredBy": "urmom", //TODO
+            "registeredBy": userName,
         }),
     });
     await checkError(res);
@@ -268,9 +276,11 @@ async function handleRegisterGameReservation(userId, gameId) {
 
 // MAIN
 token = localStorage.getItem('token');
+userName = localStorage.getItem('userName');
 if (token == null) {
     openModal(document.querySelector("#login-modal"))
 } else {
+    document.querySelector('#user-name-display').textContent = `Olá ${userName}`;
     loadGames();
     loadUsers();
 }
