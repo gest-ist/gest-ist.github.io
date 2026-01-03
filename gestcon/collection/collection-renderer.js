@@ -168,6 +168,11 @@ function handleClickGame(game) {
     modal.classList.remove('is-active');
   };
 
+  // close modal when touching outside (for mobile)
+  modal.querySelector('.modal-background').ontouchstart = () => {
+    modal.classList.remove('is-active');
+  };
+
   // window.open(`https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`, '_blank');
 }
 

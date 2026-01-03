@@ -58,6 +58,10 @@
     cursor: pointer;
 }
 
+.modal-card-title{
+  flex: 1 1 auto;
+}
+
 .modal-image {
   display:inline-block;
   overflow: hidden; /* keeps object-fit cropping */
