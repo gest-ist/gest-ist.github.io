@@ -155,7 +155,18 @@ function handleClickGame(game) {
 
   modal.querySelector('.close-modal').onclick = () => {
     modal.classList.remove('is-active');
-  }
+  };
+  // close window when pressing ESC
+  window.onkeydown = (e) => {
+    if (e.key === "Escape") {
+      modal.classList.remove('is-active');
+    }
+  };
+
+  // close modal when clicking outside
+  modal.querySelector('.modal-background').onclick = () => {
+    modal.classList.remove('is-active');
+  };
 
   // window.open(`https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`, '_blank');
 }

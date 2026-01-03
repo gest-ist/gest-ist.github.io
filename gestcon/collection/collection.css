@@ -62,14 +62,14 @@
   display:inline-block;
   overflow: hidden; /* keeps object-fit cropping */
   max-width:350px; /* default max size on large screens */
-  width:100%;
+  width:auto;
   border-radius: 12px;
+  margin: 0 auto; /* center horizontally */
 }
 .modal-image img {
   display:block;
-  width:100%;
-  height:auto;
-  object-fit:cover;
+  max-width: 100%;
+  max-height: 60vh;
 }
 
 /* Adjust sizes for smaller screens */
