@@ -168,8 +168,8 @@ function handleClickGame(game) {
     modal.classList.remove('is-active');
   };
 
-  // close modal when touching outside (for mobile)
-  modal.querySelector('.modal-background').ontouchstart = () => {
+  // close modal when touching outside (for mobile) 
+  modal.querySelector('.modal-background').ontouchcancel = () => {
     modal.classList.remove('is-active');
   };
 
