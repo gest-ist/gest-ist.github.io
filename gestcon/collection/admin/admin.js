@@ -7,6 +7,13 @@ const ENTRIES_PER_PAGE = 100;
 let token;
 let userName;
 
+function writeHeader(token) {
+    return {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        }
+}
+
 function openModal($el) {
     $el.classList.add('is-active');
 }
@@ -16,6 +23,7 @@ function closeModal($el) {
 }
 
 function showError(str) {
+    console.error(str);
     document.querySelector("#error-modal-text").innerHTML = str;
     openModal(document.querySelector("#error-modal"))
 }
@@ -38,7 +46,6 @@ async function tokenVerification(tempToken) {
         });
         if (res.status != 200) {
             let data = await res.json();
-            console.log(data);
             throw new Error('Token inválido ou sem permissões<br>' + data.error + '–' + data.detail);
         }
     }
@@ -60,7 +67,7 @@ document.querySelector('#login-button').addEventListener('click', async () => {
     try {
         await tokenVerification(tempToken);
         userName = document.querySelector('#user-name').value;
-        if(userName.length == 0) throw new Error("Insere o teu nome.");
+        if (userName.length == 0) throw new Error("Insere o teu nome.");
         // verification successfull
         // keep token in local storage and close modal
         localStorage.setItem('token', tempToken);
@@ -143,8 +150,17 @@ function requestGame(rowId) {
 }
 
 function returnGame(rowId) {
-    console.log('Return ', rowId);
-    // do whatever you need here
+    const game = gameList.find(item => item.id == rowId);
+    document.querySelector('#return-modal img').src = game.image;
+    document.querySelector('#return-modal .game-title').textContent = game.title;
+    if (game.shelf == null) {
+        document.querySelector('#return-modal .game-shelf').classList.add('is-hidden');
+    } else {
+        document.querySelector('#return-modal .game-shelf').textContent = 'Prateleira ' + game.shelf;
+    }
+    document.querySelector('#return-modal .current-requester').textContent = 'Na posse de: ' + game.currentReserver[0].value; // TODO should be a tag which opens a modal
+    document.querySelector('#return-modal .button').dataset.gameId = game.id;
+    openModal(document.querySelector("#return-modal"));
 }
 
 function openLog(rowId) {
@@ -220,7 +236,7 @@ async function loadUsers() {
             btn.addEventListener('click', async () => {
                 try {
                     btn.classList.add('is-loading');
-                    await handleRegisterGameReservation(userId, btn.dataset.gameId);
+                    await handleRegisterGameRequest(userId, btn.dataset.gameId);
                     window.location.reload();
                 } catch (error) {
                     showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
@@ -240,14 +256,11 @@ async function checkError(res) { //throws a JS error if the request was unsucces
     }
 }
 
-async function handleRegisterGameReservation(userId, gameId) {
+async function handleRegisterGameRequest(userId, gameId) {
     // add to logs table
     let res = await fetch(`https://api.baserow.io/api/database/rows/table/${logs}/?user_field_names=true`, {
         method: "POST",
-        headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-        },
+        headers: writeHeader(token),
         body: JSON.stringify({
             "game": [Number(gameId)],
             "user": [Number(userId)],
@@ -257,18 +270,49 @@ async function handleRegisterGameReservation(userId, gameId) {
     });
     await checkError(res);
     // update games table
-    console.log([Number(userId)]);
-    console.log(gameList.find(game => game.id == gameId).reservers.map(i => Number(i)) + [Number(userId)]);
     res = await fetch(`https://api.baserow.io/api/database/rows/table/${games}/${gameId}/?user_field_names=true`, {
         method: "PATCH",
-        headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-        },
+        headers: writeHeader(token),
         body: JSON.stringify({
             "currentReserver": [Number(userId)],
-            "reservers": gameList.find(game => game.id == gameId).reservers.map(i => Number(i)).concat([Number(userId)]),
+            "reservers": gameList.find(game => game.id == gameId).reservers.map(reserver => Number(reserver.id)).concat([Number(userId)]),
             "status": "Requested",
+        }),
+    });
+    await checkError(res);
+}
+
+document.querySelector('#return-button').addEventListener('click', async (e) => {
+    try {
+        e.currentTarget.classList.add('is-loading');
+        await handleRegisterGameReturn(e.currentTarget.dataset.gameId);
+        window.location.reload();
+    } catch (error) {
+        showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
+    }
+});
+
+async function handleRegisterGameReturn(gameId) {
+    const game = gameList.find(game => game.id == gameId);
+    // add to logs table
+    let res = await fetch(`https://api.baserow.io/api/database/rows/table/${logs}/?user_field_names=true`, {
+        method: "POST",
+        headers: writeHeader(token),
+        body: JSON.stringify({
+            "game": [Number(gameId)],
+            "user": [Number(game.currentReserver[0].id)],
+            "type": 'return',
+            "registeredBy": userName,
+        }),
+    });
+    await checkError(res);
+    // update games table
+    res = await fetch(`https://api.baserow.io/api/database/rows/table/${games}/${gameId}/?user_field_names=true`, {
+        method: "PATCH",
+        headers: writeHeader(token),
+        body: JSON.stringify({
+            "currentReserver": [],
+            "status": "Available",
         }),
     });
     await checkError(res);
