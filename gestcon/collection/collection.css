@@ -57,3 +57,44 @@
 .game:not(.class-b):hover {
     cursor: pointer;
 }
+
+.modal-image {
+  display:inline-block;
+  overflow: hidden; /* keeps object-fit cropping */
+  max-width:350px; /* default max size on large screens */
+  width:100%;
+  border-radius: 12px;
+}
+.modal-image img {
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* Adjust sizes for smaller screens */
+@media (max-width: 768px) {
+  .modal-image { max-width:300px; }
+}
+@media (max-width: 480px) {
+  .modal-image { max-width:250px; }
+}
+
+.modal-card-body {
+  flex-direction: column; /* stack image + lines vertically */
+  justify-content: center; /* vertical centering inside body */
+  align-items: center;     /* horizontal centering of children */
+  gap: 0.2rem;             /* consistent spacing between items */
+  text-align: center;      /* fallback for inline text */
+  padding: 1.25rem;        /* match Bulma spacing */
+}
+
+.modal-card-foot {
+  display: flex;
+  flex-direction: row;     /* buttons in a row */
+  justify-content: center; /* center buttons horizontally */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  flex-wrap: wrap;         /* keep buttons usable on small screens */
+}
