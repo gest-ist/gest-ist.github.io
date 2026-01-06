@@ -102,3 +102,24 @@
   padding: 0.75rem 1rem;
   flex-wrap: wrap;         /* keep buttons usable on small screens */
 }
+
+@media (max-width: 768px) {
+  #controls-box .year-col {order: 1; width: 50%;}
+  #controls-box .buttons-col.is-hidden-tablet{
+    order: 2;
+    width: 50%;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+/* 
+    #controls-box .buttons-col.is-hidden-tablet .buttons{
+      display: flex;
+      width: 100%;
+    } */
+
+  #controls-box .buttons-col.is-hidden-tablet .buttons .button{
+    flex-grow: 1;
+    margin-left: 4px;
+  }
+}

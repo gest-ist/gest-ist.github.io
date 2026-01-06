@@ -114,6 +114,133 @@
             </p>
           </div>
 
+                    <!-- Sort & Filter controls -->
+          <div class="box" id="controls-box" style="margin-bottom:1rem">
+            <div class="columns is-multiline is-mobile">
+
+              <div class="columns is-mobile is-multiline">
+                
+                <div class="column is-12-mobile is-12-tablet">
+                  <label class="label is-small lang lang-pt">Ordenar por:</label>
+                  <label class="label is-small lang lang-en is-hidden">Sort by:</label>
+                  <div class="select is-fullwidth is-small"> 
+                    <select id="sort-select">
+                      <option value="title-asc" class="lang lang-pt">Nome (A-Z)</option>
+                      <option value="title-asc" class="lang lang-en is-hidden">Title (A-Z)</option>
+                      <option value="title-desc" class="lang lang-pt">Nome (Z-A)</option>
+                      <option value="title-desc" class="lang lang-en is-hidden">Title (Z-A)</option>
+                      <option value="rating-desc" class="lang lang-pt">Classificação BGG (Maior-Menor)</option>
+                      <option value="rating-desc" class="lang lang-en is-hidden">BGG Rating (High-Low)</option>
+                      <option value="rating-asc" class="lang lang-pt">Classificação BGG (Menor-Maior)</option>
+                      <option value="rating-asc" class="lang lang-en is-hidden">BGG Rating (Low-High)</option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="column is-6-mobile is-one-fifth-tablet">
+                  <label class="label is-small lang lang-pt">Estado:</label>
+                  <label class="label is-small lang lang-en is-hidden">Status:</label>
+                  <div class="select is-fullwidth is-small">
+                    <select id="filter-status">
+                      <option value="any" class="lang lang-pt">Qualquer</option>
+                      <option value="any" class="lang lang-en is-hidden">Any</option>
+                      <option value="available" class="lang lang-pt">Disponível</option>
+                      <option value="available" class="lang lang-en is-hidden">Available</option>
+                      <option value="unavailable" class="lang lang-pt">Requisitado</option>
+                      <option value="unavailable" class="lang lang-en is-hidden">Requested</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-one-fifth-tablet">
+                  <label class="label is-small lang lang-pt">Nº de jogadores:</label>
+                  <label class="label is-small lang lang-en is-hidden">No. of players:</label>
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <input id="filter-players-min" class="input is-small" type="number" placeholder="Min" min="1" />  
+                    </p>
+                    <p class="control is-expanded">
+                      <input id="filter-players-max" class="input is-small" type="number" placeholder="Max" min="1" />
+                    </p>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-one-fifth-tablet">
+                  <label class="label is-small lang lang-pt">Duração (mins):</label>
+                  <label class="label is-small lang lang-en is-hidden">Playtime (mins):</label>
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <!-- increments of 5 -->
+                      <input id="filter-time-min" class="input is-small" type="number" placeholder="Min" min="0" step="5"/>
+                    </p>
+                    <p class="control is-expanded">
+                      <input id="filter-time-max" class="input is-small" type="number" placeholder="Max" min="0" />
+                    </p>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-one-fifth-tablet">
+                  <label class="label is-small lang lang-pt">Peso:</label>
+                  <label class="label is-small lang lang-en is-hidden">Weight:</label>
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <input id="filter-weight-min" class="input is-small" type="number" placeholder="Min" min="0" max="5" />
+                    </p>
+                    <p class="control is-expanded">
+                      <input id="filter-weight-max" class="input is-small" type="number" placeholder="Max" min="0" max="5" />
+                    </p>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-one-fifth-tablet year-col">
+                  <label class="label is-small lang lang-pt">Ano:</label>
+                  <label class="label is-small lang lang-en is-hidden">Year:</label>
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <input id="filter-year-min" class="input is-small" type="number" placeholder="Min" min="1900" max="2026" />
+                    </p>
+                    <p class="control is-expanded">
+                      <input id="filter-year-max" class="input is-small" type="number" placeholder="Max" min="1900" max="2026" />
+                    </p>
+                  </div>
+                </div>
+                
+                <!-- Desktop Buttons -->
+                <div class="column is-12-mobile is-2-tablet buttons-col is-hidden-mobile">
+                  <div class="buttons">
+                    <button id="apply-filters" class="button is-primary is-small lang lang-pt">Aplicar filtros</button>
+                    <button id="apply-filters" class="button is-primary is-small lang lang-en is-hidden">Apply filters</button>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-2-tablet buttons-col is-hidden-mobile">
+                  <div class="buttons">
+                    <button id="clear-filters" class="button is-light is-small lang lang-pt">Limpar filtros</button>
+                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset filters</button>
+                  </div>
+                </div>
+
+                <!-- Mobile Buttons -->
+                <div class="column is-6-mobile is-2-tablet buttons-col is-hidden-tablet">
+                  <div class="buttons">
+                    <button id="apply-filters" class="button is-primary is-small lang lang-pt">Aplicar filtros</button>
+                    <button id="apply-filters" class="button is-primary is-small lang lang-en is-hidden">Apply filters</button>
+              
+                    <button id="clear-filters" class="button is-light is-small lang lang-pt">Limpar filtros</button>
+                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset filters</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="columns is-mobile is-multiline has-text-centered" id="game-grid">
           </div>
         </div>
