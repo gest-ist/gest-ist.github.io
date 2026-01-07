@@ -123,3 +123,7 @@
     margin-left: 4px;
   }
 }
+
+.skeleton {
+  order: 99999; /* change this if we ever have more than 100000 games */
+}
