@@ -192,18 +192,33 @@ function handleClickGame(game) {
   if (gameField(game, 'playersMin') == gameField(game, 'playersMax')) {
     modal.querySelector('.lang-pt + p').textContent = `Jogadores: ${gameField(game, 'playersMin')}`;
   } else {
-    modal.querySelector('.lang-pt + p').textContent = `Jogadores: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
+   modal.querySelector('.lang-pt + p').textContent = `Jogadores: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
+   modal.querySelector('.lang-pt + p').textContent += ` (Ótimo: ${gameField(game, 'playersBest')})`;
   }
-  modal.querySelector('.lang-pt + p').textContent += ` (Ótimo: ${gameField(game, 'playersBest')}) | Duração: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+  
+  if (gameField(game, 'timeMin') == gameField(game, 'timeMax')) {
+    modal.querySelector('.lang-pt + p').textContent += ` | Duração: ${gameField(game, 'timeMin')} mins`;
+  }
+  else {
+    modal.querySelector('.lang-pt + p').textContent += ` | Duração: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+  }
   modal.querySelector('.lang-pt + p + p').textContent = `Classificação BGG: ${gameField(game, 'avgScore')} | Peso: ${gameField(game, 'weight')}`;
 
   modal.querySelector('.lang-en').textContent = `Status: ${gameField(game, 'status').value === 'Available' ? 'Available' : gameField(game, 'status').value === 'Requested' ? 'Requested' : 'Unavailable'}`;
   if (gameField(game, 'playersMin') == gameField(game, 'playersMax')) {
     modal.querySelector('.lang-en + p').textContent = `Players: ${gameField(game, 'playersMin')}`;
   } else {
-    modal.querySelector('.lang-en + p').textContent = `Players: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
+   modal.querySelector('.lang-en + p').textContent = `Players: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
+   modal.querySelector('.lang-en + p').textContent += ` (Best: ${gameField(game, 'playersBest')})`;
   }
-  modal.querySelector('.lang-en + p').textContent += ` (Best: ${gameField(game, 'playersBest')}) | Duration: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+  
+  if (gameField(game, 'timeMin') == gameField(game, 'timeMax')) {
+    modal.querySelector('.lang-en + p').textContent += ` | Duration: ${gameField(game, 'timeMin')} mins`;
+  }
+  else {
+    modal.querySelector('.lang-en + p').textContent += ` | Duration: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+  }
+
   modal.querySelector('.lang-en + p + p').textContent = `BGG Rating: ${gameField(game, 'avgScore')} | Weight: ${gameField(game, 'weight')}`;
 
   modal.querySelector('.modal-card-foot a').href = `https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`;
