@@ -58,8 +58,8 @@ function game_container_template(title, publishing_year, players_min, players_ma
       </figure>
       ${availability_tag[status]
     }
-      <span class="tag is-rounded players"><i class="fas fa-users"></i>${players_min == players_max ? players_min : `${players_min} - ${players_max}`}</span>
-      <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>${time_min == time_max ? time_min : `${time_min} - ${time_max}`}</span>
+      <span class="tag is-rounded players"><i class="fas fa-users"></i>${players_min == players_max ? players_min : `${players_min} — ${players_max}`}</span>
+      <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>${time_min == time_max ? time_min : `${time_min} — ${time_max}`}</span>
     </div>
     <p class="has-text-grey is-size-7 game-year">${publishing_year}</p>
     <p class="game-title">${title}</p>
