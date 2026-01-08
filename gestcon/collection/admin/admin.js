@@ -133,12 +133,28 @@ function addRowGame({ id, title, bggId, status, currentReserver, noOfReservation
     btn.textContent = 'Log';
     actionCell.appendChild(btn);
     btn.addEventListener('click', () => {
-        openLog(id);
+        openLogGame(id);
     });
 }
 
-function addRowUser({ id }) {
+const tbodyUser = document.querySelector('#user-table tbody');
 
+function addRowUser({ id, name, email, phoneNumber, currentReservation, noOfReservations}) {
+    const row = tbodyUser.insertRow();
+    row.insertCell().textContent = name;
+    row.insertCell().textContent = email;
+    row.insertCell().textContent = phoneNumber;
+    row.insertCell().textContent = currentReservation.length == 0 ? "" : currentReservation[0].value; //TODO yada yada
+    row.insertCell().textContent = noOfReservations;
+
+    let actionCell = row.insertCell();
+    btn = document.createElement('button');
+    btn.className = 'button';
+    btn.textContent = 'Log';
+    actionCell.appendChild(btn);
+    btn.addEventListener('click', () => {
+        openLogUser(id);
+    });
 }
 
 function requestGame(rowId) {
@@ -169,8 +185,13 @@ function returnGame(rowId) {
     openModal(document.querySelector("#return-modal"));
 }
 
-function openLog(rowId) {
-    console.log('Log ', rowId);
+function openLogGame(rowId) {
+    console.log('Game Log ', rowId);
+    // do whatever you need here
+}
+
+function openLogUser(rowId) {
+    console.log('User Log ', rowId);
     // do whatever you need here
 }
 
@@ -223,8 +244,7 @@ async function loadUsers() {
 
     select.disable();
 
-    //load(addRowUser, userList);
-    await load(users, () => { }, userList);
+    await load(users, addRowUser, userList);
     document.querySelector('.select').classList.remove('is-loading');
 
     userList.forEach(user => user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber);
@@ -323,6 +343,51 @@ async function handleRegisterGameReturn(gameId) {
     });
     await checkError(res);
 }
+
+//SWITCH TABS
+document.querySelector("#tab-users").addEventListener('click', () => {
+    document.querySelector("#games").classList.add('is-hidden');
+    document.querySelector("#tab-games").classList.remove('is-active');
+    document.querySelector("#users").classList.remove('is-hidden');
+    document.querySelector("#tab-users").classList.add('is-active');
+});
+
+document.querySelector("#tab-games").addEventListener('click', () => {
+    document.querySelector("#users").classList.add('is-hidden');
+    document.querySelector("#tab-users").classList.remove('is-active');
+    document.querySelector("#games").classList.remove('is-hidden');
+    document.querySelector("#tab-games").classList.add('is-active');
+});
+
+//USERS
+
+document.querySelector('#add-user').addEventListener('click', () => {
+    openModal(document.querySelector('#add-user-modal'));
+});
+
+document.querySelectorAll('#add-user-modal input').forEach(el => el.addEventListener('input', () => {
+    if(document.querySelector('#add-user-name').value == '' || document.querySelector('#add-user-phone').value == ''){
+        document.querySelector('#register-add-user').disabled = true;
+    } else {
+        document.querySelector('#register-add-user').disabled = false;
+    }
+}));
+
+document.querySelector('#register-add-user').addEventListener('click', async () => {
+    // add to logs table
+    let res = await fetch(`https://api.baserow.io/api/database/rows/table/${users}/?user_field_names=true`, {
+        method: "POST",
+        headers: writeHeader(token),
+        body: JSON.stringify({
+            "name": document.querySelector('#add-user-name').value,
+            "email": document.querySelector('#add-user-email').value,
+            "phoneNumber": document.querySelector('#add-user-phone').value,
+            "registeredBy": userName,
+        }),
+    });
+    await checkError(res);
+    window.location.reload();
+});
 
 // MAIN
 token = localStorage.getItem('token');

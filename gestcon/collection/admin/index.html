@@ -117,6 +117,39 @@
         </div>
     </div>
 
+    <div class="modal" id="add-user-modal">
+        <div class="modal-background close-modal"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Adicionar utilizador</p>
+                <button class="delete close-modal"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Nome*</label>
+                    <input class="input" type="text" id="add-user-name">
+                </div>
+                <div class="field">
+                    <label class="label">Número de telemóvel*</label>
+                    <input class="input" type="tel" id="add-user-phone">
+                </div>
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <input class="input" type="email" id="add-user-email">
+                </div>
+                <p>* Campos obrigatórios</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-center">
+                <button class="button is-primary px-6" id="register-add-user" disabled>
+                        <span class="icon">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                        <span>Adicionar Utilizador</span>
+                    </button>
+            </footer>
+        </div>
+    </div>
+
     <div class="modal" id="error-modal">
         <div class="modal-background close-modal"></div>
         <div class="notification is-danger">
@@ -139,11 +172,11 @@
                 <div class="navbar-item">
                     <div class="tabs is-large is-centered">
                         <ul>
-                            <li class="is-active"><a>
+                            <li id="tab-games" class="is-active"><a>
                                     <span class="icon is-small"><i class="fas fa-dice"></i></span>
                                     <span>Jogos</span>
                                 </a></li>
-                            <li><a>
+                            <li id="tab-users"><a>
                                     <span class="icon is-small"><i class="fas fa-users"></i></span>
                                     <span>Utilizadores</span>
                                 </a></li>
@@ -184,6 +217,48 @@
                         <th>Na posse de</th>
                         <th>Nº requisições</th>
                         <th>Registar</th>
+                        <th>Logs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section is-hidden" id="users">
+            <div class="field is-grouped">
+                <p class="control is-expanded has-icons-left">
+                    <input class="input" type="text" placeholder="Procurar utilizador...">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </p>
+
+                <p class="control">
+                    <button class="button is-primary px-6 mx-6" id="add-user">
+                        <span class="icon">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                        <span>Adicionar Utilizador</span>
+                    </button>
+                </p>
+            </div>
+            <table class="table is-fullwidth is-hoverable" id="user-table">
+                <colgroup>
+                    <col style="width: 23%">
+                    <col style="width: 23%">
+                    <col style="width: 15%">
+                    <col style="width: 23%">
+                    <col style="width: 10%">
+                    <col style="width: 6%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telemóvel</th>
+                        <th>Na posse de</th>
+                        <th>Nº requisições</th>
                         <th>Logs</th>
                     </tr>
                 </thead>
