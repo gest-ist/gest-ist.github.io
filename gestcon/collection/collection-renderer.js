@@ -3,7 +3,9 @@ const SLUG = 'PgslpkZShMbeWNDviq2vgcRWfj5l-ZVuN0K4sSOnSu0' // slug = the identif
 // I used this to get the rows from the database while only exposing a view of the database instead of the whole table
 // https://api.baserow.io/api/redoc/#tag/Database-table-grid-view/operation/public_list_database_table_grid_view_rows
 
-const ENTRIES_PER_PAGE = 100;
+// 4 items per row, 100 rows (enough for our current <340 games)
+// divides nicely into 2 for mobile viewports
+const ENTRIES_PER_PAGE = 4 * 100;
 
 let games = [];
 const fuse_options = { //TODO adjust these options
