@@ -195,8 +195,8 @@ function openLogUser(rowId) {
     // do whatever you need here
 }
 
-async function load_db_page(page, table) {
-    const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
+async function load_db_page(page, table, orderBy) {
+    const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}${orderBy ? `&order_by=${orderBy}`: ""}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
         method: "GET",
         headers: {
             Authorization: `Token ${token}`
@@ -205,11 +205,11 @@ async function load_db_page(page, table) {
     return await response.json();
 }
 
-async function load(table, addRowCallback, list) {
+async function load(table, addRowCallback, list, orderBy) {
     let page = 1;
     let pages_left = true;
     while (pages_left) {
-        db = await load_db_page(page, table);
+        db = await load_db_page(page, table, orderBy);
         if (db.next === null) pages_left = false;
 
         db.results.forEach(item => {
@@ -226,7 +226,7 @@ const gameList = [];
 const userList = [];
 
 async function loadGames() {
-    load(games, addRowGame, gameList);
+    load(games, addRowGame, gameList, 'status,title');
 }
 
 async function loadUsers() {
@@ -244,7 +244,7 @@ async function loadUsers() {
 
     select.disable();
 
-    await load(users, addRowUser, userList);
+    await load(users, addRowUser, userList, 'name');
     document.querySelector('.select').classList.remove('is-loading');
 
     userList.forEach(user => user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber);
