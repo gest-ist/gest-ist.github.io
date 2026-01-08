@@ -8,7 +8,9 @@ const ENTRIES_PER_PAGE = 100;
 let games = [];
 const fuse_options = { //TODO adjust these options
   keys: ['title'],
-  threshold: 0.2
+  threshold: 0.2,
+  isCaseInsensitive: true,
+  ignoreDiacritics: true,
 }
 let fuse;
 
