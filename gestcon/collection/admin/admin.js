@@ -89,7 +89,7 @@ document.querySelector('#logout-button').addEventListener('click', async () => {
 
 const tbodyGame = document.querySelector('#game-table tbody');
 
-function addRowGame({ id, title, bggId, status, currentReserver, noOfReservations }) {
+function addRowGame({ id, title, bggId, status, currentReserver, noOfReservations, shelfCode }) {
 
     const availabilityTag = {
         'Unavailable': '<span class="tag is-danger is-medium">Não Disponível</span>',
@@ -100,6 +100,7 @@ function addRowGame({ id, title, bggId, status, currentReserver, noOfReservation
 
     row.insertCell().innerHTML = `<a target="_blank" href="https://boardgamegeek.com/boardgame/${bggId}/">${bggId}</a>`;
     row.insertCell().textContent = title;
+    row.insertCell().textContent = shelfCode;
     row.insertCell().innerHTML = availabilityTag[status.value];
     row.insertCell().textContent = currentReserver.length == 1 ? currentReserver[0].value : ""; //TODO when you click it should open the user profile
     row.insertCell().textContent = noOfReservations;
@@ -140,10 +141,10 @@ function requestGame(rowId) {
     const game = gameList.find(item => item.id == rowId);
     document.querySelector('#request-modal img').src = game.image;
     document.querySelector('#request-modal .game-title').textContent = game.title;
-    if (game.shelf == null) {
+    if (game.shelfCode == null) {
         document.querySelector('#request-modal .game-shelf').classList.add('is-hidden');
     } else {
-        document.querySelector('#request-modal .game-shelf').textContent = 'Prateleira ' + game.shelf;
+        document.querySelector('#request-modal .game-shelf').textContent = 'Prateleira ' + game.shelfCode;
     }
     document.querySelector('#request-modal .button').dataset.gameId = game.id;
     openModal(document.querySelector("#request-modal"));
@@ -153,10 +154,10 @@ function returnGame(rowId) {
     const game = gameList.find(item => item.id == rowId);
     document.querySelector('#return-modal img').src = game.image;
     document.querySelector('#return-modal .game-title').textContent = game.title;
-    if (game.shelf == null) {
+    if (game.shelfCode == null) {
         document.querySelector('#return-modal .game-shelf').classList.add('is-hidden');
     } else {
-        document.querySelector('#return-modal .game-shelf').textContent = 'Prateleira ' + game.shelf;
+        document.querySelector('#return-modal .game-shelf').textContent = 'Prateleira ' + game.shelfCode;
     }
     document.querySelector('#return-modal .current-requester').textContent = 'Na posse de: ' + game.currentReserver[0].value; // TODO should be a tag which opens a modal
     document.querySelector('#return-modal .button').dataset.gameId = game.id;
