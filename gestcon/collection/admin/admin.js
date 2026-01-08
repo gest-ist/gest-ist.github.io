@@ -16,6 +16,7 @@ function writeHeader(token) {
 
 function openModal($el) {
     $el.classList.add('is-active');
+    document.querySelector('html').classList.add('is-clipped');
 }
 
 function closeModal($el) {
@@ -33,6 +34,9 @@ document.querySelectorAll('.close-modal').forEach(($el) => {
 
     $el.addEventListener('click', () => {
         closeModal($target);
+        if($target.id != "error-modal"){
+            document.querySelector('html').classList.remove('is-clipped');
+        }
     });
 });
 
@@ -144,6 +148,7 @@ function requestGame(rowId) {
     if (game.shelfCode == null) {
         document.querySelector('#request-modal .game-shelf').classList.add('is-hidden');
     } else {
+        document.querySelector('#request-modal .game-shelf').classList.remove('is-hidden');
         document.querySelector('#request-modal .game-shelf').textContent = 'Prateleira ' + game.shelfCode;
     }
     document.querySelector('#request-modal .button').dataset.gameId = game.id;

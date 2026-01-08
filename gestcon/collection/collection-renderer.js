@@ -47,8 +47,8 @@ function gameField(game, name) {
 
 function game_container_template(title, publishing_year, players_min, players_max, time_min, time_max, image, status) {
   let availability_tag = {
-    'Unavailable': '<span class="tag is-danger is-medium unavailable">Não Disponível</span>',
-    'Requested': '<span class="tag is-warning is-medium requested">Requisitado</span>',
+    'Unavailable': '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
+    'Requested': '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
     'Available': ''
   };
   return `
@@ -186,6 +186,7 @@ async function load() {
 function handleClickGame(game) {
   const modal = document.querySelector('#game-modal');
   modal.classList.add('is-active');
+  document.querySelector('html').classList.add('is-clipped');
   modal.querySelector('.modal-card-title').textContent = gameField(game, 'title');
   modal.querySelector('.modal-image img').src = gameField(game, 'image') || "https://placehold.co/350x350";
   modal.querySelector('.lang-pt').textContent = `Estado: ${gameField(game, 'status').value === 'Available' ? 'Disponível' : gameField(game, 'status').value === 'Requested' ? 'Requisitado' : 'Indisponível'}`;
@@ -225,26 +226,29 @@ function handleClickGame(game) {
   modal.querySelector('.modal-card-foot a + a').href = `https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`;
 
   modal.querySelector('.close-modal').onclick = () => {
-    modal.classList.remove('is-active');
+    closeModal();
   };
   // close window when pressing ESC
   window.onkeydown = (e) => {
     if (e.key === "Escape") {
-      modal.classList.remove('is-active');
+      closeModal();
     }
   };
 
   // close modal when clicking outside
   modal.querySelector('.modal-background').onclick = () => {
-    modal.classList.remove('is-active');
+    closeModal();
   };
 
   // close modal when touching outside (for mobile) 
   modal.querySelector('.modal-background').ontouchcancel = () => {
-    modal.classList.remove('is-active');
+    closeModal();
   };
 
-  // window.open(`https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`, '_blank');
+  function closeModal() {
+    modal.classList.remove('is-active');
+    document.querySelector('html').classList.remove('is-clipped');
+  }
 }
 
 // MAIN 

@@ -14,11 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Language selector (show/hide elements with lang classes)
   var selector = document.getElementById('language-selector');
-  var allLangSections = document.querySelectorAll('.lang');
   if (selector) {
     selector.addEventListener('change', function () {
       var lang = this.value;
-      allLangSections.forEach(function (el) {
+      document.querySelectorAll('.lang').forEach(function (el) {
         if (el.classList.contains('lang-' + lang)) el.classList.remove('is-hidden');
         else el.classList.add('is-hidden');
       });
