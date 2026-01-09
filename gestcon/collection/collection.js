@@ -3,16 +3,6 @@ const EXISTING_SLUG = "mdvDO5fm2Fh8iXdafNlx63DKzxcIowciyf0Po25Y8d0"
 const ALL_SLUG = "zv9hstXOXWdDo7_0LQ5L8hKKBk-nBrJtzxOlfs7Q8UU";
 const SLUG = ALL_SLUG;  // active slug
 
-// I used this to get the rows from the database while only exposing a view of the database instead of the whole table
-// https://api.baserow.io/api/redoc/#tag/Database-table-grid-view/operation/public_list_database_table_grid_view_rows
-
-// 4 items per row, 100 rows (enough for our current <340 games)
-// divides nicely into 2 for mobile viewports
-const ENTRIES_PER_PAGE = 4 * 100;
-
-const THUMB_PLACEHOLDER = "https://placehold.co/64x64";
-const IMAGE_PLACEHOLDER = "https://placehold.co/350x350";
-
 const SKELETON_INIT_HTML = `
 <div class="column game is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
   <div class="box image-container">
@@ -38,6 +28,8 @@ const MODAL = document.getElementById("game-modal");
 const MODAL_IMG = document.getElementById("modal-img");
 const MODAL_STATUS = document.getElementById("modal-status");
 const MODAL_STATUS_ICON = MODAL_STATUS.querySelector(".icon>i")
+const MODAL_RATING = document.getElementById("rating");
+const MODAL_WEIGHT = document.getElementById("weight");
 
 const FUSE_OPTIONS = {
     keys: ["title"],
@@ -46,14 +38,10 @@ const FUSE_OPTIONS = {
     ignoreDiacritics: true,
 }
 
-const games = [];
 let fuse;
-
 let currentSearch = "";
 let currentSearchedGames = new Set(); // Set
-
 let currentSort = "rating-desc";
-
 let currentFilter = {
     status: Status.ANY,
     playersMin: null,
@@ -67,10 +55,18 @@ let currentFilter = {
 }
 let currentFilteredGames = new Set(); // Set
 
+const COMPARATORS = {
+    'rating-desc': (a, b) => b.rating - a.rating,
+    'rating-asc': (a, b) => a.rating - b.rating,
+    'title-asc': (a, b) => strngCmp(a.title, b.title),
+    'title-desc': (a, b) => strngCmp(b.title, a.title),
+}
+
+const games = [];
+
 function renderRange(min, max) {
     return min == max ? min : `${min} - ${max}`;
 }
-
 
 function gameContainerTemplate(game) {
     return `
@@ -114,20 +110,11 @@ function strngCmp(a, b) {
     else return 0;
 }
 
-const COMPARATORS = {
-    'rating-desc': (a, b) => b.rating - a.rating,
-    'rating-asc': (a, b) => a.rating - b.rating,
-    'title-asc': (a, b) => strngCmp(a.title, b.title),
-    'title-desc': (a, b) => strngCmp(b.title, a.title),
-}
-
 function applySort() {
     const comp = COMPARATORS[currentSort];
     const indices = games.map((_, i) => i);
     indices.sort((a, b) => comp(games[a], games[b]));
-    indices.forEach((index, i) => {
-        games[index].element.style.order = i;
-    });
+    indices.forEach((index, i) => games[index].element.style.order = i);
 }
 
 function intervalsIntersect(min1, max1, min2, max2) {
@@ -225,25 +212,17 @@ function handleClickGame(game) {
     MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
     MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
-    MODAL.querySelector(".modal-info-group .lang-pt.players").textContent = renderRange(game.playersMin, game.playersMax);
+    MODAL.querySelector(".modal-info-group .lang-pt.players").textContent =
     MODAL.querySelector(".modal-info-group .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
 
-    MODAL.querySelector(".modal-info-group .lang-pt.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
+    MODAL.querySelector(".modal-info-group .lang-pt.time").textContent =
     MODAL.querySelector(".modal-info-group .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
 
-    document.getElementById("rating").textContent = game.rating;
-    document.getElementById("weight").textContent = game.weight;
+    MODAL_RATING.textContent = game.rating;
+    MODAL_WEIGHT.textContent = game.weight;
 
-    MODAL.querySelector(".modal-card-foot a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
-    MODAL.querySelector(".modal-card-foot a + a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
-
-    MODAL.querySelector(".close-modal").onclick = closeModal;
-
-    // close modal when clicking outside
-    MODAL.querySelector(".modal-background").onclick = closeModal;
-
-    // close modal when touching outside (for mobile)
-    MODAL.querySelector(".modal-background").ontouchcancel = closeModal;
+    MODAL.querySelector(".modal-card-foot a").href =
+    MODAL.querySelector(".modal-card-foot a + a").href = game.bgg();
 
     function closeModal() {
         MODAL.classList.remove("is-active");
@@ -314,6 +293,13 @@ function initListeners() {
 
     // Close window when pressing ESC
     window.onkeydown = ev => { if (ev.key === "Escape") closeModal() };
+
+    // Close modal when clicking on close buttons
+    MODAL.querySelector(".close-modal").onclick =
+    // Close modal when clicking outside
+    MODAL.querySelector(".modal-background").onclick =
+    // Close modal when touching outside (for mobile)
+    MODAL.querySelector(".modal-background").ontouchcancel = closeModal;
 }
 
 // MAIN

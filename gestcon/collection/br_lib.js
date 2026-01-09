@@ -25,6 +25,10 @@ class Game {
         return `${Game.IMG_BASE_URL}/${this.id}.avif`;
     }
 
+    bgg() {
+        return `${Game.BGG_BASE_URL}/${this.id}/`
+    }
+
     /**
      * Build a Game from the raw data obtained through Baserow.
      * Pass a mapper to handle the weird field look-up table required by views.
@@ -46,6 +50,8 @@ class Game {
     }
 
     static DEFAULT_MAPPER = (r, n) => r[n];
+
+    static BGG_BASE_URL = "https://boardgamegeek.com/boardgame";
 
     /** The base URL to use for game images. */
     static IMG_BASE_URL = "https://gestcon-img.b-cdn.net/img";  // behind a caching CDN
@@ -109,5 +115,8 @@ class ViewAPI {
     }
 
     static BASE_VIEW_URL = "https://api.baserow.io/api/database/views";
-    static PAGE_SIZE = 500;
+
+    // 4 items per row, 100 rows (enough for our current <340 games)
+    // divides nicely into 2 for mobile viewports
+    static PAGE_SIZE = 4 * 100;
 }
