@@ -1,129 +1,154 @@
 #game-grid-container {
-    max-width: 750px;
+  max-width: 750px;
 }
 
 #games {
-    .game-year {
-        margin: 2pt 0pt;
+  .game-year {
+    margin: 2pt 0pt;
+  }
+
+  .game-title {
+    margin-top: -5pt;
+  }
+
+  .image-container {
+    padding: 0pt;
+    overflow: hidden;
+    aspect-ratio: 1;
+    position: relative;
+    margin: 0pt;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
     }
 
-    .game-title {
-        margin-top: -5pt;
+    span {
+      position: absolute;
+      z-index: 3;
+      opacity: 80%;
     }
 
-    .image-container {
-        padding: 0pt;
-        overflow: hidden;
-        aspect-ratio: 1;
-        position: relative;
-        margin: 0pt;
+    i {
+      margin-right: 4px;
+    }
 
-        img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            object-position: center top;
-        }
+    .unavailable,
+    .requested {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-        span {
-            position: absolute;
-            z-index: 3;
-            opacity: 80%;
-        }
+    .players {
+      bottom: 3%;
+      left: 3%;
+    }
 
-        i {
-            margin-right: 4px;
-        }
-
-        .unavailable, .requested {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .players {
-            bottom: 3%;
-            left: 3%;
-        }
-
-        .time {
-            bottom: 3%;
-            right: 3%;
-        }
-    }     
+    .time {
+      bottom: 3%;
+      right: 3%;
+    }
+  }
 }
 
 .game:not(.class-b):hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.modal-card-title{
+.modal-card-title {
   flex: 1 1 auto;
 }
 
 .modal-image {
-  display:inline-block;
-  overflow: hidden; /* keeps object-fit cropping */
-  max-width:350px; /* default max size on large screens */
-  width:auto;
+  display: inline-block;
+  overflow: hidden;
+  /* keeps object-fit cropping */
+  max-width: 350px;
+  /* default max size on large screens */
+  width: auto;
   border-radius: 12px;
-  margin: 0 auto; /* center horizontally */
+  margin: 0 auto;
+  /* center horizontally */
 }
+
 .modal-image img {
-  display:block;
+  display: block;
   max-width: 100%;
   max-height: 60vh;
 }
 
 /* Adjust sizes for smaller screens */
 @media (max-width: 768px) {
-  .modal-image { max-width:300px; }
+  .modal-image {
+    max-width: 300px;
+  }
 }
+
 @media (max-width: 480px) {
-  .modal-image { max-width:250px; }
+  .modal-image {
+    max-width: 250px;
+  }
 }
 
 .modal-card-body {
-  flex-direction: column; /* stack image + lines vertically */
-  justify-content: center; /* vertical centering inside body */
-  align-items: center;     /* horizontal centering of children */
-  gap: 0.2rem;             /* consistent spacing between items */
-  text-align: center;      /* fallback for inline text */
-  padding: 1.25rem;        /* match Bulma spacing */
+  flex-direction: column;
+  /* stack image + lines vertically */
+  justify-content: center;
+  /* vertical centering inside body */
+  align-items: center;
+  /* horizontal centering of children */
+  gap: 0.2rem;
+  /* consistent spacing between items */
+  text-align: center;
+  /* fallback for inline text */
+  padding: 1.25rem;
+  /* match Bulma spacing */
 }
 
 .modal-card-foot {
   display: flex;
-  flex-direction: row;     /* buttons in a row */
-  justify-content: center; /* center buttons horizontally */
+  flex-direction: row;
+  /* buttons in a row */
+  justify-content: center;
+  /* center buttons horizontally */
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  flex-wrap: wrap;         /* keep buttons usable on small screens */
+  flex-wrap: wrap;
+  /* keep buttons usable on small screens */
 }
 
 @media (max-width: 768px) {
-  #controls-box .year-col {order: 1; width: 50%;}
-  #controls-box .buttons-col.is-hidden-tablet{
+  #controls-box .year-col {
+    order: 1;
+    width: 50%;
+  }
+
+  #controls-box .buttons-col.is-hidden-tablet {
     order: 2;
     width: 50%;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: flex-end;
   }
-/* 
+
+  /* 
     #controls-box .buttons-col.is-hidden-tablet .buttons{
       display: flex;
       width: 100%;
     } */
 
-  #controls-box .buttons-col.is-hidden-tablet .buttons .button{
+  #controls-box .buttons-col.is-hidden-tablet .buttons .button {
     flex-grow: 1;
     margin-left: 4px;
   }
 }
 
 .skeleton {
-  order: 99999; /* change this if we ever have more than 100000 games */
+  order: 99999;
+  /* change this if we ever have more than 100000 games */
 }

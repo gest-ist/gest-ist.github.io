@@ -1,4 +1,10 @@
-const SLUG = 'PgslpkZShMbeWNDviq2vgcRWfj5l-ZVuN0K4sSOnSu0' // slug = the identifier in the link when you share a view
+// Slugs → the identifier in the link when you share a view
+const EXISTING_SLUG = "mdvDO5fm2Fh8iXdafNlx63DKzxcIowciyf0Po25Y8d0"
+const ALL_SLUG = "zv9hstXOXWdDo7_0LQ5L8hKKBk-nBrJtzxOlfs7Q8UU";
+const SLUG = ALL_SLUG;  // active slug
+
+const VIEW_INFO_URL = new URL(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`)
+const VIEW_ROWS_URL = new URL(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/`)
 
 // I used this to get the rows from the database while only exposing a view of the database instead of the whole table
 // https://api.baserow.io/api/redoc/#tag/Database-table-grid-view/operation/public_list_database_table_grid_view_rows
@@ -6,6 +12,30 @@ const SLUG = 'PgslpkZShMbeWNDviq2vgcRWfj5l-ZVuN0K4sSOnSu0' // slug = the identif
 // 4 items per row, 100 rows (enough for our current <340 games)
 // divides nicely into 2 for mobile viewports
 const ENTRIES_PER_PAGE = 4 * 100;
+
+const THUMB_PLACEHOLDER = "https://placehold.co/64x64";
+const IMAGE_PLACEHOLDER = "https://placehold.co/350x350";
+
+const SKELETON_INIT_HTML = `
+<div class="column game is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
+  <div class="box image-container">
+    <figure class="image is-skeleton">
+    </figure>
+    <p class="has-text-grey is-size-7 game-year is-invisible">9999</p>
+    <p class="game-title is-invisible">Title</p>
+  </div>
+</div>
+`
+
+const AVAILABILITY_HTML = {
+  'Unavailable': '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
+  'Requested': '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
+  'Available': ''
+};
+
+// ELEMENTS
+const GRID = document.getElementById("game-grid");
+const MODAL = document.getElementById("game-modal");
 
 let games = [];
 const fuse_options = { //TODO adjust these options
@@ -35,62 +65,39 @@ let currentFilter = {
 let currentFilteredGames = new Set(); // Set
 
 let field2id;
-async function field_name2id() {
-  const response = await fetch(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`, { method: "GET" });
+async function fieldName2Id() {
+  const response = await fetch(VIEW_INFO_URL);
   let data = await response.json();
   let res = {};
-  data.fields.forEach((field) => {
+  data.fields.forEach(field => {
     res[field.name] = field.id;
   });
   return res;
 }
 
-function gameField(game, name) {
-  return game[`field_${field2id[name]}`]
+function renderRange(min, max) {
+  return min == max ? min : `${min} — ${max}`;
 }
 
-function game_container_template(title, publishing_year, players_min, players_max, time_min, time_max, image, status) {
-  let availability_tag = {
-    'Unavailable': '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
-    'Requested': '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
-    'Available': ''
-  };
+function gameContainerTemplate(game) {
   return `
     <div class="box image-container">
       <figure class="image is-square">
-          <img src="${image === "" ? "https://placehold.co/64x64" : image}">
+          <img src="${game.thumb || THUMB_PLACEHOLDER}">
       </figure>
-      ${availability_tag[status]
-    }
-      <span class="tag is-rounded players"><i class="fas fa-users"></i>${players_min == players_max ? players_min : `${players_min} — ${players_max}`}</span>
-      <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>${time_min == time_max ? time_min : `${time_min} — ${time_max}`}</span>
+      ${AVAILABILITY_HTML[game.status]}
+      <span class="tag is-rounded players"><i class="fas fa-users"></i>${renderRange(game.playersMin, game.playersMax)}</span>
+      <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>${renderRange(game.timeMin, game.timeMax)}</span>
     </div>
-    <p class="has-text-grey is-size-7 game-year">${publishing_year}</p>
-    <p class="game-title">${title}</p>
+    <p class="has-text-grey is-size-7 game-year">${game.year}</p>
+    <p class="game-title">${game.title}</p>
   `
-}
-
-function skeleton() {
-  const str = `
-  <div class="column game is-half-mobile is-one-third-tablet is-one-quarter-desktop skeleton">
-    <div class="box image-container">
-        <figure class="image is-skeleton">
-            <img src="https://placehold.co/64x64">
-        </figure>
-      <p class="has-text-grey is-size-7 game-year is-invisible">9999</p>
-      <p class="game-title is-invisible">Title</p>
-    </div>
-  </div>
-  `
-  const div = document.createElement('div');
-  div.innerHTML = str.trim();
-  return div.firstElementChild;
 }
 
 function showHideGames() {
   let intersection = currentFilteredGames.intersection(currentSearchedGames);
   games.forEach(game => {
-    if(intersection.has(game.id)){
+    if (intersection.has(game.id)) {
       game.element.classList.remove('is-hidden');
     } else {
       game.element.classList.add('is-hidden');
@@ -148,88 +155,128 @@ function applyFilter() {
   showHideGames();
 }
 
-
-
-async function load_db_page(page) {
-  const response = await fetch(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/?page=${page}&order_by=-field_${field2id['avgScore']}&filter__field_${field2id['status']}__single_select_not_equal=Unavailable&size=${ENTRIES_PER_PAGE}`, { method: "GET" });
+async function loadDbPage(page) {
+  const url = new URL(VIEW_ROWS_URL);
+  const sp = url.searchParams;
+  sp.set("page", page);
+  sp.set("size", 500);
+  const response = await fetch(url);
   return await response.json();
 }
 
+function appendSkeleton() {
+  const div = document.createElement('div');
+  GRID.appendChild(div);
+  div.outerHTML = SKELETON_INIT_HTML;
+  return div;
+}
+
+function game_field(raw_game, name) {
+  return raw_game[`field_${field2id[name]}`]
+}
+
+function rawToGame(raw) {
+  field = (name) => game_field(raw, name);
+  return {
+    id: field("bggId"),
+    title: field("title"),
+    playersMin: field("playersMin"),
+    playersMax: field("playersMax"),
+    timeMin: field("timeMin"),
+    timeMax: field("timeMax"),
+    rating: field("avgScore"),
+    weight: field("weight"),
+    year: field("publishingYear"),
+    image: field("image"),
+    thumb: field("thumb"),
+    status: field("status").value,
+  };
+}
+
+function prepareNewGameElement(game) {
+  let element = GRID.querySelector(".skeleton");
+  if (element === null) {
+    console.warn(`No skeleton for game: ${game.title}`);
+    return;
+  }
+  element.classList.remove('skeleton');
+  element.innerHTML = gameContainerTemplate(game);
+  element.addEventListener('click', () => handleClickGame(game));
+  return element;
+}
+
 async function load() {
-  field2id = await field_name2id();
-  let grid = document.querySelector('#game-grid');
+  field2id = await fieldName2Id();
 
   let page = 1;
-  let pages_left = true;
-  while (pages_left) {
-    for (let i = 0; i < ENTRIES_PER_PAGE; i++) {
-      grid.appendChild(skeleton());
-    }
-    db = await load_db_page(page);
-    if (db.next === null) pages_left = false;
+  while (true) {
+    for (let i = 0; i < ENTRIES_PER_PAGE; ++i) appendSkeleton()
 
-    db.results.forEach(game => {
-      field = (name) => gameField(game, name);
-      if (field('status').value != 'Unavailable') { // don't show unavailable games
-        let game_container = grid.querySelector(".skeleton");
-        game_container.classList.remove('skeleton');
-        game_container.innerHTML = game_container_template(field('title'), field('publishingYear'), field('playersMin'), field('playersMax'), field('timeMin'), field('timeMax'), field('image'), field('status').value);
-        game_container.addEventListener('click', () => handleClickGame(game));
-        games.push({ title: field('title'), playersMin: field('playersMin'), playersMax: field('playersMax'), timeMin: field('timeMin'), timeMax: field('timeMax'), rating: field('avgScore'), weight: field('weight'), year: field('publishingYear'), id: field('bggId'), status: field('status').value, element: game_container });
-      }
+    db = await loadDbPage(page);
+
+    db.results.forEach(raw_game => {
+      let game = rawToGame(raw_game);
+      console.log(game.title)
+      game.element = prepareNewGameElement(game);
+      games.push(game);
+
       fuse = new Fuse(games, fuse_options);
       applySearchFilter();
       applyFilter();
       applySort();
     });
+
+    if (db.next === null) break;
     page++;
   }
+
   document.querySelectorAll('.skeleton').forEach(el => el.remove());
 }
 
 function handleClickGame(game) {
-  const modal = document.querySelector('#game-modal');
-  modal.classList.add('is-active');
+  MODAL.classList.add('is-active');
   document.querySelector('html').classList.add('is-clipped');
-  modal.querySelector('.modal-card-title').textContent = gameField(game, 'title');
-  modal.querySelector('.modal-image img').src = gameField(game, 'image') || "https://placehold.co/350x350";
-  modal.querySelector('.lang-pt').textContent = `Estado: ${gameField(game, 'status').value === 'Available' ? 'Disponível' : gameField(game, 'status').value === 'Requested' ? 'Requisitado' : 'Indisponível'}`;
-  if (gameField(game, 'playersMin') == gameField(game, 'playersMax')) {
-    modal.querySelector('.lang-pt + p').textContent = `Jogadores: ${gameField(game, 'playersMin')}`;
+  MODAL.querySelector('.modal-card-title').textContent = game.title;
+  let img = MODAL.querySelector('.modal-image img');
+  img.src = game.thumb
+  img.src = game.image || game.thumb || IMAGE_PLACEHOLDER;
+  MODAL.querySelector('.lang-pt').textContent = `Estado: ${game.status === 'Available' ? 'Disponível' : game.status === 'Requested' ? 'Requisitado' : 'Indisponível'}`;
+  if (game.playersMin == game.playersMax) {
+    MODAL.querySelector('.lang-pt + p').textContent = `Jogadores: ${game.playersMin}`;
   } else {
-   modal.querySelector('.lang-pt + p').textContent = `Jogadores: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
-   modal.querySelector('.lang-pt + p').textContent += ` (Ótimo: ${gameField(game, 'playersBest')})`;
+    MODAL.querySelector('.lang-pt + p').textContent = `Jogadores: ${game.playersMin}- ${game.playersMax}`;
+    MODAL.querySelector('.lang-pt + p').textContent += ` (Ótimo: ${game.playersBest})`;
   }
-  
-  if (gameField(game, 'timeMin') == gameField(game, 'timeMax')) {
-    modal.querySelector('.lang-pt + p').textContent += ` | Duração: ${gameField(game, 'timeMin')} mins`;
+
+  if (game.timeMin == game.timeMax) {
+    MODAL.querySelector('.lang-pt + p').textContent += ` | Duração: ${game.timeMin} mins`;
   }
   else {
-    modal.querySelector('.lang-pt + p').textContent += ` | Duração: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+    MODAL.querySelector('.lang-pt + p').textContent += ` | Duração: ${game.timeMin}-${game.timeMax} mins`;
   }
-  modal.querySelector('.lang-pt + p + p').textContent = `Classificação BGG: ${gameField(game, 'avgScore')} | Peso: ${gameField(game, 'weight')}`;
+  MODAL.querySelector('.lang-pt + p + p').textContent = `Classificação BGG: ${game.avgScore} | Peso: ${game.weight}`;
 
-  modal.querySelector('.lang-en').textContent = `Status: ${gameField(game, 'status').value === 'Available' ? 'Available' : gameField(game, 'status').value === 'Requested' ? 'Requested' : 'Unavailable'}`;
-  if (gameField(game, 'playersMin') == gameField(game, 'playersMax')) {
-    modal.querySelector('.lang-en + p').textContent = `Players: ${gameField(game, 'playersMin')}`;
+  MODAL.querySelector('.lang-en').textContent = `Status: ${game.status === 'Available' ? 'Available' : game.status === 'Requested' ? 'Requested' : 'Unavailable'}`;
+  if (game.playersMin == game.playersMax) {
+    MODAL.querySelector('.lang-en + p').textContent = `Players: ${game.playersMin}`;
   } else {
-   modal.querySelector('.lang-en + p').textContent = `Players: ${gameField(game, 'playersMin')}- ${gameField(game, 'playersMax')}`;
-   modal.querySelector('.lang-en + p').textContent += ` (Best: ${gameField(game, 'playersBest')})`;
+    MODAL.querySelector('.lang-en + p').textContent = `Players: ${game.playersMin}- ${game.playersMax}`;
+    MODAL.querySelector('.lang-en + p').textContent += ` (Best: ${game.playersBest})`;
   }
-  
-  if (gameField(game, 'timeMin') == gameField(game, 'timeMax')) {
-    modal.querySelector('.lang-en + p').textContent += ` | Duration: ${gameField(game, 'timeMin')} mins`;
+
+  if (game.timeMin == game.timeMax) {
+    MODAL.querySelector('.lang-en + p').textContent += ` | Duration: ${game.timeMin} mins`;
   }
   else {
-    modal.querySelector('.lang-en + p').textContent += ` | Duration: ${gameField(game, 'timeMin')}-${gameField(game, 'timeMax')} mins`;
+    MODAL.querySelector('.lang-en + p').textContent += ` | Duration: ${game.timeMin}-${game.timeMax} mins`;
   }
 
-  modal.querySelector('.lang-en + p + p').textContent = `BGG Rating: ${gameField(game, 'avgScore')} | Weight: ${gameField(game, 'weight')}`;
+  MODAL.querySelector('.lang-en + p + p').textContent = `BGG Rating: ${game.avgScore} | Weight: ${game.weight}`;
 
-  modal.querySelector('.modal-card-foot a').href = `https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`;
-  modal.querySelector('.modal-card-foot a + a').href = `https://boardgamegeek.com/boardgame/${gameField(game, 'bggId')}/`;
+  MODAL.querySelector('.modal-card-foot a').href = `https://boardgamegeek.com/boardgame/${game.bggId}/`;
+  MODAL.querySelector('.modal-card-foot a + a').href = `https://boardgamegeek.com/boardgame/${game.bggId}/`;
 
-  modal.querySelector('.close-modal').onclick = () => {
+  MODAL.querySelector('.close-modal').onclick = () => {
     closeModal();
   };
   // close window when pressing ESC
@@ -240,31 +287,31 @@ function handleClickGame(game) {
   };
 
   // close modal when clicking outside
-  modal.querySelector('.modal-background').onclick = () => {
+  MODAL.querySelector('.modal-background').onclick = () => {
     closeModal();
   };
 
   // close modal when touching outside (for mobile) 
-  modal.querySelector('.modal-background').ontouchcancel = () => {
+  MODAL.querySelector('.modal-background').ontouchcancel = () => {
     closeModal();
   };
 
   function closeModal() {
-    modal.classList.remove('is-active');
+    MODAL.classList.remove('is-active');
     document.querySelector('html').classList.remove('is-clipped');
   }
 }
 
-// MAIN 
+// MAIN
 
 load();
 
-document.querySelector('#search-bar').addEventListener('input', e => {
+document.getElementById("search-bar").addEventListener('input', e => {
   currentSearch = e.target.value.trim();
   applySearchFilter();
 });
 
-document.querySelector("#sort-select").addEventListener('input', e => {
+document.getElementById("sort-select").addEventListener('input', e => {
   currentSort = e.target.value;
   applySort();
 });
@@ -274,43 +321,43 @@ function readFilters() {
     //short for number or normalize
     return x == "" ? null : Number(x);
   }
-  currentFilter.status = document.querySelector("#filter-status").value;
-  currentFilter.playersMin = n(document.querySelector("#filter-players-min").value);
-  currentFilter.playersMax = n(document.querySelector("#filter-players-max").value);
-  currentFilter.timeMin = n(document.querySelector("#filter-time-min").value);
-  currentFilter.timeMax = n(document.querySelector("#filter-time-max").value);
-  currentFilter.weightMin = n(document.querySelector("#filter-weight-min").value);
-  currentFilter.weightMax = n(document.querySelector("#filter-weight-max").value);
-  currentFilter.yearMin = n(document.querySelector("#filter-year-min").value);
-  currentFilter.yearMax = n(document.querySelector("#filter-year-max").value);
+  currentFilter.status = document.getElementById("filter-status").value;
+  currentFilter.playersMin = n(document.getElementById("filter-players-min").value);
+  currentFilter.playersMax = n(document.getElementById("filter-players-max").value);
+  currentFilter.timeMin = n(document.getElementById("filter-time-min").value);
+  currentFilter.timeMax = n(document.getElementById("filter-time-max").value);
+  currentFilter.weightMin = n(document.getElementById("filter-weight-min").value);
+  currentFilter.weightMax = n(document.getElementById("filter-weight-max").value);
+  currentFilter.yearMin = n(document.getElementById("filter-year-min").value);
+  currentFilter.yearMax = n(document.getElementById("filter-year-max").value);
 }
 
-document.querySelectorAll(".filter").forEach(function (element) {
-  element.addEventListener('input', e => {
+document.querySelectorAll(".filter").forEach(el =>
+  el.addEventListener('input', _ => {
     readFilters();
     applyFilter();
-  });
-});
+  })
+);
 
 document.querySelectorAll("#clear-filters").forEach(function (element) {
   element.addEventListener('click', e => {
     //this is needed because of the different languages
-    for(const select of [document.getElementById('sort-select'), document.getElementById('filter-status')]){
+    for (const select of [document.getElementById('sort-select'), document.getElementById('filter-status')]) {
       // Find the first option that does NOT have the 'is-hidden' class
-      const firstVisibleOption = Array.from(select.options).find(opt => 
+      const firstVisibleOption = Array.from(select.options).find(opt =>
         !opt.classList.contains('is-hidden')
       );
       firstVisibleOption.selected = true;
     }
 
-    document.querySelector("#filter-players-min").value = "";
-    document.querySelector("#filter-players-max").value = "";
-    document.querySelector("#filter-time-min").value = "";
-    document.querySelector("#filter-time-max").value = "";
-    document.querySelector("#filter-weight-min").value = "";
-    document.querySelector("#filter-weight-max").value = "";
-    document.querySelector("#filter-year-min").value = "";
-    document.querySelector("#filter-year-max").value = "";
+    document.getElementById("filter-players-min").value = "";
+    document.getElementById("filter-players-max").value = "";
+    document.getElementById("filter-time-min").value = "";
+    document.getElementById("filter-time-max").value = "";
+    document.getElementById("filter-weight-min").value = "";
+    document.getElementById("filter-weight-max").value = "";
+    document.getElementById("filter-year-min").value = "";
+    document.getElementById("filter-year-max").value = "";
     readFilters();
     applyFilter();
   });
