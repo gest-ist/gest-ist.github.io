@@ -233,14 +233,14 @@ const searchEngines = {
     'users': null,
 }
 
-const fuseOptionsGames = { //TODO adjust these options
+const fuseOptionsGames = {
     keys: ['title'],
     threshold: 0.2,
     isCaseInsensitive: true,
     ignoreDiacritics: true,
 }
 
-const fuseOptionsUsers = { //TODO adjust these options
+const fuseOptionsUsers = {
     keys: ['name', 'email', 'phoneNumber'],
     threshold: 0.2,
     isCaseInsensitive: true,
@@ -440,6 +440,7 @@ document.querySelector('#register-add-user').addEventListener('click', async () 
             "registeredBy": userName,
         }),
     });
+    document.querySelectorAll('#add-user-modal input').forEach(e => e.value = "");
     await checkError(res);
     window.location.reload();
 });
