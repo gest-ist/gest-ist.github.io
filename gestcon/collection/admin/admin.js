@@ -213,6 +213,7 @@ async function load(table, addRowCallback, list, orderBy, tableName, fuseOptions
         if (db.next === null) pages_left = false;
 
         db.results.forEach(item => {
+            if (item.status.value == "Unavailable") return; // TODO: temp
             item.row = addRowCallback(item);
             item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
             list.push(item)
