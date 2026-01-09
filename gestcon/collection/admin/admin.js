@@ -95,6 +95,7 @@ const tbodyGame = document.querySelector('#game-table tbody');
 
 function addRowGame({ id, title, bggId, status, currentReserver, noOfReservations, shelfCode }) {
 
+
     const availabilityTag = {
         'Unavailable': '<span class="tag is-danger is-medium">Não Disponível</span>',
         'Requested': '<span class="tag is-warning is-medium">Requisitado</span>',
@@ -199,10 +200,7 @@ function openLogUser(rowId) {
 
 async function load_db_page(page, table, orderBy) {
     const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}${orderBy ? `&order_by=${orderBy}` : ""}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
-        method: "GET",
-        headers: {
-            Authorization: `Token ${token}`
-        }
+        headers: { Authorization: `Token ${token}` }
     });
     return await response.json();
 }
@@ -216,6 +214,7 @@ async function load(table, addRowCallback, list, orderBy, tableName, fuseOptions
 
         db.results.forEach(item => {
             item.row = addRowCallback(item);
+            item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
             list.push(item)
         });
         list.push(...db.results);
@@ -234,7 +233,7 @@ const searchEngines = {
 }
 
 const fuseOptionsGames = {
-    keys: ['title'],
+    keys: ["title", "cR"],
     threshold: 0.2,
     isCaseInsensitive: true,
     ignoreDiacritics: true,
