@@ -81,6 +81,11 @@
   max-height: 60vh;
 }
 
+#modal-preimg {
+  position: absolute;
+  top: 0;
+}
+
 /* Adjust sizes for smaller screens */
 @media (max-width: 768px) {
   .modal-image {

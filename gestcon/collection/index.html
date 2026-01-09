@@ -78,7 +78,8 @@
       </header>
       <section class="modal-card-body has-text-centered">
         <figure class="image is-centered modal-image">
-          <img src="https://placehold.co/350x350" alt="Game Image" width="350" height="350">
+          <img src="https://placehold.co/350x350" alt="Game Image" id="modal-preimg">
+          <img src="https://placehold.co/350x350" alt="Game Image" id="modal-img" onload="this.parentElement.children[0].style.zIndex='-1'">
         </figure>
 
         <p class="lang lang-pt">Estado: Disponível</p>

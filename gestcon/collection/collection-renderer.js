@@ -35,7 +35,10 @@ const AVAILABILITY_HTML = {
 
 // ELEMENTS
 const GRID = document.getElementById("game-grid");
+
 const MODAL = document.getElementById("game-modal");
+const MODAL_PREIMG = document.getElementById("modal-preimg");
+const MODAL_IMG = document.getElementById("modal-img");
 
 let games = [];
 const fuse_options = { //TODO adjust these options
@@ -216,7 +219,6 @@ async function load() {
 
     db.results.forEach(raw_game => {
       let game = rawToGame(raw_game);
-      console.log(game.title)
       game.element = prepareNewGameElement(game);
       games.push(game);
 
@@ -237,9 +239,12 @@ function handleClickGame(game) {
   MODAL.classList.add('is-active');
   document.querySelector('html').classList.add('is-clipped');
   MODAL.querySelector('.modal-card-title').textContent = game.title;
-  let img = MODAL.querySelector('.modal-image img');
-  img.src = game.thumb
-  img.src = game.image || game.thumb || IMAGE_PLACEHOLDER;
+
+  // Progressive enhancement for modal image
+  MODAL_PREIMG.style.zIndex = "1";
+  MODAL_PREIMG.src = game.thumb
+  MODAL_IMG.src = game.image || game.thumb || IMAGE_PLACEHOLDER;
+
   MODAL.querySelector('.lang-pt').textContent = `Estado: ${game.status === 'Available' ? 'Disponível' : game.status === 'Requested' ? 'Requisitado' : 'Indisponível'}`;
   if (game.playersMin == game.playersMax) {
     MODAL.querySelector('.lang-pt + p').textContent = `Jogadores: ${game.playersMin}`;
