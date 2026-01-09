@@ -453,7 +453,7 @@ userName = localStorage.getItem('userName');
 if (token == null) {
     openModal(document.querySelector("#login-modal"))
 } else {
-    document.querySelector('#user-name-display').textContent = `Olá ${userName}! 👋`;
+    document.querySelector('#user-name-display').textContent = `Olá ${userName}? ඞ`;
     loadGames();
     loadUsers();
 }
