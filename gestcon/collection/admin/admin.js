@@ -93,8 +93,10 @@ document.querySelector('#logout-button').addEventListener('click', async () => {
 
 const tbodyGame = document.querySelector('#game-table tbody');
 
-function addRowGame({ id, title, bggId, status, currentReserver, noOfReservations, shelfCode }) {
-
+function addRowGame(item, { id, title, bggId, status, currentReserver, noOfReservations, shelfCode }) {
+    if (status.value == "Unavailable") {
+        return null;
+    }
 
     const availabilityTag = {
         'Unavailable': '<span class="tag is-danger is-medium">Não Disponível</span>',
@@ -102,6 +104,8 @@ function addRowGame({ id, title, bggId, status, currentReserver, noOfReservation
         'Available': '<span class="tag is-success is-medium">Disponível</span>',
     };
     const row = tbodyGame.insertRow();
+
+    item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
 
     row.insertCell().innerHTML = `<a target="_blank" href="https://boardgamegeek.com/boardgame/${bggId}/">${bggId}</a>`;
     row.insertCell().textContent = title;
@@ -141,7 +145,7 @@ function addRowGame({ id, title, bggId, status, currentReserver, noOfReservation
 
 const tbodyUser = document.querySelector('#user-table tbody');
 
-function addRowUser({ id, name, email, phoneNumber, currentReservation, noOfReservations }) {
+function addRowUser(item, { id, name, email, phoneNumber, currentReservation, noOfReservations }) {
     const row = tbodyUser.insertRow();
     row.insertCell().textContent = name;
     row.insertCell().textContent = email;
@@ -213,12 +217,9 @@ async function load(table, addRowCallback, list, orderBy, tableName, fuseOptions
         if (db.next === null) pages_left = false;
 
         db.results.forEach(item => {
-            if (item.status.value == "Unavailable") return; // TODO: temp
-            item.row = addRowCallback(item);
-            item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
-            list.push(item)
+            item.row = addRowCallback(item, item);
+            if (item.row !== null) list.push(item)
         });
-        list.push(...db.results);
         searchEngines[tableName] = new Fuse(list, fuseOptions);
         applySearchFilter();
         page++;
