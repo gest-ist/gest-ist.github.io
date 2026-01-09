@@ -281,7 +281,7 @@ usersSearch.addEventListener('input', e => {
 });
 
 async function loadGames() {
-    load(games, addRowGame, gameList, 'status,title', 'games', fuseOptionsGames, applySearchFilterGames);
+    load(games, addRowGame, gameList, '-status,title', 'games', fuseOptionsGames, applySearchFilterGames);
 }
 
 async function loadUsers() {
