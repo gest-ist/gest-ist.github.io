@@ -16,10 +16,12 @@ th {
 }
 
 .image-container {
-  width: 50%;
+  display: inline-block;
+  max-width: 250px;
+  width: auto;
   padding: 0pt;
   overflow: hidden;
-  aspect-ratio: 1;
+  /* aspect-ratio: 1; */
   position: relative;
   margin: 0pt;
 
@@ -29,5 +31,21 @@ th {
     display: block;
     object-fit: cover;
     object-position: center top;
+    max-height: 40vh;
   }
 }
+
+/* .modal-image {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 350px;
+  width: auto;
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+.modal-image img {
+  display: block;
+  max-width: 100%;
+  max-height: 60vh;
+} */
