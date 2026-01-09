@@ -296,8 +296,8 @@ function handleClickGame(game) {
       break;
   }
 
-  MODAL_STATUS.classList.add(spanClass);
-  MODAL_STATUS_ICON.classList.add(iconName);
+  MODAL_STATUS.className = spanClass;
+  MODAL_STATUS_ICON.className = `fas ${iconName}`;
   MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
   MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
