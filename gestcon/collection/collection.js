@@ -31,6 +31,24 @@ const MODAL_STATUS_ICON = MODAL_STATUS.querySelector(".icon>i")
 const MODAL_RATING = document.getElementById("rating");
 const MODAL_WEIGHT = document.getElementById("weight");
 
+const RANGE_FILTERS = {
+    playersMin: document.getElementById("filter-players-min"),
+    playersMax: document.getElementById("filter-players-max"),
+    timeMin: document.getElementById("filter-time-min"),
+    timeMax: document.getElementById("filter-time-max"),
+    weightMin: document.getElementById("filter-weight-min"),
+    weightMax: document.getElementById("filter-weight-max"),
+    yearMin: document.getElementById("filter-year-min"),
+    yearMax: document.getElementById("filter-year-max"),
+}
+
+const SELECT_FILTERS = {
+    sort: document.getElementById("sort-select"),
+    status: document.getElementById("filter-status"),
+}
+
+const FILTERS = { ...SELECT_FILTERS, ...RANGE_FILTERS }
+
 const FUSE_OPTIONS = {
     keys: ["title"],
     threshold: 0.2,
@@ -101,15 +119,6 @@ function applySearchFilter() {
     showHideGames();
 }
 
-
-function strngCmp(a, b) {
-    a = a.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    b = b.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    if (a < b) return -1;
-    else if (b < a) return 1;
-    else return 0;
-}
-
 function applySort() {
     const comp = COMPARATORS[currentSort];
     const indices = games.map((_, i) => i);
@@ -117,19 +126,13 @@ function applySort() {
     indices.forEach((index, i) => games[index].element.style.order = i);
 }
 
-function intervalsIntersect(min1, max1, min2, max2) {
-    return (min1 == null || max2 == null || min1 <= max2) && (min2 == null || max1 == null || min2 <= max1);
-}
-
-function inInterval(min, x, max) {
-    return (min == null || min <= x) && (max == null || x <= max);
-}
 function fulfilFilter(game) {
-    return (currentFilter.status == Status.ANY || game.status == currentFilter.status)
-        && intervalsIntersect(currentFilter.playersMin, currentFilter.playersMax, game.playersMin, game.playersMax)
-        && intervalsIntersect(currentFilter.timeMin, currentFilter.timeMax, game.timeMin, game.timeMax)
-        && inInterval(currentFilter.weightMin, game.weight, currentFilter.weightMax)
-        && inInterval(currentFilter.yearMin, game.year, currentFilter.yearMax)
+    const [f, g] = [currentFilter, game]; // easier to read the rest
+    return (f.status == Status.ANY || g.status == f.status)
+        && intervalsIntersect(f.playersMin, f.playersMax, g.playersMin, g.playersMax)
+        && intervalsIntersect(f.timeMin, f.timeMax, g.timeMin, g.timeMax)
+        && inInterval(f.weightMin, g.weight, f.weightMax)
+        && inInterval(f.yearMin, g.year, f.yearMax)
 }
 
 function applyFilter() {
@@ -153,7 +156,7 @@ function prepareNewGameElement(game) {
     }
     element.classList.remove('skeleton');
     element.innerHTML = gameContainerTemplate(game);
-    element.addEventListener('click', () => handleClickGame(game));
+    element.addEventListener('click', () => openGameModal(game));
     game.element = element;
     return element;
 }
@@ -177,7 +180,7 @@ async function load() {
     document.querySelectorAll('.skeleton').forEach(el => el.remove());
 }
 
-function handleClickGame(game) {
+function openGameModal(game) {
     HTML.classList.add("is-clipped");
 
     MODAL.classList.add("is-active");
@@ -213,37 +216,38 @@ function handleClickGame(game) {
     MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
     MODAL.querySelector(".modal-info-group .lang-pt.players").textContent =
-    MODAL.querySelector(".modal-info-group .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
+        MODAL.querySelector(".modal-info-group .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
 
     MODAL.querySelector(".modal-info-group .lang-pt.time").textContent =
-    MODAL.querySelector(".modal-info-group .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
+        MODAL.querySelector(".modal-info-group .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
 
     MODAL_RATING.textContent = game.rating;
     MODAL_WEIGHT.textContent = game.weight;
 
     MODAL.querySelector(".modal-card-foot a").href =
-    MODAL.querySelector(".modal-card-foot a + a").href = game.bgg();
+        MODAL.querySelector(".modal-card-foot a + a").href = game.bgg();
+}
 
-    function closeModal() {
-        MODAL.classList.remove("is-active");
-        HTML.classList.remove("is-clipped");
-    }
+function closeGameModal() {
+    MODAL.classList.remove("is-active");
+    HTML.classList.remove("is-clipped");
 }
 
 function readFilters() {
-    function n(x) {
-        //short for number or normalize
-        return x == "" ? null : Number(x);
-    }
-    currentFilter.status = Number(document.getElementById("filter-status").value);
-    currentFilter.playersMin = n(document.getElementById("filter-players-min").value);
-    currentFilter.playersMax = n(document.getElementById("filter-players-max").value);
-    currentFilter.timeMin = n(document.getElementById("filter-time-min").value);
-    currentFilter.timeMax = n(document.getElementById("filter-time-max").value);
-    currentFilter.weightMin = n(document.getElementById("filter-weight-min").value);
-    currentFilter.weightMax = n(document.getElementById("filter-weight-max").value);
-    currentFilter.yearMin = n(document.getElementById("filter-year-min").value);
-    currentFilter.yearMax = n(document.getElementById("filter-year-max").value);
+    const n = el => el.value == "" ? null : Number(el.value);
+    Object.entries(FILTERS).forEach((key, el) => currentFilter[key] = n(el));
+}
+
+function clearFilters() {
+    Object.values(RANGE_FILTERS).forEach(f => f.value = "");
+    //this is needed because of the different languages
+    Object.values(SELECT_FILTERS).forEach(f => {
+        const first = f.options.find(o => !isHidden(o));
+        if (first !== undefined) first.selected = true;
+    });
+
+    readFilters();
+    applyFilter();
 }
 
 function initListeners() {
@@ -267,39 +271,19 @@ function initListeners() {
         })
     );
 
-    document.querySelectorAll("#clear-filters").forEach(function (element) {
-        element.addEventListener('click', e => {
-            //this is needed because of the different languages
-            for (const select of [document.getElementById('sort-select'), document.getElementById('filter-status')]) {
-                // Find the first option that does NOT have the 'is-hidden' class
-                const firstVisibleOption = Array.from(select.options).find(opt =>
-                    !opt.classList.contains('is-hidden')
-                );
-                firstVisibleOption.selected = true;
-            }
-
-            document.getElementById("filter-players-min").value = "";
-            document.getElementById("filter-players-max").value = "";
-            document.getElementById("filter-time-min").value = "";
-            document.getElementById("filter-time-max").value = "";
-            document.getElementById("filter-weight-min").value = "";
-            document.getElementById("filter-weight-max").value = "";
-            document.getElementById("filter-year-min").value = "";
-            document.getElementById("filter-year-max").value = "";
-            readFilters();
-            applyFilter();
-        });
-    });
+    document.querySelectorAll("#clear-filters").forEach(el =>
+        el.addEventListener('click', _ => clearFilters)
+    );
 
     // Close window when pressing ESC
-    window.onkeydown = ev => { if (ev.key === "Escape") closeModal() };
+    window.onkeydown = ev => { if (ev.key === "Escape") closeGameModal() };
 
     // Close modal when clicking on close buttons
     MODAL.querySelector(".close-modal").onclick =
-    // Close modal when clicking outside
-    MODAL.querySelector(".modal-background").onclick =
-    // Close modal when touching outside (for mobile)
-    MODAL.querySelector(".modal-background").ontouchcancel = closeModal;
+        // Close modal when clicking outside
+        MODAL.querySelector(".modal-background").onclick =
+        // Close modal when touching outside (for mobile)
+        MODAL.querySelector(".modal-background").ontouchcancel = closeGameModal;
 }
 
 // MAIN

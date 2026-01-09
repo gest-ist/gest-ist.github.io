@@ -16,3 +16,8 @@ function intervalsIntersect(min1, max1, min2, max2) {
 function inInterval(min, x, max) {
     return (min == null || min <= x) && (max == null || x <= max);
 }
+
+/** Returns true if the given element is hidden. */
+function isHidden(element) {
+    return element.classList.contains("is-hidden")
+}
