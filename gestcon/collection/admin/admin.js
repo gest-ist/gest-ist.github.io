@@ -360,6 +360,7 @@ async function handleRegisterGameRequest(userId, gameId) {
             "status": "Requested",
         }),
     });
+    document.getElementById('select-request').value = "";
     await checkError(res);
 }
 
