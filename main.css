@@ -14,11 +14,13 @@
 
 .image-carousel img {
   flex: 0 0 auto;
-  max-height: 300px;       /* ✅ set a max height */
+  max-height: 300px;
+  /* ✅ set a max height */
   height: auto;
-  width: auto;             /* ✅ let width scale with height */
+  width: auto;
+  /* ✅ let width scale with height */
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .scroll-button {
@@ -50,10 +52,12 @@
 .responsive-iframe {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
 }
+
 .responsive-iframe iframe {
   position: absolute;
   top: 0;
@@ -69,9 +73,12 @@
 
 
 .container img {
-  width: 100%;       /* allow it to scale down */
-  max-width: 400px;  /* but never grow beyond 400px */
-  height: auto;      /* keep aspect ratio */
+  width: 100%;
+  /* allow it to scale down */
+  max-width: 400px;
+  /* but never grow beyond 400px */
+  height: auto;
+  /* keep aspect ratio */
 }
 
 /* Make carousel padding and image sizes friendlier on small screens */
@@ -80,14 +87,15 @@
     padding: 0.5rem 1rem;
     gap: 0.5rem;
   }
+
   .image-carousel img {
     max-height: 180px;
   }
 }
 
 .navbar {
-    transition: transform 0.3s ease-in-out;
-    will-change: transform;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
 }
 
 /* Mobile fix for navbar brand name */
@@ -149,4 +157,8 @@
     margin-left: auto;
     min-width: 120px;
   }
+}
+
+.grayed {
+  filter: grayscale(90%);
 }

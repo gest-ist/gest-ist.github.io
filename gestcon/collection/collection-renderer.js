@@ -28,9 +28,9 @@ const SKELETON_INIT_HTML = `
 `
 
 const AVAILABILITY_HTML = {
-  'Unavailable': '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
-  'Requested': '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
-  'Available': ''
+  0: '',
+  1: '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
+  2: '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
 };
 
 // ELEMENTS
@@ -100,10 +100,11 @@ function renderRange(min, max) {
   return min == max ? min : `${min} — ${max}`;
 }
 
+
 function gameContainerTemplate(game) {
   return `
     <div class="box image-container">
-      <figure class="image is-square">
+      <figure class="image is-square ${game.status == Status.OK ? "" : "grayed"}">
           <img src="${game.thumb || THUMB_PLACEHOLDER}">
       </figure>
       ${AVAILABILITY_HTML[game.status]}
