@@ -44,6 +44,7 @@ const MODAL_STATUS = document.getElementById("modal-status");
 const MODAL_STATUS_ICON = MODAL_STATUS.querySelector(".icon>i")
 
 class Status {
+  static ANY = -1;
   static OK = 0;
   static TAKEN = 1;
   static MISSING = 2;
@@ -72,7 +73,7 @@ let currentSearchedGames = new Set(); // Set
 let currentSort = "rating-desc";
 
 let currentFilter = {
-  status: "Any",
+  status: Status.ANY,
   playersMin: null,
   playersMax: null,
   timeMin: null,
@@ -162,7 +163,7 @@ function inInterval(min, x, max) {
   return (min == null || min <= x) && (max == null || x <= max);
 }
 function fulfilFilter(game) {
-  return (currentFilter.status == 'Any' || game.status == currentFilter.status)
+  return (currentFilter.status == Status.ANY || game.status == currentFilter.status)
     && intervalsIntersect(currentFilter.playersMin, currentFilter.playersMax, game.playersMin, game.playersMax)
     && intervalsIntersect(currentFilter.timeMin, currentFilter.timeMax, game.timeMin, game.timeMax)
     && inInterval(currentFilter.weightMin, game.weight, currentFilter.weightMax)
@@ -327,7 +328,7 @@ function readFilters() {
     //short for number or normalize
     return x == "" ? null : Number(x);
   }
-  currentFilter.status = document.getElementById("filter-status").value;
+  currentFilter.status = Number(document.getElementById("filter-status").value);
   currentFilter.playersMin = n(document.getElementById("filter-players-min").value);
   currentFilter.playersMax = n(document.getElementById("filter-players-max").value);
   currentFilter.timeMin = n(document.getElementById("filter-time-min").value);
