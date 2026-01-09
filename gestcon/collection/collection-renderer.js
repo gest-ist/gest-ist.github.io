@@ -247,8 +247,7 @@ async function load() {
 
     db.results.forEach(raw_game => {
       let game = rawToGame(raw_game);
-      games.push(game);
-
+      if (game.status != Status.MISSING) games.push(game);
     });
 
     if (db.next === null) break;
