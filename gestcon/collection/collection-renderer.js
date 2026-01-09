@@ -6,6 +6,9 @@ const SLUG = ALL_SLUG;  // active slug
 const VIEW_INFO_URL = new URL(`https://api.baserow.io/api/database/views/${SLUG}/public/info/`)
 const VIEW_ROWS_URL = new URL(`https://api.baserow.io/api/database/views/grid/${SLUG}/public/rows/`)
 
+// const IMG_BASE_URL = "https://bgimg.tomasduarte.eu/img";
+const IMG_BASE_URL = "https://gestcon-img.b-cdn.net/img";
+
 // I used this to get the rows from the database while only exposing a view of the database instead of the whole table
 // https://api.baserow.io/api/redoc/#tag/Database-table-grid-view/operation/public_list_database_table_grid_view_rows
 
@@ -38,7 +41,7 @@ const HTML = document.querySelector("html");
 const GRID = document.getElementById("game-grid");
 
 const MODAL = document.getElementById("game-modal");
-const MODAL_PREIMG = document.getElementById("modal-preimg");
+// const MODAL_PREIMG = document.getElementById("modal-preimg");
 const MODAL_IMG = document.getElementById("modal-img");
 const MODAL_STATUS = document.getElementById("modal-status");
 const MODAL_STATUS_ICON = MODAL_STATUS.querySelector(".icon>i")
@@ -105,7 +108,7 @@ function gameContainerTemplate(game) {
   return `
     <div class="box image-container">
       <figure class="image is-square ${game.status == Status.OK ? "" : "grayed"}">
-          <img src="${game.thumb || THUMB_PLACEHOLDER}">
+          <img src="${gameImg(game)}" loading="lazy">
       </figure>
       ${AVAILABILITY_HTML[game.status]}
       <span class="tag is-rounded players"><i class="fas fa-users"></i>${renderRange(game.playersMin, game.playersMax)}</span>
@@ -134,23 +137,26 @@ function applySearchFilter() {
   showHideGames();
 }
 
-function applySort() {
-  function strngCmp(a, b) {
-    a = a.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    b = b.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    if (a < b) return -1;
-    else if (b < a) return 1;
-    else return 0;
-  }
-  comprFn = {
-    'rating-desc': (a, b) => b.rating - a.rating,
-    'rating-asc': (a, b) => a.rating - b.rating,
-    'title-asc': (a, b) => strngCmp(a.title, b.title),
-    'title-desc': (a, b) => strngCmp(b.title, a.title),
-  }
 
+function strngCmp(a, b) {
+  a = a.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+  b = b.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+  if (a < b) return -1;
+  else if (b < a) return 1;
+  else return 0;
+}
+
+const COMPARATORS = {
+  'rating-desc': (a, b) => b.rating - a.rating,
+  'rating-asc': (a, b) => a.rating - b.rating,
+  'title-asc': (a, b) => strngCmp(a.title, b.title),
+  'title-desc': (a, b) => strngCmp(b.title, a.title),
+}
+
+function applySort() {
+  const comp = COMPARATORS[currentSort];
   const indices = games.map((_, i) => i);
-  indices.sort((a, b) => comprFn[currentSort](games[a], games[b]));
+  indices.sort((a, b) => comp(games[a], games[b]));
   indices.forEach((index, i) => {
     games[index].element.style.order = i;
   });
@@ -193,6 +199,10 @@ function appendSkeleton() {
   return div;
 }
 
+function gameImg(game) {
+  return `${IMG_BASE_URL}/${game.id}.avif`;
+}
+
 function game_field(raw_game, name) {
   return raw_game[`field_${field2id[name]}`]
 }
@@ -209,8 +219,6 @@ function rawToGame(raw) {
     rating: field("avgScore"),
     weight: field("weight"),
     year: field("publishingYear"),
-    image: field("image"),
-    thumb: field("thumb"),
     status: Status.parse(field("status").value),
   };
 }
@@ -224,6 +232,7 @@ function prepareNewGameElement(game) {
   element.classList.remove('skeleton');
   element.innerHTML = gameContainerTemplate(game);
   element.addEventListener('click', () => handleClickGame(game));
+  game.element = element;
   return element;
 }
 
@@ -238,18 +247,20 @@ async function load() {
 
     db.results.forEach(raw_game => {
       let game = rawToGame(raw_game);
-      game.element = prepareNewGameElement(game);
       games.push(game);
 
-      fuse = new Fuse(games, fuse_options);
-      applySearchFilter();
-      applyFilter();
-      applySort();
     });
 
     if (db.next === null) break;
     page++;
   }
+
+  games.sort(COMPARATORS[currentSort])
+  games.forEach(game => prepareNewGameElement(game));
+  fuse = new Fuse(games, fuse_options);
+  applySearchFilter();
+  applyFilter();
+  applySort();
 
   document.querySelectorAll('.skeleton').forEach(el => el.remove());
 }
@@ -260,9 +271,9 @@ function handleClickGame(game) {
   MODAL.querySelector(".modal-card-title").textContent = game.title;
 
   // Progressive enhancement for modal image
-  MODAL_PREIMG.style.zIndex = "1";
-  MODAL_PREIMG.src = game.thumb
-  MODAL_IMG.src = game.image || game.thumb || IMAGE_PLACEHOLDER;
+  // MODAL_PREIMG.style.zIndex = "1";
+  // MODAL_PREIMG.src = game.thumb
+  MODAL_IMG.src = gameImg(game);
 
   let spanClass, iconName, ptName, enName;
   switch (game.status) {
