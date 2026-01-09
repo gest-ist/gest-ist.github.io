@@ -9,9 +9,9 @@ let userName;
 
 function writeHeader(token) {
     return {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-        }
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+    }
 }
 
 function openModal($el) {
@@ -34,7 +34,7 @@ document.querySelectorAll('.close-modal').forEach(($el) => {
 
     $el.addEventListener('click', () => {
         closeModal($target);
-        if($target.id != "error-modal"){
+        if ($target.id != "error-modal") {
             document.querySelector('html').classList.remove('is-clipped');
         }
     });
@@ -135,11 +135,12 @@ function addRowGame({ id, title, bggId, status, currentReserver, noOfReservation
     btn.addEventListener('click', () => {
         openLogGame(id);
     });
+    return row;
 }
 
 const tbodyUser = document.querySelector('#user-table tbody');
 
-function addRowUser({ id, name, email, phoneNumber, currentReservation, noOfReservations}) {
+function addRowUser({ id, name, email, phoneNumber, currentReservation, noOfReservations }) {
     const row = tbodyUser.insertRow();
     row.insertCell().textContent = name;
     row.insertCell().textContent = email;
@@ -155,6 +156,7 @@ function addRowUser({ id, name, email, phoneNumber, currentReservation, noOfRese
     btn.addEventListener('click', () => {
         openLogUser(id);
     });
+    return row;
 }
 
 function requestGame(rowId) {
@@ -196,7 +198,7 @@ function openLogUser(rowId) {
 }
 
 async function load_db_page(page, table, orderBy) {
-    const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}${orderBy ? `&order_by=${orderBy}`: ""}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
+    const response = await fetch(`https://api.baserow.io/api/database/rows/table/${table}/?page=${page}${orderBy ? `&order_by=${orderBy}` : ""}&user_field_names=true&size=${ENTRIES_PER_PAGE}`, {
         method: "GET",
         headers: {
             Authorization: `Token ${token}`
@@ -205,7 +207,7 @@ async function load_db_page(page, table, orderBy) {
     return await response.json();
 }
 
-async function load(table, addRowCallback, list, orderBy) {
+async function load(table, addRowCallback, list, orderBy, tableName, fuseOptions, applySearchFilter) {
     let page = 1;
     let pages_left = true;
     while (pages_left) {
@@ -213,11 +215,12 @@ async function load(table, addRowCallback, list, orderBy) {
         if (db.next === null) pages_left = false;
 
         db.results.forEach(item => {
-            addRowCallback(item);
+            item.row = addRowCallback(item);
+            list.push(item)
         });
         list.push(...db.results);
-        //fuse = new Fuse(games, fuse_options); TODO
-        //applySearchFilter();
+        searchEngines[tableName] = new Fuse(list, fuseOptions);
+        applySearchFilter();
         page++;
     }
 }
@@ -225,8 +228,60 @@ async function load(table, addRowCallback, list, orderBy) {
 const gameList = [];
 const userList = [];
 
+const searchEngines = {
+    'games': null,
+    'users': null,
+}
+
+const fuseOptionsGames = { //TODO adjust these options
+    keys: ['title'],
+    threshold: 0.2,
+    isCaseInsensitive: true,
+    ignoreDiacritics: true,
+}
+
+const fuseOptionsUsers = { //TODO adjust these options
+    keys: ['name', 'email', 'phoneNumber'],
+    threshold: 0.2,
+    isCaseInsensitive: true,
+    ignoreDiacritics: true,
+}
+
+const gamesSearch = document.getElementById("games-search-bar");
+const usersSearch = document.getElementById("users-search-bar");
+
+function applySearchFilter(searchBar, list, tableName) {
+    return function () {
+        const query = searchBar.value.trim();
+        let show;
+        if (!query) {
+            show = new Set(list.map(item => item.id));
+        } else {
+            show = new Set(searchEngines[tableName].search(query).map(entry => entry.item.id));
+        }
+        list.forEach(item => {
+            if (show.has(item.id)) {
+                item.row.classList.remove('is-hidden');
+            } else {
+                item.row.classList.add('is-hidden');
+            }
+        });
+    }
+}
+
+const applySearchFilterGames = applySearchFilter(gamesSearch, gameList, 'games');
+const applySearchFilterUsers = applySearchFilter(usersSearch, userList, 'users');
+
+gamesSearch.addEventListener('input', e => {
+    applySearchFilterGames();
+});
+
+usersSearch.addEventListener('input', e => {
+    applySearchFilterUsers();
+});
+
 async function loadGames() {
-    load(games, addRowGame, gameList, 'status,title');
+    load(games, addRowGame, gameList, 'status,title', 'games', fuseOptionsGames, applySearchFilterGames);
 }
 
 async function loadUsers() {
@@ -244,7 +299,7 @@ async function loadUsers() {
 
     select.disable();
 
-    await load(users, addRowUser, userList, 'name');
+    await load(users, addRowUser, userList, 'name', 'users', fuseOptionsUsers, applySearchFilterUsers);
     document.querySelector('.select').classList.remove('is-loading');
 
     userList.forEach(user => user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber);
@@ -366,7 +421,7 @@ document.querySelector('#add-user').addEventListener('click', () => {
 });
 
 document.querySelectorAll('#add-user-modal input').forEach(el => el.addEventListener('input', () => {
-    if(document.querySelector('#add-user-name').value == '' || document.querySelector('#add-user-phone').value == ''){
+    if (document.querySelector('#add-user-name').value == '' || document.querySelector('#add-user-phone').value == '') {
         document.querySelector('#register-add-user').disabled = true;
     } else {
         document.querySelector('#register-add-user').disabled = false;
