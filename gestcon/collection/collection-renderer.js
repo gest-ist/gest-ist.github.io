@@ -34,11 +34,28 @@ const AVAILABILITY_HTML = {
 };
 
 // ELEMENTS
+const HTML = document.querySelector("html");
 const GRID = document.getElementById("game-grid");
 
 const MODAL = document.getElementById("game-modal");
 const MODAL_PREIMG = document.getElementById("modal-preimg");
 const MODAL_IMG = document.getElementById("modal-img");
+const MODAL_STATUS = document.getElementById("modal-status");
+const MODAL_STATUS_ICON = MODAL_STATUS.querySelector(".icon>i")
+
+class Status {
+  static OK = 0;
+  static TAKEN = 1;
+  static MISSING = 2;
+
+  static parse(rawStatus) {
+    switch (rawStatus) {
+      case "Available": return Status.OK;
+      case "Requested": return Status.TAKEN;
+      case "Unavailable": return Status.MISSING;
+    }
+  }
+}
 
 let games = [];
 const fuse_options = { //TODO adjust these options
@@ -192,7 +209,7 @@ function rawToGame(raw) {
     year: field("publishingYear"),
     image: field("image"),
     thumb: field("thumb"),
-    status: field("status").value,
+    status: Status.parse(field("status").value),
   };
 }
 
@@ -236,74 +253,58 @@ async function load() {
 }
 
 function handleClickGame(game) {
-  MODAL.classList.add('is-active');
-  document.querySelector('html').classList.add('is-clipped');
-  MODAL.querySelector('.modal-card-title').textContent = game.title;
+  MODAL.classList.add("is-active");
+  HTML.classList.add("is-clipped");
+  MODAL.querySelector(".modal-card-title").textContent = game.title;
 
   // Progressive enhancement for modal image
   MODAL_PREIMG.style.zIndex = "1";
   MODAL_PREIMG.src = game.thumb
   MODAL_IMG.src = game.image || game.thumb || IMAGE_PLACEHOLDER;
 
-  MODAL.querySelector('.lang-pt').textContent = `Estado: ${game.status === 'Available' ? 'Disponível' : game.status === 'Requested' ? 'Requisitado' : 'Indisponível'}`;
-  if (game.playersMin == game.playersMax) {
-    MODAL.querySelector('.lang-pt + p').textContent = `Jogadores: ${game.playersMin}`;
-  } else {
-    MODAL.querySelector('.lang-pt + p').textContent = `Jogadores: ${game.playersMin}- ${game.playersMax}`;
-    MODAL.querySelector('.lang-pt + p').textContent += ` (Ótimo: ${game.playersBest})`;
+  let spanClass, iconName, ptName, enName;
+  switch (game.status) {
+    case Status.OK:
+      spanClass = "has-text-success";
+      iconName = "fa-check";
+      ptName = "Disponível";
+      enName = "Available";
+      break;
+    case Status.TAKEN:
+      spanClass = "has-text-warning";
+      iconName = "fa-spiral";
+      ptName = "Requisitado";
+      enName = "Requested";
+      break;
+    case Status.MISSING:
+      spanClass = "has-text-danger";
+      iconName = "fa-xmark";
+      ptName = "Indisponível";
+      enName = "Unavailable";
+      break;
   }
 
-  if (game.timeMin == game.timeMax) {
-    MODAL.querySelector('.lang-pt + p').textContent += ` | Duração: ${game.timeMin} mins`;
-  }
-  else {
-    MODAL.querySelector('.lang-pt + p').textContent += ` | Duração: ${game.timeMin}-${game.timeMax} mins`;
-  }
-  MODAL.querySelector('.lang-pt + p + p').textContent = `Classificação BGG: ${game.avgScore} | Peso: ${game.weight}`;
+  MODAL_STATUS.classList.add(spanClass);
+  MODAL_STATUS_ICON.classList.add(iconName);
+  MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
+  MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
-  MODAL.querySelector('.lang-en').textContent = `Status: ${game.status === 'Available' ? 'Available' : game.status === 'Requested' ? 'Requested' : 'Unavailable'}`;
-  if (game.playersMin == game.playersMax) {
-    MODAL.querySelector('.lang-en + p').textContent = `Players: ${game.playersMin}`;
-  } else {
-    MODAL.querySelector('.lang-en + p').textContent = `Players: ${game.playersMin}- ${game.playersMax}`;
-    MODAL.querySelector('.lang-en + p').textContent += ` (Best: ${game.playersBest})`;
-  }
+  MODAL.querySelector(".modal-card-foot a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
+  MODAL.querySelector(".modal-card-foot a + a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
 
-  if (game.timeMin == game.timeMax) {
-    MODAL.querySelector('.lang-en + p').textContent += ` | Duration: ${game.timeMin} mins`;
-  }
-  else {
-    MODAL.querySelector('.lang-en + p').textContent += ` | Duration: ${game.timeMin}-${game.timeMax} mins`;
-  }
-
-  MODAL.querySelector('.lang-en + p + p').textContent = `BGG Rating: ${game.avgScore} | Weight: ${game.weight}`;
-
-  MODAL.querySelector('.modal-card-foot a').href = `https://boardgamegeek.com/boardgame/${game.bggId}/`;
-  MODAL.querySelector('.modal-card-foot a + a').href = `https://boardgamegeek.com/boardgame/${game.bggId}/`;
-
-  MODAL.querySelector('.close-modal').onclick = () => {
-    closeModal();
-  };
+  MODAL.querySelector(".close-modal").onclick = closeModal;
   // close window when pressing ESC
-  window.onkeydown = (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-    }
-  };
+  window.onkeydown = ev => { if (ev.key === "Escape") closeModal() };
 
   // close modal when clicking outside
-  MODAL.querySelector('.modal-background').onclick = () => {
-    closeModal();
-  };
+  MODAL.querySelector(".modal-background").onclick = closeModal;
 
-  // close modal when touching outside (for mobile) 
-  MODAL.querySelector('.modal-background').ontouchcancel = () => {
-    closeModal();
-  };
+  // close modal when touching outside (for mobile)
+  MODAL.querySelector(".modal-background").ontouchcancel = closeModal;
 
   function closeModal() {
-    MODAL.classList.remove('is-active');
-    document.querySelector('html').classList.remove('is-clipped');
+    MODAL.classList.remove("is-active");
+    HTML.classList.remove("is-clipped");
   }
 }
 

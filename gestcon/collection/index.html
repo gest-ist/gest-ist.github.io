@@ -82,18 +82,48 @@
           <img src="https://placehold.co/350x350" alt="Game Image" id="modal-img" onload="this.parentElement.children[0].style.zIndex='-1'">
         </figure>
 
-        <p class="lang lang-pt">Estado: Disponível</p>
-        <p class="lang lang-pt">Jogadores: 1-4 (Ótimo: 4) | Duração: 30-45 mins</p>
-        <p class="lang lang-pt">Classificação BGG: 8.70 | Peso: 3.52</p>
+        <div id="modal-status">
+          <span class="icon"><i class="fas"></i></span>
+          <span class="lang lang-pt status">Disponível</span>
+          <span class="lang lang-en is-hidden status">Available</span>
+        </div>
 
-        <p class="lang lang-en is-hidden">Status: Available</p>
-        <p class="lang lang-en is-hidden">Players: 1-4 (Best: 4) | Playtime: 30-45 mins</p>
-        <p class="lang lang-en is-hidden">BGG Rating: 8.70 | Weight: 3.52</p>
+        <div class="modal-info-group">
+            <span id="modal-players">
+              <span class="icon"><i class="fas fa-people-carry-box"></i></span>
+              <span class="lang lang-pt players">1—4 (Ótimo: 4)</span>
+              <span class="lang lang-en is-hidden players">1—4 (Best: 4)</span>
+            </span>
+
+            <span id="modal-players">
+              <span class="icon"><i class="fas fa-hourglass"></i></span>
+              <span class="lang lang-pt time">30—45 mins</span>
+              <span class="lang lang-en is-hidden time">30—45 mins</span>
+            </span>
+        </div>
+
+        <div class="modal-info-group">
+            <span id="modal-rating">
+              <span class="icon"><i class="fas fa-star-half-stroke"></i></span>
+              <span id="rating">8.70</span>
+            </span>
+
+            <span id="modal-weight">
+              <span class="icon"><i class="fas fa-scale-unbalanced"></i></span>
+              <span id="weight">3.52</span>
+            </span>
+        </div>
 
       </section>
       <footer class="modal-card-foot is-justify-content-center">
-        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-pt" target="_blank">Ver no BGG</a>
-        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-en is-hidden" target="_blank">See on BGG</a>
+        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-pt" target="_blank">
+          <span>Ver no BGG</span>
+          <span class="icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+        </a>
+        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-en is-hidden" target="_blank">
+          <span>See on BGG</span>
+          <span class="icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+        </a>
       </footer>
     </div>
   </div>
