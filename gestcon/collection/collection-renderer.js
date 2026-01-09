@@ -97,7 +97,7 @@ async function fieldName2Id() {
 }
 
 function renderRange(min, max) {
-  return min == max ? min : `${min} — ${max}`;
+  return min == max ? min : `${min} - ${max}`;
 }
 
 
@@ -290,6 +290,15 @@ function handleClickGame(game) {
   MODAL_STATUS_ICON.classList.add(iconName);
   MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
   MODAL_STATUS.querySelector(".lang-en").textContent = enName;
+
+  MODAL.querySelector(".modal-info-group .lang-pt.players").textContent = renderRange(game.playersMin, game.playersMax);
+  MODAL.querySelector(".modal-info-group .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
+
+  MODAL.querySelector(".modal-info-group .lang-pt.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
+  MODAL.querySelector(".modal-info-group .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
+
+  document.getElementById("rating").textContent = game.rating;
+  document.getElementById("weight").textContent = game.weight;
 
   MODAL.querySelector(".modal-card-foot a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
   MODAL.querySelector(".modal-card-foot a + a").href = `https://boardgamegeek.com/boardgame/${game.id}/`;
