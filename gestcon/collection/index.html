@@ -15,8 +15,7 @@
 
 <body>
   <script>0</script>
-  <a class="skip-link" href="#main-content"
-    style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+  <a class="skip-link" href="#main-content" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 
   <!-- Navbar -->
   <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
@@ -27,8 +26,7 @@
       </a>
 
       <!-- Hamburger button -->
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar"
-        data-target="mainNavbar">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar" data-target="mainNavbar">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -45,12 +43,10 @@
       <div class="navbar-item icons-language-container">
         <!-- Social Icons -->
         <div class="icons">
-          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank"
-            rel="noopener noreferrer">
+          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-instagram fa-lg"></i>
           </a>
-          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank"
-            rel="noopener noreferrer">
+          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord fa-lg"></i>
           </a>
           <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
@@ -78,7 +74,6 @@
       </header>
       <section class="modal-card-body has-text-centered">
         <figure class="image is-centered modal-image">
-          <!-- <img src="https://placehold.co/350x350" alt="Game Image" id="modal-preimg"> -->
           <img src="https://placehold.co/350x350" alt="Game Image" id="modal-img"
             onload="this.parentElement.children[0].style.zIndex='-1'">
         </figure>
@@ -89,40 +84,44 @@
           <span class="lang lang-en is-hidden status">Available</span>
         </div>
 
-        <div class="modal-info-group">
-          <span id="modal-players">
-            <span class="icon"><i class="fas fa-users"></i></span>
-            <span class="lang lang-pt players">1 - 4 (Ótimo: 4)</span>
-            <span class="lang lang-en is-hidden players">1-4 (Best: 4)</span>
-          </span>
+        <div class="modal-info">
+            <span id="modal-players" class="tt" style="justify-self:end">
+              <span class="tt-txt lang lang-pt">Jogadores</span>
+              <span class="tt-txt lang lang-en is-hidden">Players</span>
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span class="lang lang-pt players">1 - 4 (Ótimo: 4)</span>
+              <span class="lang lang-en is-hidden players">1-4 (Best: 4)</span>
+            </span>
 
-          <span id="modal-players">
-            <span class="icon"><i class="fas fa-hourglass"></i></span>
-            <span class="lang lang-pt time">30 - 45 mins</span>
-            <span class="lang lang-en is-hidden time">30 - 45 mins</span>
-          </span>
+            <span id="modal-players" class="tt" style="justify-self:start">
+              <span class="tt-txt lang lang-pt">Duração</span>
+              <span class="tt-txt lang lang-en is-hidden">Duration</span>
+              <span class="icon"><i class="fas fa-hourglass"></i></span>
+              <span class="lang lang-pt time">30 - 45 mins</span>
+              <span class="lang lang-en is-hidden time">30 - 45 mins</span>
+            </span>
+
+            <span id="modal-rating" class="tt" style="justify-self:end">
+              <span class="tt-txt lang lang-pt">Classificação</span>
+              <span class="tt-txt lang lang-en is-hidden">Rating</span>
+              <span class="icon"><i class="fas fa-star-half-stroke"></i></span>
+              <span id="rating">8.70</span>
+            </span>
+
+            <span id="modal-weight" class="tt" style="justify-self:start">
+              <span class="tt-txt lang lang-pt">Complexidade</span>
+              <span class="tt-txt lang lang-en is-hidden">Weight</span>
+              <span class="icon"><i class="fas fa-gears"></i></span>
+              <span id="weight">3.52</span>
+            </span>
         </div>
-
-        <div class="modal-info-group">
-          <span id="modal-rating">
-            <span class="icon"><i class="fas fa-star-half-stroke"></i></span>
-            <span id="rating">8.70</span>
-          </span>
-
-          <span id="modal-weight">
-            <span class="icon"><i class="fas fa-gears"></i></span>
-            <span id="weight">3.52</span>
-          </span>
-        </div>
-
       </section>
       <footer class="modal-card-foot is-justify-content-center">
         <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-pt" target="_blank">
           <span>Ver no BGG</span>
           <span class="icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
         </a>
-        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-en is-hidden"
-          target="_blank">
+        <a href="https://boardgamegeek.com/" class="button is-primary close-modal lang lang-en is-hidden" target="_blank">
           <span>See on BGG</span>
           <span class="icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
         </a>
@@ -132,7 +131,6 @@
 
   <main id="main-content">
     <section class="section" id="games">
-
       <div class="columns is-centered">
         <div class="column is-full-mobile is-three-quarters-tablet is-two-thirds-desktop" id="game-grid-container">
 
@@ -233,12 +231,10 @@
                   <label class="label is-small lang lang-en is-hidden">Year:</label>
                   <div class="field has-addons">
                     <p class="control is-expanded">
-                      <input id="filter-year-min" class="input is-small filter" type="number" placeholder="Min" min="1900"
-                        max="2026" />
+                      <input id="filter-year-min" class="input is-small filter" type="number" placeholder="Min" min="1900" max="2026" />
                     </p>
                     <p class="control is-expanded">
-                      <input id="filter-year-max" class="input is-small filter" type="number" placeholder="Max" min="1900"
-                        max="2026" />
+                      <input id="filter-year-max" class="input is-small filter" type="number" placeholder="Max" min="1900" max="2026" />
                     </p>
                   </div>
                 </div>
@@ -247,8 +243,7 @@
                 <div class="column is-6-mobile is-2-tablet buttons-col is-hidden-mobile">
                   <div class="buttons">
                     <button id="clear-filters" class="button is-light is-small lang lang-pt">Limpar filtros</button>
-                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset
-                      filters</button>
+                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset filters</button>
                   </div>
                 </div>
 
@@ -256,8 +251,7 @@
                 <div class="column is-6-mobile is-2-tablet buttons-col is-hidden-tablet">
                   <div class="buttons">
                     <button id="clear-filters" class="button is-light is-small lang lang-pt">Limpar filtros</button>
-                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset
-                      filters</button>
+                    <button id="clear-filters" class="button is-light is-small lang lang-en is-hidden">Reset filters</button>
                   </div>
                 </div>
               </div>
