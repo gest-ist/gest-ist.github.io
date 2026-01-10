@@ -4,8 +4,35 @@ const logs = '783823';
 
 const ENTRIES_PER_PAGE = 200;
 
+// ELEMENTS
+const REQUEST_BTN = document.getElementById("request-button");
+const REGISTER_BTN = document.getElementById("register-add-user");
+
+const ERROR_MODAL = document.getElementById("error-modal");
+const REQUEST_MODAL = document.getElementById("request-modal");
+const RETURN_MODAL = document.getElementById("return-modal");
+const REGISTER_MODAL = document.getElementById("add-user-modal");
+
+const USER_NAME_FIELD = document.getElementById("add-user-name");
+const USER_EMAIL_FIELD = document.getElementById("add-user-email");
+const USER_PHONE_FIELD = document.getElementById("add-user-phone");
+
+const USER_SELECT = new TomSelect("#select-user", {
+    create: registerUserInline, //TODO would be neat if it were true and clicking it opened the create user modal
+    valueField: "id",
+    labelField: "name",
+    searchField: "searchField",
+    sortField: {
+        field: "name",
+        direction: "asc"
+    },
+    dropdownParent: "body",
+});
+
 let token;
-let userName;
+let adminName;
+// if we're registering a user inline it contains the TomSelect callback
+let inInlineRegistration;
 
 function writeHeader(token) {
     return {
@@ -26,7 +53,7 @@ function closeModal($el) {
 function showError(str) {
     console.error(str);
     document.querySelector("#error-modal-text").innerHTML = str;
-    openModal(document.querySelector("#error-modal"))
+    openModal(ERROR_MODAL);
 }
 
 document.querySelectorAll('.close-modal').forEach(($el) => {
@@ -70,13 +97,13 @@ document.querySelector('#login-button').addEventListener('click', async () => {
 
     try {
         await tokenVerification(tempToken);
-        userName = document.querySelector('#user-name').value;
-        if (userName.length == 0) throw new Error("Insere o teu nome.");
+        adminName = document.querySelector('#user-name').value;
+        if (adminName.length == 0) throw new Error("Insere o teu nome.");
         // verification successfull
         // keep token in local storage and close modal
         localStorage.setItem('token', tempToken);
         token = tempToken;
-        localStorage.setItem('userName', userName);
+        localStorage.setItem('userName', adminName);
         closeModal(document.querySelector("#login-modal"));
         window.location.reload();
     } catch (error) {
@@ -179,7 +206,7 @@ function requestGame(rowId) {
         document.querySelector('#request-modal .game-shelf').textContent = 'Prateleira ' + game.shelfCode;
     }
     document.querySelector('#request-modal .button').dataset.gameId = game.id;
-    openModal(document.querySelector("#request-modal"));
+    openModal(REQUEST_MODAL);
 }
 
 function returnGame(rowId) {
@@ -193,7 +220,7 @@ function returnGame(rowId) {
     }
     document.querySelector('#return-modal .current-requester').textContent = 'Na posse de: ' + game.currentReserver[0].value; // TODO should be a tag which opens a modal
     document.querySelector('#return-modal .button').dataset.gameId = game.id;
-    openModal(document.querySelector("#return-modal"));
+    openModal(RETURN_MODAL);
 }
 
 function openLogGame(rowId) {
@@ -289,51 +316,19 @@ async function loadGames() {
     load(games, addRowGame, gameList, '-status,title', 'games', fuseOptionsGames, applySearchFilterGames);
 }
 
+function prepareUserSearch(user) {
+    user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber
+}
+
 async function loadUsers() {
-    const select = new TomSelect("#select-user", {
-        create: false, //TODO would be neat if it were true and clicking it opened the create user modal
-        valueField: 'id',
-        labelField: 'name',
-        searchField: 'searchField',
-        sortField: {
-            field: "name",
-            direction: "asc"
-        },
-        dropdownParent: 'body',
-    });
+    USER_SELECT.disable();
 
-    select.disable();
+    await load(users, addRowUser, userList, "name", "users", fuseOptionsUsers, applySearchFilterUsers);
+    document.querySelector(".select").classList.remove("is-loading");
 
-    await load(users, addRowUser, userList, 'name', 'users', fuseOptionsUsers, applySearchFilterUsers);
-    document.querySelector('.select').classList.remove('is-loading');
-
-    userList.forEach(user => user.searchField = user.name + ' ' + user.email + ' ' + user.phoneNumber);
-    select.addOptions(userList);
-    select.enable();
-
-    const btn = document.querySelector('#request-button')
-    select.on('item_add', (userId) => {
-        const user = userList.find(user => user.id == userId)
-        if (user.currentReservation.length != 0) { // if hasn't returned previuosly requested game.
-            showError(`O utilizador ${user.name} ainda não devolveu o jogo ${user.currentReservation[0].value}.`)
-            select.clear();
-        } else {
-            btn.disabled = false;
-            btn.addEventListener('click', async () => {
-                try {
-                    btn.classList.add('is-loading');
-                    await handleRegisterGameRequest(userId, btn.dataset.gameId);
-                    gamesSearch.value = "";
-                    window.location.reload();
-                } catch (error) {
-                    showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
-                }
-            });
-        }
-    });
-    select.on('item_remove', () => {
-        btn.disabled = true;
-    });
+    userList.forEach(prepareUserSearch);
+    USER_SELECT.addOptions(userList);
+    USER_SELECT.enable();
 }
 
 async function checkError(res) { //throws a JS error if the request was unsuccessful
@@ -352,7 +347,7 @@ async function handleRegisterGameRequest(userId, gameId) {
             "game": [Number(gameId)],
             "user": [Number(userId)],
             "type": 'request',
-            "registeredBy": userName,
+            "registeredBy": adminName,
         }),
     });
     await checkError(res);
@@ -391,7 +386,7 @@ async function handleRegisterGameReturn(gameId) {
             "game": [Number(gameId)],
             "user": [Number(game.currentReserver[0].id)],
             "type": 'return',
-            "registeredBy": userName,
+            "registeredBy": adminName,
         }),
     });
     await checkError(res);
@@ -424,43 +419,105 @@ document.querySelector("#tab-games").addEventListener('click', () => {
 
 // USERS
 
-document.querySelector('#add-user').addEventListener('click', () => {
-    openModal(document.querySelector('#add-user-modal'));
+document.querySelector("#add-user").addEventListener("click", () => {
+    openModal(document.querySelector("#add-user-modal"));
 });
 
-document.querySelectorAll('#add-user-modal input').forEach(el => el.addEventListener('input', () => {
-    if (document.querySelector('#add-user-name').value == '' || document.querySelector('#add-user-phone').value == '') {
-        document.querySelector('#register-add-user').disabled = true;
-    } else {
-        document.querySelector('#register-add-user').disabled = false;
-    }
+document.querySelectorAll("#add-user-modal input").forEach(el => el.addEventListener("input", () => {
+    REGISTER_BTN.disabled = USER_NAME_FIELD.value == '' || USER_PHONE_FIELD.value == '';
 }));
 
-document.querySelector('#register-add-user').addEventListener('click', async () => {
+async function registerUser(name, phone, email = "") {
     // add to logs table
-    let res = await fetch(`https://api.baserow.io/api/database/rows/table/${users}/?user_field_names=true`, {
+    const res = await fetch(`https://api.baserow.io/api/database/rows/table/${users}/?user_field_names=true`, {
         method: "POST",
         headers: writeHeader(token),
         body: JSON.stringify({
-            "name": document.querySelector('#add-user-name').value,
-            "email": document.querySelector('#add-user-email').value,
-            "phoneNumber": document.querySelector('#add-user-phone').value,
-            "registeredBy": userName,
+            "name": name,
+            "email": email,
+            "phoneNumber": phone,
+            "registeredBy": adminName,
         }),
     });
-    document.querySelectorAll('#add-user-modal input').forEach(e => e.value = "");
+
+    REGISTER_MODAL.querySelectorAll("input").forEach(e => e.value = "");
     usersSearch.value = "";
     await checkError(res);
-    window.location.reload();
+
+    const data = await res.json();
+    const user = { id: data.id, name: name, currentReservation: [] };
+
+    prepareUserSearch(user);
+    userList.push(user);
+    USER_SELECT.addOption(user);
+    USER_SELECT.refreshOptions();
+    USER_SELECT.addItem(user);
+
+    return user;
+}
+
+document.querySelector('#register-add-user').addEventListener('click', async () => {
+    const user = await registerUser(USER_NAME_FIELD.value, USER_PHONE_FIELD.value, USER_EMAIL_FIELD.value);
+    closeModal(REGISTER_MODAL);
+    if (inInlineRegistration !== undefined) {
+        inInlineRegistration({ value: user.id, text: user.name });
+        USER_SELECT.setValue(user.id);
+        setTimeout(() => {
+            USER_SELECT.blur();
+            REQUEST_BTN.disabled = false
+        }, 20);
+        inInlineRegistration = undefined;
+    } else {
+        window.location.reload();
+    }
 });
+
+async function registerUserInline(input, callback) {
+    inInlineRegistration = callback; // jAnK
+    USER_NAME_FIELD.value = input;
+    USER_SELECT.close(false);
+    openModal(REGISTER_MODAL);
+}
+
+function initRequestListeners() {
+    USER_SELECT.on("item_add", userId => {
+        const user = userList.find(user => user.id == userId)
+        console.log(1)
+        if (user.currentReservation.length != 0) { // if hasn't returned previuosly requested game.
+            showError(`O utilizador ${user.name} ainda não devolveu o jogo ${user.currentReservation[0].value}.`)
+            USER_SELECT.clear();
+        } else {
+            REQUEST_BTN.disabled = false;
+        }
+    });
+
+    USER_SELECT.on("item_remove", () => {
+        REQUEST_BTN.disabled = true;
+    });
+
+    REQUEST_BTN.addEventListener("click", async () => {
+        try {
+            REQUEST_BTN.classList.add("is-loading");
+            await handleRegisterGameRequest(userList[userList.length - 1].id, REQUEST_BTN.dataset.gameId);
+            gamesSearch.value = "";
+            window.location.reload();
+        } catch (error) {
+            showError("Algo correu mal, mostra esta mensagem ao Tomás/Simão<br>" + error);
+        }
+    });
+}
+
+function initListeners() {
+    initRequestListeners();
+}
 
 // MAIN
 token = localStorage.getItem('token');
-userName = localStorage.getItem('userName');
+adminName = localStorage.getItem('userName');
 if (token == null) {
     openModal(document.querySelector("#login-modal"))
 } else {
-    document.querySelector('#user-name-display').textContent = `Olá ${userName}? ඞ`;
+    document.querySelector('#user-name-display').textContent = `Olá ${adminName}? ඞ`;
     loadGames();
     loadUsers();
 }
@@ -470,3 +527,4 @@ window.onkeydown = ev => {
         document.querySelectorAll(".modal").forEach(el => closeModal(el));
 };
 
+initListeners();
