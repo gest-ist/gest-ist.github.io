@@ -46,6 +46,7 @@ class Game {
             weight: f("weight"),
             year: f("publishingYear"),
             status: Status.parse(f("status")?.value),
+            lastLog: Date.parse(f("lastLog")),
         });
     }
 

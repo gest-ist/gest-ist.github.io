@@ -26,7 +26,8 @@
       object-position: center top;
     }
 
-    span {
+    span,
+    div {
       position: absolute;
       z-index: 3;
       opacity: 100%;
@@ -51,6 +52,10 @@
     .time {
       bottom: 3%;
       right: 3%;
+    }
+
+    .req-time {
+      filter: brightness(350%);
     }
   }
 }

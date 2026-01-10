@@ -14,12 +14,6 @@ const SKELETON_INIT_HTML = `
 </div>
 `
 
-const AVAILABILITY_HTML = {
-    0: '',
-    1: '<span class="tag is-warning is-medium requested"><p class="lang lang-pt">Requisitado</p><p class="lang lang-en is-hidden">Requested</p></span>',
-    2: '<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>',
-};
-
 // ELEMENTS
 const HTML = document.querySelector("html");
 const GRID = document.getElementById("game-grid");
@@ -86,13 +80,29 @@ function renderRange(min, max) {
     return min == max ? min : `${min} - ${max}`;
 }
 
+function renderStatusPill(game) {
+    switch (game.status) {
+        case Status.TAKEN:
+            return `
+<span class="tag is-warning is-medium requested">
+    <p class="lang lang-pt">Requisitado</p>
+    <p class="lang lang-en is-hidden">Requested</p>
+</span>`;
+        // <p class="req-time"><i class="fas fa-clock-rotate-left"></i><span></span></p>
+        case Status.MISSING:
+            return `<span class="tag is-danger is-medium unavailable"><span class="lang lang-pt">Não Disponível</span><span class="lang lang-en is-hidden">Unavailable</span></span>`;
+    }
+
+    return "";
+}
+
 function gameContainerTemplate(game) {
     return `
     <div class="box image-container">
       <figure class="image is-square ${game.status == Status.OK ? "" : "grayed"}">
           <img src="${game.img()}" loading="lazy">
       </figure>
-      ${AVAILABILITY_HTML[game.status]}
+      ${renderStatusPill(game)}
       <span class="tag is-rounded players"><i class="fas fa-users"></i>${renderRange(game.playersMin, game.playersMax)}</span>
       <span class="tag is-rounded time"><i class="fas fa-hourglass"></i>${renderRange(game.timeMin, game.timeMax)}</span>
     </div>
@@ -148,6 +158,10 @@ function appendSkeleton() {
     return div;
 }
 
+function renderReqTime(game) {
+    return game.lastLog === undefined ? "" : `${Math.max(1, (Date.now() - game.lastLog) / 60_000).toFixed(0)} min`;
+}
+
 function prepareNewGameElement(game) {
     let element = GRID.querySelector(".skeleton");
     if (element === null) {
@@ -158,6 +172,14 @@ function prepareNewGameElement(game) {
     element.innerHTML = gameContainerTemplate(game);
     element.addEventListener('click', () => openGameModal(game));
     game.element = element;
+
+    // TODO: não tenho a menor pachorra para CSS
+    // const reqTime = element.querySelector(".req-time span");
+    // if (reqTime !== null) {
+    //     reqTime.textContent = renderReqTime(game);
+    //     setInterval(() => reqTime.textContent = renderReqTime(game), 60_000); // one minute
+    // }
+
     return element;
 }
 
@@ -199,8 +221,9 @@ function openGameModal(game) {
         case Status.TAKEN:
             spanClass = "has-text-warning";
             iconName = "fa-spiral";
-            ptName = "Requisitado";
-            enName = "Requested";
+            const rt = renderReqTime(game);
+            ptName = `Requisitado (há ${rt})`;
+            enName = `Requested (${rt} ago)`;
             break;
         case Status.MISSING:
             spanClass = "has-text-danger";
