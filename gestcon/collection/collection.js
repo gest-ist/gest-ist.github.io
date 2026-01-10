@@ -237,7 +237,7 @@ function closeGameModal() {
 
 function readFilters() {
     const n = el => el.value == "" ? null : Number(el.value);
-    Object.entries(FILTERS).forEach((key, el) => currentFilter[key] = n(el));
+    Object.entries(FILTERS).forEach(([key, el]) => currentFilter[key] = n(el));
 }
 
 function clearFilters() {
