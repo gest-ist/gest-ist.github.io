@@ -108,7 +108,7 @@ function addRowGame(item, { id, title, bggId, status, currentReserver, noOfReser
     item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
 
     // TODO: VERY temporary
-    const game = Game.fromRaw(item); console.log(game);
+    const game = Game.fromRaw(item);
     row.insertCell().innerHTML = `<a target="_blank" href="https://boardgamegeek.com/boardgame/${bggId}/">${bggId}</a>`;
     row.insertCell().innerHTML = `<img class="image is-64x64" src="${game.thmb()}" loading="lazy"></img>`
     row.insertCell().textContent = title
@@ -461,3 +461,9 @@ if (token == null) {
     loadGames();
     loadUsers();
 }
+
+window.onkeydown = ev => {
+    if (ev.key === "Escape")
+        document.querySelectorAll(".modal").forEach(el => closeModal(el));
+};
+
