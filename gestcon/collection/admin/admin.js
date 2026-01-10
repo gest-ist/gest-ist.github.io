@@ -323,6 +323,7 @@ async function loadUsers() {
                 try {
                     btn.classList.add('is-loading');
                     await handleRegisterGameRequest(userId, btn.dataset.gameId);
+                    gamesSearch.value = "";
                     window.location.reload();
                 } catch (error) {
                     showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
@@ -373,6 +374,7 @@ document.querySelector('#return-button').addEventListener('click', async (e) => 
     try {
         e.currentTarget.classList.add('is-loading');
         await handleRegisterGameReturn(e.currentTarget.dataset.gameId);
+        gamesSearch.value = "";
         window.location.reload();
     } catch (error) {
         showError('Algo correu mal, mostra esta mensagem ao Simão<br>' + error);
@@ -447,6 +449,7 @@ document.querySelector('#register-add-user').addEventListener('click', async () 
         }),
     });
     document.querySelectorAll('#add-user-modal input').forEach(e => e.value = "");
+    usersSearch.value = "";
     await checkError(res);
     window.location.reload();
 });
