@@ -33,6 +33,7 @@ let token;
 let adminName;
 // if we're registering a user inline it contains the TomSelect callback
 let inInlineRegistration;
+let selectedUser;
 
 function writeHeader(token) {
     return {
@@ -466,6 +467,7 @@ document.querySelector('#register-add-user').addEventListener('click', async () 
             USER_SELECT.blur();
             REQUEST_BTN.disabled = false
         }, 20);
+        selectedUser = user;
         inInlineRegistration = undefined;
     } else {
         window.location.reload();
@@ -482,23 +484,24 @@ async function registerUserInline(input, callback) {
 function initRequestListeners() {
     USER_SELECT.on("item_add", userId => {
         const user = userList.find(user => user.id == userId)
-        console.log(1)
         if (user.currentReservation.length != 0) { // if hasn't returned previuosly requested game.
             showError(`O utilizador ${user.name} ainda não devolveu o jogo ${user.currentReservation[0].value}.`)
             USER_SELECT.clear();
         } else {
             REQUEST_BTN.disabled = false;
+            selectedUser = user;
         }
     });
 
     USER_SELECT.on("item_remove", () => {
+        selectedUser = undefined;
         REQUEST_BTN.disabled = true;
     });
 
     REQUEST_BTN.addEventListener("click", async () => {
         try {
             REQUEST_BTN.classList.add("is-loading");
-            await handleRegisterGameRequest(userList[userList.length - 1].id, REQUEST_BTN.dataset.gameId);
+            await handleRegisterGameRequest(selectedUser.id, REQUEST_BTN.dataset.gameId);
             gamesSearch.value = "";
             window.location.reload();
         } catch (error) {
