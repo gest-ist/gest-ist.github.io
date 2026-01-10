@@ -2,7 +2,7 @@ const games = '760059';
 const users = '760060';
 const logs = '783823';
 
-const ENTRIES_PER_PAGE = 100;
+const ENTRIES_PER_PAGE = 200;
 
 let token;
 let userName;
@@ -107,8 +107,12 @@ function addRowGame(item, { id, title, bggId, status, currentReserver, noOfReser
 
     item.cR = item.currentReserver.length == 1 ? item.currentReserver[0].value : undefined;
 
+    // TODO: VERY temporary
+    const game = Game.fromRaw(item); console.log(game);
     row.insertCell().innerHTML = `<a target="_blank" href="https://boardgamegeek.com/boardgame/${bggId}/">${bggId}</a>`;
-    row.insertCell().textContent = title;
+    row.insertCell().innerHTML = `<img class="image is-64x64" src="${game.thmb()}" loading="lazy"></img>`
+    row.insertCell().textContent = title
+    // row.insertCell().innerHTML = `<span class="icon"><img src="${game.img()}"></img></span><span>${title}</span>`;
     row.insertCell().textContent = shelfCode;
     row.insertCell().innerHTML = availabilityTag[status.value];
     row.insertCell().textContent = currentReserver.length == 1 ? currentReserver[0].value : ""; //TODO when you click it should open the user profile
@@ -401,7 +405,7 @@ async function handleRegisterGameReturn(gameId) {
     await checkError(res);
 }
 
-//SWITCH TABS
+// SWITCH TABS
 document.querySelector("#tab-users").addEventListener('click', () => {
     document.querySelector("#games").classList.add('is-hidden');
     document.querySelector("#tab-games").classList.remove('is-active');
@@ -416,7 +420,7 @@ document.querySelector("#tab-games").addEventListener('click', () => {
     document.querySelector("#tab-games").classList.add('is-active');
 });
 
-//USERS
+// USERS
 
 document.querySelector('#add-user').addEventListener('click', () => {
     openModal(document.querySelector('#add-user-modal'));
