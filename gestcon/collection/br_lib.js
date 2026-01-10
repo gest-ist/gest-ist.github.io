@@ -21,13 +21,12 @@ class Status {
  * A board game as stored in Baserow.
  */
 class Game {
-    img() {
-        return `${Game.IMG_BASE_URL}/${this.id}.avif`;
-    }
-
-    bgg() {
-        return `${Game.BGG_BASE_URL}/${this.id}/`
-    }
+    /** Returns the URL for this game's cover image. */
+    img() { return `${Game.IMG_BASE_URL}/img/${this.id}.avif` }
+    /** Returns the URL for this game's cover image. */
+    thmb() { return `${Game.IMG_BASE_URL}/thmb/${this.id}.avif` }
+    /** Returns the BGG URL for this game. */
+    bgg() { return `${Game.BGG_BASE_URL}/${this.id}/` }
 
     /**
      * Build a Game from the raw data obtained through Baserow.
@@ -54,8 +53,8 @@ class Game {
     static BGG_BASE_URL = "https://boardgamegeek.com/boardgame";
 
     /** The base URL to use for game images. */
-    static IMG_BASE_URL = "https://gestcon-img.b-cdn.net/img";  // behind a caching CDN
-    // static IMG_BASE_URL = "https://bgimg.tomasduarte.eu/img";  // directly from my server
+    // static IMG_BASE_URL = "https://gestcon-img.b-cdn.net";  // behind a caching CDN
+    static IMG_BASE_URL = "https://bgimg.tomasduarte.eu";  // directly from my server
 }
 
 class ViewAPI {
