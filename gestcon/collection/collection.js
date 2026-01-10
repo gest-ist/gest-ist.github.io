@@ -215,8 +215,10 @@ function openGameModal(game) {
     MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
     MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
-    MODAL.querySelector(".modal-info .lang-pt.players").textContent =
-        MODAL.querySelector(".modal-info .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
+    const playerRange = renderRange(game.playersMin, game.playersMax);
+    const single = game.playersMin == game.playersMax;
+    MODAL.querySelector(".modal-info .lang-pt.players").textContent = `${playerRange}${single ? "" : ` (Ótimo: ${game.playersBest})`}`;
+    MODAL.querySelector(".modal-info .lang-en.players").textContent = `${playerRange}${single ? "" : ` (Best: ${game.playersBest})`}`;
 
     MODAL.querySelector(".modal-info .lang-pt.time").textContent =
         MODAL.querySelector(".modal-info .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";

@@ -39,6 +39,7 @@ class Game {
             title: f("title"),
             playersMin: f("playersMin"),
             playersMax: f("playersMax"),
+            playersBest: f("playersBest"),
             timeMin: f("timeMin"),
             timeMax: f("timeMax"),
             rating: f("avgScore"),
