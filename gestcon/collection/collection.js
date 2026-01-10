@@ -215,11 +215,11 @@ function openGameModal(game) {
     MODAL_STATUS.querySelector(".lang-pt").textContent = ptName;
     MODAL_STATUS.querySelector(".lang-en").textContent = enName;
 
-    MODAL.querySelector(".modal-info-group .lang-pt.players").textContent =
-        MODAL.querySelector(".modal-info-group .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
+    MODAL.querySelector(".modal-info .lang-pt.players").textContent =
+        MODAL.querySelector(".modal-info .lang-en.players").textContent = renderRange(game.playersMin, game.playersMax);
 
-    MODAL.querySelector(".modal-info-group .lang-pt.time").textContent =
-        MODAL.querySelector(".modal-info-group .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
+    MODAL.querySelector(".modal-info .lang-pt.time").textContent =
+        MODAL.querySelector(".modal-info .lang-en.time").textContent = renderRange(game.timeMin, game.timeMax) + " mins";
 
     MODAL_RATING.textContent = game.rating;
     MODAL_WEIGHT.textContent = game.weight;
