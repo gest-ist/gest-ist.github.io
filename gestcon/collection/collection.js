@@ -265,9 +265,8 @@ function readFilters() {
 
 function clearFilters() {
     Object.values(RANGE_FILTERS).forEach(f => f.value = "");
-    //this is needed because of the different languages
     Object.values(SELECT_FILTERS).forEach(f => {
-        const first = f.options.find(o => !isHidden(o));
+        const first = Array.from(f.options).find(o => !isHidden(o));
         if (first !== undefined) first.selected = true;
     });
 
@@ -290,15 +289,15 @@ function initListeners() {
 
     // Apply search filter on each element change
     document.querySelectorAll(".filter").forEach(el =>
-        el.addEventListener('input', _ => {
+        el.addEventListener("input", _ => {
             readFilters();
             applyFilter();
         })
     );
 
-    document.querySelectorAll("#clear-filters").forEach(el =>
-        el.addEventListener('click', _ => clearFilters)
-    );
+    document.querySelectorAll(".clear-filters").forEach(el => {
+        el.addEventListener("click", clearFilters)
+    });
 
     // Close window when pressing ESC
     window.onkeydown = ev => { if (ev.key === "Escape") closeGameModal() };
