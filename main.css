@@ -1,3 +1,13 @@
+/**
+ * Fonts
+ */
+
+/* Our "official" font */
+@font-face {
+  font-family: "GEST";
+  src: local("Gabarito"), url("/static/fonts/Gabarito-VariableFont_wght.woff2") format("woff2");
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
