@@ -55,6 +55,18 @@ footer {
   background-color: var(--gest-brown);
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Greatly helps readability */
+  max-width: 800px;
+  margin: auto;
+}
+
 /* fooooocking bulma */
 .title {
   color: var(--gest-black);
