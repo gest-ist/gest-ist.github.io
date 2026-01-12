@@ -12,6 +12,22 @@
  * Global styles
  */
 
+:root {
+  /* Our colors */
+  --gest-black: #1D1717;
+  --gest-white: #F5EEDE;
+  --gest-gray: #D2BDB8;
+  --gest-brown: #BE8677;
+  --gest-dark-purple: #452959;
+  --gest-light-purple: #854AA6;
+  --gest-pink: #E28BB7;
+  --gest-dark-green: #649670;
+  --gest-light-green: #6CB57E;
+  --gest-yellow: #F7DF00;
+  --gest-red: #EB4010;
+  --gest-blue: #56A6F8;
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
