@@ -8,6 +8,10 @@
   src: local("Gabarito"), url("/static/fonts/Gabarito-VariableFont_wght.woff2") format("woff2");
 }
 
+/**
+ * Global styles
+ */
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -20,29 +24,9 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-.image-carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.image-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  padding: 1rem 2rem;
-}
-
-.image-carousel img {
-  flex: 0 0 auto;
-  max-height: 300px;
-  /* ✅ set a max height */
-  height: auto;
-  width: auto;
-  /* ✅ let width scale with height */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+footer,
+.footer {
+  padding: 2em 1.5em 2em;
 }
 
 .scroll-button {
@@ -89,11 +73,6 @@ body {
   border: 0;
 }
 
-/*.navbar.is-primary {
-  background-color: #F2BC35; 
-}*/
-
-
 .container img {
   width: 100%;
   /* allow it to scale down */
@@ -103,18 +82,6 @@ body {
   /* keep aspect ratio */
 }
 
-/* Make carousel padding and image sizes friendlier on small screens */
-@media (max-width: 640px) {
-  .image-carousel {
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-  }
-
-  .image-carousel img {
-    max-height: 180px;
-  }
-}
-
 .navbar {
   transition: transform 0.3s ease-in-out;
   will-change: transform;
@@ -122,22 +89,9 @@ body {
 
 /* Mobile fix for navbar brand name */
 @media (max-width: 600px) {
-
   .brand-name {
     max-width: 280px;
     font-size: 0.875rem;
-  }
-}
-
-/* Allow location container to wrap on narrow screens */
-@media (max-width: 800px) {
-  .location-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .location-map {
-    width: 100%;
   }
 }
 
@@ -243,4 +197,57 @@ body {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover;
+}
+
+/**
+ * Landing page specific styles
+ */
+
+.image-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.image-carousel img {
+  flex: 0 0 auto;
+  max-height: 300px;
+  /* ✅ set a max height */
+  height: auto;
+  width: auto;
+  /* ✅ let width scale with height */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Make carousel padding and image sizes friendlier on small screens */
+@media (max-width: 640px) {
+  .image-carousel {
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .image-carousel img {
+    max-height: 180px;
+  }
+}
+
+/* Allow location container to wrap on narrow screens */
+@media (max-width: 800px) {
+  .location-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .location-map {
+    width: 100%;
+  }
 }
