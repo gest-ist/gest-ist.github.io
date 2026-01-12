@@ -13,6 +13,9 @@
  */
 
 :root {
+  font-family: "GEST";
+  font-size: 20px;
+
   /* Our colors */
   --gest-black: #1D1717;
   --gest-white: #F5EEDE;
@@ -31,6 +34,9 @@
 html {
   height: 100%;
   box-sizing: border-box;
+
+  font-family: "GEST";
+  color: var(--gest-black);
 }
 
 body {
@@ -38,6 +44,9 @@ body {
   min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+
+  font-family: "GEST";
+  color: var(--gest-black);
 }
 
 footer {
