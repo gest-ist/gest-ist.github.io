@@ -39,16 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Adjust main content margin for fixed navbar
-  function adjustForNavbar() {
-    var navbar = document.querySelector('.navbar');
-    var main = document.getElementById('main-content');
-    if (navbar && main) {
-      var navbarHeight = navbar.offsetHeight;
-      main.style.marginTop = navbarHeight + 'px';
-    }
-  }
-  window.addEventListener('resize', adjustForNavbar);
-  adjustForNavbar();
+  // function adjustForNavbar() {
+  //   var navbar = document.querySelector('.navbar');
+  //   var main = document.getElementById('main-content');
+  //   if (navbar && main) {
+  //     var navbarHeight = navbar.offsetHeight;
+  //     main.style.marginTop = navbarHeight + 'px';
+  //   }
+  // }
+  // window.addEventListener('resize', adjustForNavbar);
+  // adjustForNavbar();
 
   // Carousel scroll helper for the gallery (buttons call scrollCarousel)
   window.scrollCarousel = function (direction) {
@@ -59,26 +59,26 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   // Navbar hide on scroll
-  let lastScrollTop = 0;
-  const navbar = document.querySelector('.navbar');
-  const scrollThreshold = 70; // CHANGE THRESHOLD HERE
-
-  window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > scrollThreshold) {
-      if (scrollTop > lastScrollTop) {
-        // Scrolling down
-        navbar.style.transform = 'translateY(-100%)';
-        navbar.style.transition = 'transform 0.3s ease-in-out'; // CHANGE ANIMATION DURATION HERE
-      }
-    } else {
-      // Near top - show navbar
-      navbar.style.transform = 'translateY(0)';
-      navbar.style.transition = 'transform 0.45s'; // CHANGE ANIMATION DURATION HERE
-    }
-
-    lastScrollTop = scrollTop;
-  });
+  //   let lastScrollTop = 0;
+  //   const navbar = document.querySelector('.navbar');
+  //   const scrollThreshold = 70; // CHANGE THRESHOLD HERE
+  //
+  //   window.addEventListener('scroll', () => {
+  //     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  //
+  //     if (scrollTop > scrollThreshold) {
+  //       if (scrollTop > lastScrollTop) {
+  //         // Scrolling down
+  //         navbar.style.transform = 'translateY(-100%)';
+  //         navbar.style.transition = 'transform 0.3s ease-in-out'; // CHANGE ANIMATION DURATION HERE
+  //       }
+  //     } else {
+  //       // Near top - show navbar
+  //       navbar.style.transform = 'translateY(0)';
+  //       navbar.style.transition = 'transform 0.45s'; // CHANGE ANIMATION DURATION HERE
+  //     }
+  //
+  //     lastScrollTop = scrollTop;
+  //   });
 
 });

@@ -108,6 +108,12 @@ footer {
   /* keep aspect ratio */
 }
 
+nav {
+  background-color: var(--gest-brown) !important;
+  --bulma-navbar-background-color: var(--gest-brown) !important;
+  --bulma-navbar-item-background: var(--gest-brown) !important;
+}
+
 .navbar {
   transition: transform 0.3s ease-in-out;
   will-change: transform;
