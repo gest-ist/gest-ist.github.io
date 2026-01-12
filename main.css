@@ -52,6 +52,7 @@ body {
 footer {
   text-align: center;
   padding: 1em 1.5em 1em;
+  background-color: var(--gest-brown);
 }
 
 .scroll-button {
@@ -158,6 +159,12 @@ footer {
     margin-left: auto;
     min-width: 120px;
   }
+}
+
+.cr {
+  /* funny */
+  font-family: cursive;
+  font-weight: bold;
 }
 
 .grayed {
