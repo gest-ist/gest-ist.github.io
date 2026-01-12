@@ -1,35 +1,3 @@
-.location-container {
-  display: flex;
-  flex-direction: column; /* stack children vertically */
-  align-items: stretch;    /* make children take full width */
-  gap: 20px;
-}
-
-.location-text {
-  flex: 1;
-}
-
-.location-map {
-  flex: 1;
-}
-
-/* Allow location container to wrap on narrow screens */
-@media (max-width: 800px) {
-  .location-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .location-map {
-    width: 100%;
-  }
-}
-
-.navbar {
-  transition: transform 0.3s ease-in-out;
-  will-change: transform;
-}
-
 .icons-language-container {
   display: flex;
   justify-content: space-between;
@@ -73,17 +41,6 @@
   position: relative;
 }
 
-/* 
-.brand-name::after {
-  content: "";
-  position: absolute;
-  top: 0 ;
-  right: 0;
-  width : 40px;
-  height: 100%;
-  pointer-events: none;
-} */
-
 .hero .title {
   font-size: 4rem;
   font-weight: 600;
@@ -116,6 +73,36 @@
     font-weight: 500;
   }
 }
+
+.location-container {
+  display: flex;
+  /* stack children vertically */
+  flex-direction: column;
+  /* make children take full width */
+  align-items: stretch;
+  gap: 20px;
+}
+
+.location-text {
+  flex: 1;
+}
+
+.location-map {
+  flex: 1;
+}
+
+/* Allow location container to wrap on narrow screens */
+@media (max-width: 800px) {
+  .location-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .location-map {
+    width: 100%;
+  }
+}
+
 
 /* Ensure responsive iframe does not overflow its container and is centered */
 .location-map .responsive-iframe {
