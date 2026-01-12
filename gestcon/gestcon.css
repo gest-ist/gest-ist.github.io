@@ -67,7 +67,6 @@
 
 .brand-name {
   display: inline-block;
-  max-width: 350px;
   /*Adjust here*/
   white-space: nowrap;
   overflow: hidden;
@@ -104,7 +103,6 @@
 @media (max-width: 600px) {
 
   .brand-name {
-    max-width: 280px;
     font-size: 0.875rem;
   }
 
@@ -124,6 +122,7 @@
   max-width: 100%;
   margin: 0 auto;
 }
+
 .location-map .responsive-iframe iframe {
   max-width: 100%;
   width: 100%;

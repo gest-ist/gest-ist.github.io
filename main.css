@@ -116,7 +116,6 @@ footer {
 /* Mobile fix for navbar brand name */
 @media (max-width: 600px) {
   .brand-name {
-    max-width: 280px;
     font-size: 0.875rem;
   }
 }
