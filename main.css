@@ -24,9 +24,9 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-footer,
-.footer {
-  padding: 2em 1.5em 2em;
+footer {
+  text-align: center;
+  padding: 1em 1.5em 1em;
 }
 
 .scroll-button {
