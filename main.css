@@ -34,6 +34,7 @@
 html {
   height: 100%;
   box-sizing: border-box;
+  background-color: var(--gest-brown);
 
   font-family: "GEST";
   color: var(--gest-black);
