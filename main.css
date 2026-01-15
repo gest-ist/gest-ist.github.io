@@ -4,8 +4,10 @@
 
 /* Our "official" font */
 @font-face {
-  font-family: "GEST";
-  src: local("Gabarito"), url("/static/fonts/Gabarito-VariableFont_wght.woff2") format("woff2");
+	font-family: "GEST";
+	src:
+		local("Gabarito"),
+		url("/static/fonts/Gabarito-VariableFont_wght.woff2") format("woff2");
 }
 
 /**
@@ -13,47 +15,134 @@
  */
 
 :root {
-  font-family: "GEST";
-  font-size: 20px;
+	--font-family: "GEST", sans;
+	--font-size: 20px;
+	font-family: var(--font-family);
+	font-size: var(--font-size);
 
-  /* Our colors */
-  --gest-black: #1D1717;
-  --gest-white: #F5EEDE;
-  --gest-gray: #D2BDB8;
-  --gest-brown: #BE8677;
-  --gest-dark-purple: #452959;
-  --gest-light-purple: #854AA6;
-  --gest-pink: #E28BB7;
-  --gest-dark-green: #649670;
-  --gest-light-green: #6CB57E;
-  --gest-yellow: #F7DF00;
-  --gest-red: #EB4010;
-  --gest-blue: #56A6F8;
+	/* Our colors */
+	--gest-black: #1d1717;
+	--gest-white: #f5eede;
+	--gest-gray: #d2bdb8;
+	--gest-brown: #be8677;
+	--gest-dark-purple: #452959;
+	--gest-light-purple: #854aa6;
+	--gest-pink: #e28bb7;
+	--gest-dark-green: #649670;
+	--gest-light-green: #6cb57e;
+	--gest-yellow: #f7df00;
+	--gest-red: #eb4010;
+	--gest-blue: #56a6f8;
+
+	--text-color: var(--gest-black);
+	--bg-color: var(--gest-white);
+	--nav-footer-color: var(--gest-gray);
+
+	--bulma-text: var(--text-color);
+	--bulma-scheme-main: var(--bg-color);
+	--bulma-scheme-h: 41;
+	--bulma-scheme-s: 24;
+	--bulma-scheme-main-l: 245;
+	--bulma-box-background-color: var(--gest-gray);
+}
+
+.black {
+	background-color: var(--gest-black);
+}
+
+.white {
+	background-color: var(--gest-white);
+}
+
+.gray {
+	background-color: var(--gest-gray);
+}
+
+.brown {
+	background-color: var(--gest-brown);
+}
+
+.dpurple {
+	background-color: var(--gest-dark-purple);
+}
+
+.lpurple {
+	background-color: var(--gest-light-purple);
+}
+
+.pink {
+	background-color: var(--gest-pink);
+}
+
+.dgreen {
+	background-color: var(--gest-dark-green);
+}
+
+.lgreen {
+	background-color: var(--gest-light-green);
+}
+
+.yellow {
+	background-color: var(--gest-yellow);
+}
+
+.red {
+	background-color: var(--gest-red);
+}
+
+.blue {
+	background-color: var(--gest-blue);
+}
+
+.default-color {
+	color: var(--text-color);
 }
 
 html {
-  height: 100%;
-  box-sizing: border-box;
-  background-color: var(--gest-brown);
+	height: 100%;
+	box-sizing: border-box;
+	background-color: var(--nav-footer-color);
 
-  font-family: "GEST";
-  color: var(--gest-black);
+	font-family: var(--font-family);
+	color: var(--text-color);
 }
 
 body {
-  height: 100%;
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+	height: 100%;
+	min-height: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 
-  font-family: "GEST";
-  color: var(--gest-black);
+	font-family: var(--font-family);
+	color: var(--text-color);
 }
 
-footer {
-  text-align: center;
-  padding: 1em 1.5em 1em;
-  background-color: var(--gest-brown);
+header > nav {
+	background-color: var(--nav-footer-color) !important;
+}
+
+.navbar-item {
+	transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-item:hover,
+.navbar-item:focus,
+.navbar-item:active {
+	background-color: var(--nav-footer-color);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.1));
+}
+
+/* Mobile fix for navbar brand name */
+@media (max-width: 600px) {
+	.brand-name {
+		font-size: 0.875rem;
+	}
+}
+
+body > footer {
+	text-align: center;
+	padding: 1em 1.5em 1em;
+	background-color: var(--nav-footer-color);
 }
 
 p,
@@ -63,246 +152,340 @@ h3,
 h4,
 h5,
 h6 {
-  /* Greatly helps readability */
-  max-width: 800px;
-  margin: auto;
+	/* Greatly helps readability */
+	max-width: 800px;
+	margin: auto;
+}
+
+section {
+	background-color: var(--bg-color);
+}
+
+#hero {
+	display: flex;
+	background-color: var(--gest-blue);
+
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		box-shadow:
+			inset 0 5px 5px rgba(0, 0, 0, 0.2),
+			inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+	}
+}
+
+#event-cards {
+  .box {
+      display: flex;
+      flex-direction: column;
+
+      height: 100%;
+  }
+
+  footer {
+    margin-top: auto;
+
+    &> * {
+      margin-top: 1em;
+    }
+  }
 }
 
 /* fooooocking bulma */
 .title {
-  color: var(--gest-black);
-}
-
-.scroll-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  z-index: 1;
-  transition: background 0.3s;
-}
-
-.scroll-button:hover {
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.scroll-button.left {
-  left: 0;
-}
-
-.scroll-button.right {
-  right: 0;
+	color: var(--text-color);
 }
 
 /* Responsive iframe wrapper for calendar/map embeds */
 .responsive-iframe {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%;
+	/* 16:9 aspect ratio */
+	height: 0;
+	overflow: hidden;
 }
 
 .responsive-iframe iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
 }
 
 .container img {
-  width: 100%;
-  /* allow it to scale down */
-  max-width: 400px;
-  /* but never grow beyond 400px */
-  height: auto;
-  /* keep aspect ratio */
-}
-
-nav {
-  background-color: var(--gest-brown) !important;
-  --bulma-navbar-background-color: var(--gest-brown) !important;
-  --bulma-navbar-item-background: var(--gest-brown) !important;
-}
-
-.navbar {
-  transition: transform 0.3s ease-in-out;
-  will-change: transform;
-}
-
-/* Mobile fix for navbar brand name */
-@media (max-width: 600px) {
-  .brand-name {
-    font-size: 0.875rem;
-  }
-}
-
-.navbar {
-  transition: transform 0.3s ease-in-out;
-  will-change: transform;
+	width: 100%;
+	/* allow it to scale down */
+	max-width: 400px;
+	/* but never grow beyond 400px */
+	height: auto;
+	/* keep aspect ratio */
 }
 
 .icons-language-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+#lang-select {
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	text-align: center;
+
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	i {
+		margin: 0.5em;
+	}
+
+	option {
+		padding: 0.5em 0.75em 0.75em 0.5em;
+		cursor: pointer;
+	}
+
+	&:not(:is(:hover, :active, :focus)) option {
+		display: none;
+	}
 }
 
 .icons {
-  display: flex;
-  gap: 0.75rem;
+	display: flex;
+	gap: 0.75rem;
 }
 
 .select {
-  margin-left: auto;
+	margin-left: auto;
 }
 
 @media (max-width: 1023px) {
-  .navbar-end {
-    width: 100%;
-  }
+	.navbar-end {
+		width: 100%;
+	}
 
-  .icons-language-container {
-    width: 100%;
-  }
+	.icons-language-container {
+		width: 100%;
+	}
 
-  .icons {
-    width: auto;
-  }
+	.icons {
+		width: auto;
+	}
 
-  .select {
-    margin-left: auto;
-    min-width: 120px;
+	.select {
+		margin-left: auto;
+		min-width: 120px;
+	}
+}
+
+button,
+a[role="button"],
+.button {
+  --bulma-button-background-color: var(--gest-blue);
+	background-color: var(--gest-blue);
+
+  &[disabled] {
+    --bulma-button-disabled-background-color: var(--gest-blue);
+    opacity: 0.5;
   }
+}
+
+/** Vertical aligned container */
+.valigned {
+	display: flex;
+	align-items: center;
 }
 
 .cr {
-  /* funny */
-  font-family: cursive;
-  font-weight: bold;
+	/* funny */
+	font-family: cursive;
+	font-weight: bold;
 }
 
 .grayed {
-  filter: grayscale(90%);
+	filter: grayscale(90%);
+}
+
+.scroll-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(255, 255, 255, 0.8);
+	border: none;
+	font-size: 2rem;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	z-index: 1;
+	transition: background 0.3s;
+}
+
+.scroll-button:hover {
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.scroll-button.left {
+	left: 0;
+}
+
+.scroll-button.right {
+	right: 0;
 }
 
 /* From W3Schools cus I can't be bothered */
 /* Tooltip container */
 .tt {
-  position: relative;
-  display: inline-block;
-  /* Add dots under the hoverable text */
-  border-bottom: 1px dotted black;
-  cursor: help;
+	position: relative;
+	display: inline-block;
+	/* Add dots under the hoverable text */
+	border-bottom: 1px dotted black;
+	cursor: help;
 }
 
 /* Tooltip text */
 .tt-txt {
-  visibility: hidden;
-  width: 130px;
-  background-color: var(--bulma-body-color);
-  color: #ffffff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  /* Use half of the width (130/2 = 65), to center the tooltip */
-  margin-left: -65px;
-  /* Fade-in */
-  opacity: 0;
-  transition: opacity 0.2s;
+	visibility: hidden;
+	width: 130px;
+	background-color: var(--gest-black);
+	color: var(--gest-white);
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	/* Use half of the width (130/2 = 65), to center the tooltip */
+	margin-left: -65px;
+	/* Fade-in */
+	opacity: 0;
+	transition: opacity 0.2s;
 }
 
 .tt:hover .tt-txt {
-  visibility: visible;
-  opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 .tt-txt::after {
-  content: " ";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--bulma-body-color) transparent transparent transparent;
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--gest-black) transparent transparent transparent;
 }
 
 .fill {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 }
 
 .fill img {
-  flex-shrink: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%;
+	object-fit: cover;
+}
+
+/** Centered text */
+.tcenter {
+	text-align: center;
 }
 
 /**
  * Landing page specific styles
  */
 
+main > section h2 {
+	text-align: center;
+}
+
+#discord-invite {
+	text-align: center;
+	max-width: 13em;
+	position: absolute;
+	right: -4em;
+	top: 3em;
+
+	opacity: 0.6;
+	transition: opacity 0.2s ease-in-out;
+
+	* {
+		color: var(--text-color);
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+#oneshots-btn ~ i {
+	margin-left: 0.5em;
+	opacity: 0.5;
+}
+
+#gallery,
+#gallery .title {
+	color: var(--gest-white);
+}
+
 .image-carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
 }
 
 .image-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  padding: 1rem 2rem;
+	display: flex;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	gap: 1rem;
+	padding: 1rem 2rem;
 }
 
 .image-carousel img {
-  flex: 0 0 auto;
-  max-height: 300px;
-  /* ✅ set a max height */
-  height: auto;
-  width: auto;
-  /* ✅ let width scale with height */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	flex: 0 0 auto;
+	max-height: 300px;
+	/* ✅ set a max height */
+	height: auto;
+	width: auto;
+	/* ✅ let width scale with height */
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Make carousel padding and image sizes friendlier on small screens */
 @media (max-width: 640px) {
-  .image-carousel {
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-  }
+	.image-carousel {
+		padding: 0.5rem 1rem;
+		gap: 0.5rem;
+	}
 
-  .image-carousel img {
-    max-height: 180px;
-  }
+	.image-carousel img {
+		max-height: 180px;
+	}
 }
 
 /* Allow location container to wrap on narrow screens */
 @media (max-width: 800px) {
-  .location-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
+	.location-container {
+		flex-direction: column;
+		align-items: stretch;
+	}
 
-  .location-map {
-    width: 100%;
-  }
+	.location-map {
+		width: 100%;
+	}
 }

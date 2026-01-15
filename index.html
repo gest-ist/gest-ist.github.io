@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" data-theme="light">
+<html id="html" lang="pt">
 
 <head>
   <meta charset="UTF-8" />
@@ -12,187 +12,179 @@
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="#">
-        <img class="mr-2" src="/static/logos/small_pure_white.svg">
-        <strong class="brand-name">Grupo de Estratégia, Simulação e Táctica</strong>
-      </a>
-      <!-- Hamburger button for mobile -->
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar" data-target="mainNavbar">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div id="mainNavbar" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item lang lang-pt" href="#about">Sobre nós</a>
-        <a class="navbar-item lang lang-pt" href="#events">Eventos</a>
-        <a class="navbar-item lang lang-pt" href="#gallery">Galeria</a>
-        <a class="navbar-item lang lang-pt" href="./gestcon"> GESTCon — Convenção de Jogos de Tabuleiro</a>
-        <a class="navbar-item lang lang-en is-hidden" href="#about">About</a>
-        <a class="navbar-item lang lang-en is-hidden" href="#events">Events</a>
-        <a class="navbar-item lang lang-en is-hidden" href="#gallery">Gallery</a>
-        <a class="navbar-item lang lang-en is-hidden" href="./gestcon"> GESTCon — Board Game Convention</a>
+  <header>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="/static/logos/small_black.svg">
+          <strong class="brand-name">Grupo de Estratégia, Simulação e Táctica</strong>
+        </a>
+        <!-- Hamburger button for mobile -->
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" aria-controls="mainNavbar" data-target="mainNavbar">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item icons-language-container">
-        <!-- Social Icons -->
-        <div class="icons">
-          <a href="https://instagram.com/gest.aeist" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-instagram fa-lg"></i>
-          </a>
-          <a href="https://discord.gg/PU3aQhHnqu" class="icon is-large has-text-white mr-2" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-discord fa-lg"></i>
-          </a>
-          <a href="mailto:gest.sa@aeist.pt" class="icon is-large has-text-white mr-5">
-            <i class="fas fa-envelope fa-lg"></i>
-          </a>
-        </div>
 
-        <div class="select mr-4">
-          <select id="language-selector">
-            <option value="pt">Português</option>
-            <option value="en">English</option>
-          </select>
+      <div id="mainNavbar" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item lang lang-pt" href="#about">Sobre nós</a>
+          <a class="navbar-item lang lang-pt" href="#events">Eventos</a>
+          <a class="navbar-item lang lang-pt" href="#gallery">Galeria</a>
+          <a class="navbar-item lang lang-pt" href="./gestcon"> GESTCon — Convenção de Jogos de Tabuleiro</a>
+          <a class="navbar-item lang lang-en is-hidden" href="#about">About</a>
+          <a class="navbar-item lang lang-en is-hidden" href="#events">Events</a>
+          <a class="navbar-item lang lang-en is-hidden" href="#gallery">Gallery</a>
+          <a class="navbar-item lang lang-en is-hidden" href="./gestcon"> GESTCon — Board Game Convention</a>
         </div>
       </div>
 
-    </div>
-  </nav>
+      <div class="navbar-end">
+        <a href="https://instagram.com/gest.aeist" class="navbar-item" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram fa-lg"></i>
+        </a>
+        <a href="https://discord.gg/PU3aQhHnqu" class="navbar-item" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-discord fa-lg"></i>
+        </a>
+        <a href="mailto:gest.sa@aeist.pt" class="navbar-item">
+          <i class="fas fa-envelope fa-lg"></i>
+        </a>
 
-  <main id="main-content">
+        <div id="lang-select" class="navbar-item">
+          <i class="fas fa-language"></i>
+          <option value="pt">PT</option>
+          <option value="en">EN</option>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
     <!-- Hero Section -->
-    <section class="hero is-link is-medium">
-      <div class="hero-body">
-        <div class="container" style="text-align:center;">
-          <img class="mr-2" src="/static/logos/big_pure_white.svg" width="400" loading="lazy" decoding="async" alt="GEST logo">
-          <br>
-          <br>
-          <h2 class="subtitle lang lang-pt">Secção Autónoma da Associação dos Estudantes do Instituto Superior Técnico
-          </h2>
-          <h2 class="subtitle lang lang-en is-hidden">Autonomous Section of Instituto Superior Técnico's Students
-            Association</h2>
-        </div>
-      </div>
+    <section id="hero">
+      <img src="/static/img/banner.svg" loading="async" alt="GEST banner" width="6250" height="2500">
     </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
+    <section class="section white" id="about">
       <div class="container">
-
         <h2 class="title is-3 lang lang-pt">Sobre Nós</h2>
         <h2 class="title is-3 lang lang-en is-hidden">About Us</h2>
-        <div class="columns">
-          <p class="column lang lang-pt">
-            Somos um grupo de estudantes do IST com o objectivo de disponibilizar e divulgar uma grande variedade de
-            jogos,
-            incluindo jogos de tabuleiro, jogos narrativos, jogos de cartas colecionáveis, videojogos e outras
-            actividades semelhantes.
-            Organizamos eventos, incluindo Game Nights, campanhas de D&D, torneios e muito mais. Para além disso,
-            promovemos uma comunidade inclusiva, na qual todos são bem-vindos para partilhar o gosto pelos diversos
-            jogos.
-            Se tiveres alguma dúvida, contacta-nos ou junta-te ao nosso servidor de Discord!
+
+        <p class="lang lang-pt">
+          Somos um grupo de estudantes do IST com o objectivo de disponibilizar e divulgar uma grande variedade de
+          jogos,
+          incluindo jogos de tabuleiro, jogos narrativos, jogos de cartas colecionáveis, videojogos e outras
+          actividades semelhantes.
+          Organizamos eventos, incluindo Game Nights, campanhas de D&D, torneios e muito mais. Para além disso,
+          promovemos uma comunidade inclusiva, na qual todos são bem-vindos para partilhar o gosto pelos diversos
+          jogos.
+          Se tiveres alguma dúvida, contacta-nos ou junta-te ao nosso servidor de Discord!
+        </p>
+        <p class="lang lang-en is-hidden">
+          We are a student group at IST whose goal is to make available and promote a wide variety of games, including
+          board games,
+          role playing games, collectible card games, video games, and similar activities. We organize events,
+          including Game Nights,
+          D&D campaigns, tournaments, and more. In addition, we foster an inclusive community, where everyone is
+          welcome to share their
+          love of games. If you have any questions, contact us or join our Discord server!
+        </p>
+
+        <a id="discord-invite" href="https://discord.gg/PU3aQhHnqu" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-discord fa-3x"></i>
+          <p class="lang lang-pt">
+            Junta-te a nós no Discord para conversar, participar em actividades e interagir com a comunidade!
           </p>
-          <p class="column lang lang-en is-hidden">
-            We are a student group at IST whose goal is to make available and promote a wide variety of games, including
-            board games,
-            role playing games, collectible card games, video games, and similar activities. We organize events,
-            including Game Nights,
-            D&D campaigns, tournaments, and more. In addition, we foster an inclusive community, where everyone is
-            welcome to share their
-            love of games. If you have any questions, contact us or join our Discord server!
+          <p class="lang lang-en is-hidden">
+            Join us on Discord to chat, participate in activities, and engage with the community!
           </p>
-          <div class="column has-text-centered">
-            <div class="columns">
-              <a class="column" href="https://discord.gg/PU3aQhHnqu" target="_blank" rel="noopener noreferrer">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Join us on Discord"
-                  style="width: 100px; height: 100px;" loading="lazy" decoding="async">
-                <p class="lang lang-pt">
-                  Junta-te a nós no Discord para conversar, participar em actividades e interagir com a comunidade!
-                </p>
-                <p class="lang lang-en is-hidden">
-                  Join us on Discord to chat, participate in activities, and engage with the community!
-                </p>
-              </a>
-              <div class="column">
-                <img src="/static/img/gameday_alt_2025.avif" alt="Game Day 2025" style="max-height: 300px;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
     </section>
 
     <!-- Events Section -->
-    <section class="section has-background-light" id="events">
+    <section class="section dgreen" id="events">
       <div class="container">
         <h2 class="title is-3 lang lang-pt">Eventos Recorrentes</h2>
         <h2 class="title is-3 lang lang-en is-hidden">Recurrent Events</h2>
-        <div class="columns">
+
+        <div id="event-cards" class="columns">
           <div class="column">
             <div class="box">
-              <h3 class="title is-5 lang lang-pt">Game Nights</h3>
-              <h3 class="title is-5 lang lang-en is-hidden">Game Nigths</h3>
-              <p class="lang lang-pt">Junta-te a uma das nossas Game Nights quinzenais! Marca no calendário a próxima
-                data e vem jogar Catan,
-                HEAT: Pedal to the Metal, Cat in the Box, Wavelength e muito mais. Não é necessária inscrição, e podes
-                trazer o teu grupo ou vir
-                individualmente. Este evento é aberto tanto a veteranos como a principiantes (ou sem experiência
-                nenhuma!). Consulta o nosso
-                catálogo de jogos no seguinte link:</p>
-              <p class="lang lang-en is-hidden">Join one of our bi-weekly Game Nights! Mark your calendars for the next
-                date and come play Catan,
-                HEAT: Pedal to the Metal, Cat in the Box, Wavelength, and more. No registration is required, and you can
-                bring your own group or
-                come on your own. The events are open to veterans and beginners alike (even with no experience!). Check
-                out our game collection
-                at the link below:</p>
-              <div class="mt-4">
-                <a href="collection" class="button is-link">
+              <section>
+                <h3 class="title is-5 lang lang-pt">Game Nights</h3>
+                <h3 class="title is-5 lang lang-en is-hidden">Game Nigths</h3>
+
+                <p class="lang lang-pt">
+                  Junta-te a uma das nossas Game Nights semanais! Marca no calendário a próxima
+                  data e vem jogar Catan, HEAT: Pedal to the Metal, Cat in the Box, Wavelength e
+                  muito mais. Não é necessária inscrição, e podes trazer o teu grupo ou vir
+                  individualmente. Este evento é aberto tanto a veteranos como a principiantes (ou
+                  sem experiência nenhuma!).<br>
+                  Consulta a nossa ludoteca carregando no botão abaixo.
+                </p>
+                <p class="lang lang-en is-hidden">
+                  Join one of our bi-weekly Game Nights! Mark your calendars for the next date and
+                  come play Catan, HEAT: Pedal to the Metal, Cat in the Box, Wavelength, and more.
+                  No registration is required, and you can bring your own group or come on your own.
+                  The events are open to veterans and beginners alike (even with no experience!).<br>
+                  Check our collection by clicking on the button below.
+                </p>
+
+
+              <footer>
+                <a href="collection" role="button" class="button">
                   <span class="lang lang-pt">Colecção de Jogos</span>
                   <span class="lang lang-en is-hidden">Game Collection</span>
                 </a>
-              </div>
+              </footer>
             </div>
           </div>
+
+          <!-- TODO: tentar meter as duas caixas com a mesma altura -->
           <div class="column">
             <div class="box">
-              <h3 class="title is-5 lang lang-pt">One-Shots de D&D</h3>
-              <h3 class="title is-5 lang lang-en is-hidden">D&D One-Shots</h3>
-              <p class="lang lang-pt">Os eventos de One-Shots de Dungeons & Dragons (D&D) realizam-se trimestralmente e
-                dirigem-se a jogadores
-                de todos os níveis de experiência, desde iniciantes curiosos até veteranos experientes. Cada sessão é
-                independente, dando
-                aos participantes uma aventura completa sem compromisso a longo prazo. As inscrições podem ser feitas
-                individualmente
-                ou em grupo.</p>
-              <p class="lang lang-en is-hidden">Dungeons & Dragons (D&D) One-Shot events are held quarterly and are
-                geared toward players of all
-                experience levels, from curious beginners to seasoned veterans. Each session is self-contained, giving
-                participants a complete
-                adventure without a long-term commitment. Registration is available individually or as a group.</p>
-              <div class="mt-4">
+              <section>
+                <h3 class="title is-5 lang lang-pt">One-Shots de D&D</h3>
+                <h3 class="title is-5 lang lang-en is-hidden">D&D One-Shots</h3>
 
-                <!-- WHEN THERE ARE NO EVENTS USE THIS -->
-                <a class="button is-link is-disabled tooltip"
-                  style="pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+                <p class="lang lang-pt">
+                  Os eventos de One-Shots de Dungeons & Dragons (D&D) realizam-se trimestralmente e
+                  dirigem-se a jogadores de todos os níveis de experiência, desde iniciantes
+                  curiosos até veteranos experientes. Cada sessão é independente, dando aos
+                  participantes uma aventura completa sem compromisso a longo prazo. As inscrições
+                  podem ser feitas individualmente ou em grupo.
+                </p>
+                <p class="lang lang-en is-hidden">
+                  Dungeons & Dragons (D&D) One-Shot events are held quarterly and are geared toward
+                  players of all experience levels, from curious beginners to seasoned veterans.
+                  Each session is self-contained, giving participants a complete adventure without a
+                  long-term commitment. Registration is available individually or as a group.
+                </p>
+              </section>
 
-                  <!-- WHEN THERE IS AN EVENT USE THIS (AND REPLACE THE HREF)
-			  <a href="" class="button is-link"> -->
+              <footer>
+                <div class="valigned">
+                  <!-- Tirar attributo "disabled" para abrir as inscrições (e colocar href) -->
+                  <a id="oneshots-btn" role="button" class="button" disabled>
+                    <span class="lang lang-pt">Inscrições</span>
+                    <span class="lang lang-en is-hidden">Sign up</span>
+                  </a>
 
-                  <span class="lang lang-pt">Inscrições</span>
-                  <span class="lang lang-en is-hidden">Sign up</span>
-                </a>
-              </div>
+                  <i class="lang lang-pt">De momento não temos inscrições a decorrer.</i>
+                  <i class="lang lang-en is-hidden">De momento não temos inscrições a decorrer.</i>
+                </div>
+              </footer>
             </div>
           </div>
         </div>
       </div>
+
       <br>
+
       <div class="container">
         <h2 class="title is-3 lang lang-pt">Calendário</h2>
         <h2 class="title is-3 lang lang-en is-hidden">Calendar</h2>
@@ -208,7 +200,7 @@
       </div>
     </section>
 
-    <section class="section" id="gallery">
+    <section class="section black" id="gallery">
       <div class="container">
         <h2 class="title is-3 lang lang-pt">Galeria</h2>
         <h2 class="title is-3 lang lang-en is-hidden">Gallery</h2>
@@ -220,21 +212,22 @@
             <img src="/static/img/oneshots_2023.avif" alt="D&D One-Shots, 2023" loading="lazy" decoding="async">
             <img src="/static/img/oneshots_2022.avif" alt="D&D One-Shots, 2022" loading="lazy" decoding="async">
             <img src="/static/img/gameday_2025.avif" alt="Game Day, 2025" loading="lazy" decoding="async">
-            <img src="/static/img/acolhimento_2024.avif" alt="Semana de Acolhimento, 2024" loading="lazy" decoding="async">
+            <img src="/static/img/acolhimento_2024.avif" alt="Semana de Acolhimento, 2024" loading="lazy"
+              decoding="async">
           </div>
 
           <button class="scroll-button right" onclick="scrollCarousel(1)">&#10095;</button>
         </div>
       </div>
     </section>
+  </main>
 
   <!-- Footer -->
   <footer>
-      <p><span class="cr">&copy;</span> 2025 GEST</p>
+    <p><span class="cr">&copy;</span> 2025–2026 GEST</p>
   </footer>
 
   <script src="main.js" defer></script>
-
 </body>
 
 </html>

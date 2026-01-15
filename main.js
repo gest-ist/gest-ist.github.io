@@ -13,13 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Language selector (show/hide elements with lang classes)
-  var selector = document.getElementById('language-selector');
-  if (selector) {
-    selector.addEventListener('change', function () {
-      var lang = this.value;
-      document.querySelectorAll('.lang').forEach(function (el) {
-        if (el.classList.contains('lang-' + lang)) el.classList.remove('is-hidden');
-        else el.classList.add('is-hidden');
+  const select = document.getElementById("lang-select");
+  if (select) {
+    select.querySelectorAll("option").forEach(opt => {
+      opt.addEventListener("click", _ => {
+        const lang = opt.value;
+        document.getElementById("html").lang = lang;
+        document.querySelectorAll(".lang").forEach(el => {
+          if (el.classList.contains("lang-" + lang)) el.classList.remove('is-hidden');
+          else el.classList.add("is-hidden");
+        });
       });
     });
   }
@@ -40,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Adjust main content margin for fixed navbar
   // function adjustForNavbar() {
-  //   var navbar = document.querySelector('.navbar');
-  //   var main = document.getElementById('main-content');
+  //   var navbar = document.getElementById("nav");
+  //   var main = document.getElementById("main");
   //   if (navbar && main) {
   //     var navbarHeight = navbar.offsetHeight;
   //     main.style.marginTop = navbarHeight + 'px';
