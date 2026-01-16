@@ -34,6 +34,8 @@ const RANGE_FILTERS = {
     weightMax: document.getElementById("filter-weight-max"),
     yearMin: document.getElementById("filter-year-min"),
     yearMax: document.getElementById("filter-year-max"),
+    bestPlayer: document.getElementById("filter-best-player"),
+    difficultyLevel: document.getElementById("filter-difficulty-level"),
 }
 
 const SELECT_FILTERS = {
@@ -50,6 +52,13 @@ const FUSE_OPTIONS = {
     ignoreDiacritics: true,
 }
 
+const THRESHOLDS = {
+    timeEasy: 30,
+    weightMedium: 1.5,
+    weightHard: 2.91,
+    weightVeryHard: 4.05,
+}
+
 let fuse;
 let currentSearch = "";
 let currentSearchedGames = new Set(); // Set
@@ -64,6 +73,8 @@ let currentFilter = {
     weightMax: null,
     yearMin: null,
     yearMax: null,
+    bestPlayer: null,
+    difficultyLevel: null,
 }
 let currentFilteredGames = new Set(); // Set
 
@@ -136,6 +147,21 @@ function applySort() {
     indices.forEach((index, i) => games[index].element.style.order = i);
 }
 
+function checkDifficultyLevel(game, filtered_level) {
+    let level;
+    if (game.timeMax <= THRESHOLDS.timeEasy || game.weight <= THRESHOLDS.weightMedium) {
+        level = "-1";
+    } else if (game.weight <= THRESHOLDS.weightHard) {
+        level = "0";
+    } else if (game.weight <= THRESHOLDS.weightVeryHard) {
+        level = "1";
+    } else {
+        level = "2";
+    }
+
+  return (level == filtered_level)
+}
+
 function fulfilFilter(game) {
     const [f, g] = [currentFilter, game]; // easier to read the rest
     return (f.status == Status.ANY || g.status == f.status)
@@ -143,6 +169,8 @@ function fulfilFilter(game) {
         && intervalsIntersect(f.timeMin, f.timeMax, g.timeMin, g.timeMax)
         && inInterval(f.weightMin, g.weight, f.weightMax)
         && inInterval(f.yearMin, g.year, f.yearMax)
+        && (f.bestPlayer === null || g.playersBest.includes(f.bestPlayer))
+        && (f.difficultyLevel === null || checkDifficultyLevel(g, f.difficultyLevel))
 }
 
 function applyFilter() {

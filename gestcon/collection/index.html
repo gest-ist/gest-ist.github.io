@@ -238,6 +238,33 @@
                   </div>
                 </div>
 
+                <div class="column is-6-mobile is-one-fifth-tablet best-player-col">
+                  <label class="label is-small lang lang-pt">Melhor a:</label>
+                  <label class="label is-small lang lang-en is-hidden">Best at:</label>
+                  <div class="field has-addons">
+                    <p class="control is-expanded">
+                      <input id="filter-best-player" class="input is-small filter" type="number" placeholder="no." min="1" step="1"/>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="column is-6-mobile is-one-fifth-tablet difficulty-col">
+                  <label class="label is-small lang lang-pt">Dificuldade:</label>
+                  <label class="label is-small lang lang-en is-hidden">Difficulty:</label>
+                  <div class="select is-fullwidth is-small">
+                    <select id="filter-difficulty-level" class="filter">
+                      <!-- Yeah, the values should be lower case. Mistakes of the past. We stand in the shoulders of midgets. Easier if they are Uppercase -->
+                      <option value="-1" class="lang lang-pt">Fácil</option>
+                      <option value="-1" class="lang lang-en is-hidden">Light</option>
+                      <option value="0" class="lang lang-pt">Médio</option>
+                      <option value="0" class="lang lang-en is-hidden">Medium</option>
+                      <option value="1" class="lang lang-pt">Difícil</option>
+                      <option value="1" class="lang lang-en is-hidden">Heavy</option>
+                      <option value="2" class="lang lang-pt">Muito Difícil</option>
+                      <option value="2" class="lang lang-en is-hidden">Very Heavy</option>
+                    </select>
+                  </div>
+                </div>
                 <!-- Desktop Buttons -->
                 <div class="column is-6-mobile is-2-tablet buttons-col is-hidden-mobile">
                   <div class="buttons">
