@@ -1,56 +1,55 @@
 name,type,owner,quantity,location,hidden,price,thumbnail_ref,image_ref,tags,notes,bgg_id,year,weight,min_players,max_players,opt_players,min_playtime_minutes,max_playtime_minutes,rating,parent_game,system
-Xadrez,board_game,,7,,FALSE,10,,,abstract;educational,Em tecido,171,1475,3.64,2,2,,,,7.2,,
-Xadrez,board_game,,1,,FALSE,10,,,abstract;educational,,171,1475,3.64,2,2,,,,7.2,,
+Chess,board_game,,7,,FALSE,10,,,abstract;educational,Em tecido,171,1475,3.64,2,2,,,,7.2,,
+Chess,board_game,,1,,FALSE,10,,,abstract;educational,,171,1475,3.64,2,2,,,,7.2,,
 D&D - 3rd Edition Adventure Game,ttrpg,,1,A4,FALSE,11.97,,,,,,,,,,,,,,,dnd
-D&D - 4th Edition Core Rulebook Colection,ttrpg,,1,A4,FALSE,90,,,,,,,,,,,,,,,dnd
-D&D - 3rd Edition: Dugeon Master Guide,ttrpg,,1,A4,FALSE,22.45,,,,,,,,,,,,,,,dnd
-D&D - 3rd Edition: Dugeon Monsters Manual,ttrpg,,1,A4,FALSE,24.19,,,,,,,,,,,,,,,dnd
-D&D - 3rd Edition: Dugeon Player's Handbook,ttrpg,,1,A4,FALSE,23.69,,,,,,,,,,,,,,,dnd
-Advanced D&D - 2nd Edition: Player's Handbook,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dnd
-Advanced D&D - 2nd Edition: The complete fighters handbook,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dnd
-Advanced D&D - 2nd Edition: Forgotten Realms: Cyclopedia of the Realms,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dnd
-Advanced D&D - 2nd Edition: Forgotten Realms: DM sourcebook,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dnd
+D&D - 4th Edition Core Rulebook Colection,ttrpg,,1,A4,FALSE,90,,,,,,2008,,,,,,,,,dnd
+D&D - 3rd Edition: Dugeon Master's Guide,ttrpg,,1,A4,FALSE,22.45,,,,,,2000,,,,,,,,,dnd
+D&D - 3rd Edition: Monster Manual,ttrpg,,1,A4,FALSE,24.19,,,,,,2000,,,,,,,,,dnd
+D&D - 3rd Edition: Player's Handbook,ttrpg,,1,A4,FALSE,23.69,,,,,,2000,,,,,,,,,dnd
+Advanced D&D - 2nd Edition: Player's Handbook,ttrpg,,1,A4,FALSE,0,,,,,,1989,,,,,,,,,dnd
+Advanced D&D - 2nd Edition: The complete fighters handbook,ttrpg,,1,A4,FALSE,0,,,,,,1989,,,,,,,,,dnd
+Advanced D&D - 2nd Edition: Forgotten Realms: Cyclopedia of the Realms,ttrpg,,1,A4,FALSE,0,,,,,,1987,,,,,,,,,dnd
+Advanced D&D - 2nd Edition: Forgotten Realms: DM's Sourcebook of the Realms,ttrpg,,1,A4,FALSE,0,,,,,,1987,,,,,,,,,dnd
 Exalted - The Tomb of 5 corners,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,exalted
-Exalted - Core rules,ttrpg,,1,A4,FALSE,38.92,,,,,,,,,,,,,,,exalted
+Exalted - Core rules,ttrpg,,1,A4,FALSE,38.92,,,,,,2001,,,,,,,,,exalted
 Final Fantasy - Core rules,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,final_fantasy
-Other worlds - Core Rules,ttrpg,,1,A4,FALSE,50,,,,,,,,,,,,,,,other_worlds
-El señor de los anillos,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,lotr
-Vampire dark ages - Core Rules,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,
-Vampire the masquerade - Bloodline book: ahrimanes,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,vtm
-Vampire the masquerade - La sombra,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,vtm
+Other worlds - Core Rules,ttrpg,,1,A4,FALSE,50,,,,,,2011,,,,,,,,,other_worlds
+El señor de los anillos,ttrpg,,1,A4,FALSE,0,,,,,,1993,,,,,,,,,lotr
+Vampire: The Dark Ages,ttrpg,,1,A4,FALSE,16.44,,,,,,1998,,,,,,,,,
+Vampire: The Masquerade - Bloodline book: ahrimanes,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,vtm
+Vampire: The Masquerade - La sombra,ttrpg,,1,A4,FALSE,16.44,,,,,,2001,,,,,,,,,vtm
 Vampire the masquerade - Introductory kit,ttrpg,,1,A4,FALSE,20,,,,,,,,,,,,,,,vtm
-Vampire the requiem - Core Rules,ttrpg,,2,A4,FALSE,16.44,,,,,,,,,,,,,,,
-Vampire the masquerade - O classico,ttrpg,,1,A4,FALSE,34.92,,,,,,,,,,,,,,,vtm
+Vampire: The Requiem,ttrpg,,2,A4,FALSE,16.44,,,,,,2004,,,,,,,,,
+Vampire: The Masquerade,ttrpg,,1,A4,FALSE,34.92,,,,,,2000,,,,,,,,,vtm
 Vampire the requiem - Introductory scenarios,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,
-Demon The fallen - StoryTellers companion,ttrpg,,1,A4,FALSE,34.92,,,,,,,,,,,,,,,dtf
-Demon The fallen - Dammend and Deceived,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,dtf
-Demon The fallen - Saviours and Destroyers,ttrpg,,1,A4,FALSE,36.44,,,,,,,,,,,,,,,dtf
-Demon The fallen - Game Master Screen,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dtf
-Call of Cthulhu - beyond the mountain of menace,ttrpg,,1,A4,FALSE,40,,,,,,,,,,,,,,,coc
-Mindjammer,ttrpg,,1,A4,FALSE,60,,,,,,,,,,,,,,,mindjammer
-Hunter: The reckoning,ttrpg,,1,A4,FALSE,38.92,,,,,,,,,,,,,,,hunter
-Gurps - Magic,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,gurps
-Dread,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,dread
-Legend of the 5 rings - 2nd edition - core,ttrpg,,1,A4,FALSE,40,,,,,,,,,,,,,,,lot5r
-Legend of the 5 rings - 2nd edition - way of the ratling,ttrpg,,1,A4,FALSE,20,,,,,,,,,,,,,,,lot5r
-Dragon age - set 1,ttrpg,,1,A4,FALSE,30,,,,,,,,,,,,,,,dragon_age
+Demon: StoryTellers companion,ttrpg,,1,A4,FALSE,34.92,,,,,,,,,,,,,,,dtf
+Demon: The fallen - Damnend and Deceived,ttrpg,,1,A4,FALSE,16.44,,,,,,,,,,,,,,,dtf
+Demon: The Fallen - Saviors and Destroyers,ttrpg,,1,A4,FALSE,36.44,,,,,,2003,,,,,,,,,dtf
+Call of Cthulhu - beyond the mountain of menace,ttrpg,,1,A4,FALSE,40,,,,,,2001,,,,,,,,,coc
+Mindjammer,ttrpg,,1,A4,FALSE,60,,,,,,2014,,,,,,,,,mindjammer
+Hunter: The reckoning,ttrpg,,1,A4,FALSE,38.92,,,,,,1999,,,,,,,,,hunter
+Gurps - Magic,ttrpg,,1,A4,FALSE,0,,,,,,1989,,,,,,,,,gurps
+Dread,ttrpg,,1,A4,FALSE,0,,,,,,2005,,,,,,,,,dread
+Legend of the 5 rings - 2nd edition - core,ttrpg,,1,A4,FALSE,40,,,,,,2000,,,,,,,,,lot5r
+Legend of the 5 rings - 2nd edition - way of the ratling,ttrpg,,1,A4,FALSE,20,,,,,,2001,,,,,,,,,lot5r
+Dragon age - set 1,ttrpg,,1,A4,FALSE,30,,,,,,2010,,,,,,,,,dragon_age
 Doctor who - core set,ttrpg,,1,A4,FALSE,45,,,,,,,,,,,,,,,dr_who
-Battle Tech - Maximum Tech,ttrpg,,1,A4,FALSE,16.46,,,,,,,,,,,,,,,battle_tech
+Battle Tech - Maximum Tech,ttrpg,,1,A4,FALSE,16.46,,,,,,1997,,,,,,,,,battle_tech
 Battle Tech - Maps,ttrpg,,1,A4,FALSE,2.05,,,,,,,,,,,,,,,battle_tech
-Besm - big eyes small mouth revised 2nd Edition,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,besm
-Mage the awakening - Introductionary scenario,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,mta
-Necromunda - Rule book,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,necromunda
-Necromunda - Source book,ttrpg,,1,A4,FALSE,0,,,,,,,,,,,,,,,necromunda
+Besm - big eyes small mouth revised 2nd Edition,ttrpg,,1,A4,FALSE,0,,,,,,2002,,,,,,,,,besm
+Mage the awakening - Introductionary scenario,ttrpg,,1,A4,FALSE,0,,,,,,2005,,,,,,,,,mta
+Necromunda - Rule book,ttrpg,,1,A4,FALSE,0,,,,,,1995,,,,,,,,,necromunda
+Necromunda - Source book,ttrpg,,1,A4,FALSE,0,,,,,,1995,,,,,,,,,necromunda
 Anima,board_game,,1,,FALSE,15,,,,,24935,2006,2.17,2,5,4,60,60,5.8,,
-Vem ai a Troika,board_game,,1,,FALSE,12,,,historical,,133713,2012,1.93,2,4,3,45,45,6,,
-La Tripulación: Misión Mar Profundo,board_game,,1,,FALSE,15,,,cooperative;trick-taking;family;recommended,,324856,2021,2.05,2,5,4,20,20,8,,
+Vem aí a Troika,board_game,,1,,FALSE,12,,,historical,,133713,2012,1.93,2,4,3,45,45,6,,
+The Crew: Mission Deep Sea,board_game,,1,,FALSE,15,,,cooperative;trick-taking;family;recommended,,324856,2021,2.05,2,5,4,20,20,8,,
 Scout,board_game,,1,,FALSE,17.23,,,pattern-building;western;recommended,,291453,2019,1.39,2,5,4,20,20,7.8,,
 Coup,board_game,,1,,FALSE,20,,,social-deduction,,131357,2012,1.42,2,6,5,15,15,7,,
 Unlock!: Escape Adventures,board_game,,1,,FALSE,30.99,,,cooperative;adventure;horror;mystery,,213460,2017,2.12,2,6,2,45,75,7.3,,
 Jaipur,board_game,,1,,FALSE,14.02,,,card-drafting;medieval,,54043,2009,1.46,2,2,,30,30,7.5,,
-Café,board_game,,1,,FALSE,18.98,,,Engine-building;recommended,,284936,2020,2.05,1,4,2,20,45,7.1,,
+Café,board_game,,1,,FALSE,18.98,,,engine-building;recommended,,284936,2020,2.05,1,4,2,20,45,7.1,,
 Sushi Go!,board_game,,1,,FALSE,10,,,,,133473,2013,1.16,2,5,4,15,15,7,,
-Inkognito,board_game,,1,,FALSE,15,,,,,353,1997,1.65,3,5,4,20,30,5.5,,
+Inkognito: The Card Game,board_game,,1,,FALSE,15,,,,,353,1997,1.65,3,5,4,20,30,5.5,,
 Decrypto,board_game,,1,,FALSE,27.45,,,word;family,,225694,2018,1.83,3,8,6,15,45,7.8,,
 Twilight Imperium 2nd edition,board_game,,1,,FALSE,73.57,,,area-control;asymmetric;sci-fi;space;war;heavy,,26055,2000,3.46,2,6,6,240,240,6.9,,
 Trench,board_game,,1,,FALSE,40,,,abstract;historical,,102881,2013,3.45,2,2,,45,45,7.2,,
@@ -61,13 +60,13 @@ Hanamikoji,board_game,,1,,FALSE,17.34,,,,,158600,2013,1.67,2,2,,15,15,7.4,,
 Trio,board_game,,1,,FALSE,,,,party;memory;family;recommended,,352515,2021,1.07,3,6,5,15,15,7.4,,
 Long Shot: The Dice Game,board_game,,1,,FALSE,21.45,,,dice;roll-and-write;historical;family,,295374,2022,1.95,1,8,5,25,25,7.5,,
 Letter Jam,board_game,,1,,FALSE,15,,,cooperative;word;family;recommended,,275467,2019,1.97,2,6,6,45,45,7.1,,
-Bloodbowl - Death Zone Season 1,,,1,,FALSE,23,,,,,,,,,,,,,,,
-Bloodbowl - Death Zone Season 2,,,1,,FALSE,23,,,,,,,,,,,,,,,
+Bloodbowl - Death Zone Season 1,,,1,,FALSE,23,,,,,,2016,,,,,,,,,
+Bloodbowl - Death Zone Season 2,,,1,,FALSE,23,,,,,,2017,,,,,,,,,
 Legions of Steel,board_game,,1,,FALSE,40,,,,,2091,1992,2.94,2,5,2,180,180,7.3,,
 Gipf,board_game,,1,,FALSE,25,,,,,527,1996,2.76,2,2,,30,60,7.1,,
 Abalone,board_game,,1,,FALSE,39.91,,,abstract,,526,1987,2.15,2,2,,30,30,6.5,,
 Go,board_game,,1,,FALSE,20,,,abstract,,188,-2200,3.92,2,2,,30,180,7.7,,
-Imperium,board_game,,1,,FALSE,14.97,,,sci-fi;space,,3661,1977,2.61,2,2,,180,300,6.9,,
+Imperium: Empires in Conflict – Worlds in the Balance,board_game,,1,,FALSE,14.97,,,sci-fi;space,,3661,1977,2.61,2,2,,180,300,6.9,,
 Turing Machine,board_game,,1,,FALSE,37,,,puzzle,,356123,2022,2.53,1,4,1,20,20,7.6,,
 Azul,board_game,,1,,FALSE,50,,,pattern-building,,230802,2017,1.77,2,4,2,30,45,7.7,,
 Carcassone,board_game,,1,,FALSE,21.99,,,tile-laying;worker-placement;medieval;family;recommended,,822,2000,1.88,2,5,2,30,45,7.4,,
@@ -84,9 +83,9 @@ Catan,board_game,,1,,FALSE,44.4,,,resource-management;negotiation;medieval,Old,1
 Catan: Seafarers,board_game,,1,,FALSE,44.4,,,resource-management;negotiation;medieval;pirates,Old,325,1997,2.37,3,4,4,90,90,7.2,Catan,
 Catan: 5-6 Player Expansion,board_game,,1,,FALSE,19.94,,,resource-management;negotiation;medieval,Old,2807,1996,2.31,5,6,5,120,120,7,Catan,
 Catan: 5-6 Player Expansion,board_game,,1,,FALSE,19.94,,,resource-management;negotiation;medieval,,2807,1996,2.31,5,6,5,120,120,7,Catan,
-Axis and Allies,board_game,,1,,FALSE,73.59,,,historical;war;heavy,,98,1981,3.03,2,5,5,180,180,6.6,,
+Axis & Allies,board_game,,1,,FALSE,73.59,,,historical;war;heavy,,98,1981,3.03,2,5,5,180,180,6.6,,
 Jerusalem,board_game,,1,,FALSE,30,,,medieval,,63632,2010,2.91,2,4,4,90,90,6.7,,
-Pirate's cove,board_game,,1,,FALSE,30,,,resource-management;pirates,,2987,2002,2.01,3,5,5,60,90,6.6,,
+Pirate's Cove,board_game,,1,,FALSE,30,,,resource-management;pirates,,2987,2002,2.01,3,5,5,60,90,6.6,,
 D. Afonso Henriques,board_game,,1,,FALSE,20,,,historical,,168900,2014,2,2,4,4,45,45,6.3,,
 Dune: Imperium - Uprising,board_game,,1,,FALSE,68.95,,,sci-fi;heavy,,397598,2023,3.53,1,6,4,60,120,8.7,,
 Dune: Imperium - Bloodlines,board_game,,1,,FALSE,39.99,,,sci-fi;heavy,,426129,2025,3.59,1,6,4,60,120,8.7,Dune: Imperium - Uprising,
@@ -106,13 +105,13 @@ Inferno,board_game,,1,,FALSE,30,,,,,2656,1996,2.78,2,5,2,120,120,5.2,,
 Tsuro,board_game,,1,,FALSE,32.99,,,abstract,,16992,2005,1.22,2,8,6,15,20,6.7,,
 BOOoop.,board_game,,1,,FALSE,20.31,,,abstract;animals,,383579,2023,1.44,2,2,,25,35,7.5,,
 MindTrap,board_game,,1,,FALSE,29.94,,,,,1923,1991,1.94,2,16,6,60,60,4.8,,
-Dominion,board_game,,1,,FALSE,50,,,Deck-building;recommended,,36218,2008,2.34,2,4,3,30,30,7.6,,
+Dominion,board_game,,1,,FALSE,50,,,deck-building;recommended,,36218,2008,2.34,2,4,3,30,30,7.6,,
 Cubitos,board_game,,1,,FALSE,47.48,,,deck-building;push-your-luck;recommended,,298069,2021,2.17,2,4,4,30,60,7.4,,
 Wavelength,board_game,,1,,FALSE,45,,,party;word;family,,262543,2019,1.11,2,12,8,30,45,7.2,,
 Ticket to Ride,board_game,,1,,FALSE,49.99,,,card-drafting;trains,,9209,2004,1.82,2,5,4,30,60,7.4,,
 Cubitos: Fowl Play,board_game,,1,,FALSE,,,,deck-building;push-your-luck,,388568,2024,2.25,2,6,6,30,60,8,Cubitos,
-Bloow Bowl,board_game,,1,,FALSE,,,,,,15985,2004,3.17,2,2,,120,120,7.9,,
-Optimus,board_game,,1,,FALSE,,,,,,244522,2018,1.85,1,4,2,30,30,7.5,,
+Blood Bowl,board_game,,1,,FALSE,,,,,,15985,2004,3.17,2,2,,120,120,7.9,,
+That's Pretty Clever!,board_game,,1,,FALSE,,,,,,244522,2018,1.85,1,4,2,30,30,7.5,,
 Pessoa,board_game,,1,,FALSE,,,,,,309728,2022,2.64,1,4,4,45,74,7.2,,
 Tulip Bubble,board_game,,1,,FALSE,,,,historical,,229414,2015,2.44,3,5,5,50,70,7.1,,
 Hues and Cues,board_game,,1,,FALSE,,,,word,,302520,2020,1.06,3,10,6,30,30,6.4,,
@@ -121,3 +120,4 @@ Shinkansen: Zero-Kei,board_game,,1,,FALSE,,,,card-drafting,,339614,2021,2.64,1,4
 Flip 7,board_game,,1,,FALSE,,,,push-your-luck,,420087,2024,1.04,3,18,6,20,20,7.2,,
 The Mind,board_game,,1,,FALSE,,,,cooperative,,244992,2018,1.07,2,4,4,20,20,6.7,,
 Junk Art,board_game,,1,,FALSE,,,,,,193042,2016,1.19,2,6,4,30,30,7.3,,
+Blood Bowl (2016 Edition),board_game,,1,,FALSE,,,,,,212445,2016,3.56,2,2,,60,180,8,,
